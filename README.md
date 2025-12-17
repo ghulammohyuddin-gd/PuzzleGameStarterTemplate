@@ -34,6 +34,9 @@ This template is designed as a **starting point** so developers can quickly crea
 - Play button calls:  
 ```csharp
 GameFlowManager.Instance.StartGameplay();
+
+
+
 3️⃣ Gameplay Scene
 HUDCanvas: Displays moves and current level.
 
