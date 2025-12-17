@@ -32,8 +32,6 @@ This template is designed as a **starting point** so developers can quickly crea
   - Bottom navigation buttons to switch panels.
 - **MainMenuUIManager** handles panel switching and Play button logic.
 - Play button calls:  
-```csharp
-GameFlowManager.Instance.StartGameplay();
 
 
 
