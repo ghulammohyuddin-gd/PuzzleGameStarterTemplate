@@ -1,160 +1,157 @@
 # Puzzle Game Starter Template
 
-## Overview
-This Unity template provides a **starter foundation** for building procedural puzzle games. It includes scene setup, UI, audio, level generation, move management, and a flexible command-based loading system.
-
-The template is designed so developers can reuse or extend scripts, prefabs, and UI to quickly implement new puzzle types.
+Welcome to the **Puzzle Game Starter Template** for Unity. This project provides a robust starting point for any tile-based or puzzle game, with procedural levels, UI, audio, and game flow management.
 
 ---
 
-## Project Structure
-```
-Assets/
-├── Prefabs/
-│   ├── AudioSystem.prefab
-│   │    ├── MusicSource
-│   │    └── SFXSource
-│   ├── PuzzleTile.prefab
-│   └── UI Prefabs (HUDCanvas, LoadingCanvas, LoseScreenPanel, MainMenuCanvas, WinScreenPanel)
-├── ScriptableObjects/
-│   └── LevelConfig.asset
-├── Scripts/
-│   ├── Audio/
-│   │    ├── AudioManager.cs
-│   │    └── AudioSettings.cs
-│   ├── Controllers/
-│   │    ├── LevelManager.cs
-│   │    ├── MoveCounter.cs
-│   │    ├── PuzzleController.cs
-│   │    └── PuzzleTile.cs
-│   ├── Core/
-│   │    ├── GameEvents.cs
-│   │    └── GameFlowManager.cs
-│   ├── Generation/
-│   │    ├── LevelConfig.cs
-│   │    ├── LevelData.cs
-│   │    └── ProceduralLevelGenerator.cs
-│   ├── Input/
-│   │    └── TileInputHandler.cs
-│   ├── Loading/
-│   │    ├── Commands/
-│   │    │    ├── LoadAudioCommand.cs
-│   │    │    ├── LoadPlayerProgressCommand.cs
-│   │    │    ├── LoadServiceCommand.cs
-│   │    │    └── LoadStaticDataCommand.cs
-│   │    ├── Core/
-│   │    │    ├── ILoadingCommand.cs
-│   │    │    ├── LoadingCommandBase.cs
-│   │    │    └── LoadingManager.cs
-│   │    └── UI/
-│   │         └── LoadingUIController.cs
-│   ├── Persistence/
-│   │    └── ProgressManager.cs
-│   └── UI/
-│        ├── HomePanelController.cs
-│        ├── HUDController.cs
-│        ├── LeaderboardPanelController.cs
-│        ├── LoseScreen.cs
-│        ├── MainMenuUIManager.cs
-│        ├── MapPanelController.cs
-│        ├── NavigationPanelController.cs
-│        ├── PlayButtonHandler.cs
-│        ├── SettingsPanelController.cs
-│        ├── StorePanelController.cs
-│        ├── UIManager.cs
-│        └── WinScreen.cs
-```
+## 📂 Project Structure
+
+### Scenes
+
+- **Loading Scene**
+  - **LoadingCanvas**: Displays progress bar for loading commands.
+  - **LoadingManager**: Executes commands sequentially (LoadStaticDataCommand, LoadPlayerProgressCommand, LoadAudioCommand, etc.).
+  - **AudioSystem**: Contains MusicSource and SFXSource (assign clips in the Inspector).
+  - **GameFlowManager**: Handles scene transitions and game state resets.
+
+- **MainMenu Scene**
+  - **MainMenuCanvas**: Root canvas for main menu UI.
+    - Panels: HomePanel, StorePanel, LeaderboardPanel, MapPanel, SettingsPanel.
+    - **PlayButtonHandler**: Handles play button input.
+    - **NavigationPanelController**: Handles bottom navigation buttons.
+  - **TileInputHandler**: Handles global tile input for gameplay scene.
+  - **UI Root**: Contains HUDCanvas and ResultCanvas.
+    - **UIManager**: Manages HUD, WinScreen, LoseScreen.
+
+- **Gameplay Scene**
+  - **PuzzleController**: Generates grid based on procedural level.
+  - **LevelManager**: Singleton managing level progression.
+  - **MoveCounter**: Tracks moves for current level.
+  - **ProceduralLevelGenerator**: Generates LevelData for each level.
+  - **PuzzleTile Prefabs**: Tiles for gameplay grid.
+  - **HUDCanvas / ResultCanvas**: Display HUD and Win/Lose screens.
+
+### Scripts
+
+#### Audio
+- `AudioManager.cs`: Handles playing music and SFX.
+- `AudioSettings.cs`: Configuration for audio.
+
+#### Controllers
+- `LevelManager.cs`: Handles level progression, singleton.
+- `PuzzleController.cs`: Handles grid generation and tile interactions.
+- `MoveCounter.cs`: Tracks and manages moves.
+- `PuzzleTile.cs`: Individual tile behavior.
+
+#### Core
+- `GameFlowManager.cs`: Manages scene transitions and game resets.
+- `GameEvents.cs`: Event system for level updates.
+
+#### Generation
+- `LevelConfig.cs`: ScriptableObject for level settings.
+- `LevelData.cs`: Holds level-specific data.
+- `ProceduralLevelGenerator.cs`: Procedural generation logic.
+
+#### Input
+- `TileInputHandler.cs`: Captures player input for tile clicks.
+
+#### Loading
+- **Core**
+  - `ILoadingCommand.cs`: Interface for loading commands.
+  - `LoadingCommandBase.cs`: Base class for loading commands.
+  - `LoadingManager.cs`: Executes loading commands sequentially.
+- **Commands**
+  - `LoadStaticDataCommand.cs`: Loads static game data.
+  - `LoadPlayerProgressCommand.cs`: Loads saved progress.
+  - `LoadAudioCommand.cs`: Loads AudioSystem.
+- **UI**
+  - `LoadingUIController.cs`: Updates progress bar and loading text.
+
+#### Persistence
+- `ProgressManager.cs`: Save/load player progress using PlayerPrefs.
+
+#### UI
+- `HomePanelController.cs`
+- `HUDController.cs`
+- `LeaderBoardPanelController.cs`
+- `LoseScreen.cs`
+- `MainMenuUIManager.cs`
+- `MapPanelController.cs`
+- `NavigationPanelController.cs`
+- `PlayButtonHandler.cs`
+- `SettingsPanelController.cs`
+- `StorePanelController.cs`
+- `UIManager.cs`
+- `WinScreen.cs`
+
+### Prefabs
+- **AudioSystem**: Contains MusicSource and SFXSource.
+- **Tiles**: PuzzleTile prefab.
+- **UI**: HUDCanvas, LoadingCanvas, LoseScreenPanel, MainMenuCanvas, WinScreenPanel.
+
+### ScriptableObjects
+- **LevelConfig**: Configure procedural level settings.
 
 ---
 
-## Scenes
-- **LoadingScene**: Handles loading commands sequentially with a progress bar.
-- **MainMenu**: Bottom navigation buttons, panels for Home, Store, Leaderboard, Map, Settings.
-- **Gameplay**: Procedural puzzle grid, move counter, HUD, Win/Lose screens.
+## 🚀 Getting Started
+
+1. **Open `Loading` Scene** first.
+2. Ensure **AudioSystem** has MusicSource and SFXSource clips assigned.
+3. Run scene: LoadingManager will execute commands and show progress.
+4. After loading, **MainMenu Scene** appears.
+5. Tap **Play** → loads Gameplay Scene.
 
 ---
 
-## Key Scripts & Responsibilities
-### Core
-- `GameFlowManager.cs` → Manages scene transitions and resetting game state.
-- `GameEvents.cs` → Event system for level changes, moves updates, win/lose.
+## ⚡ Usage Guide
 
-### Controllers
-- `LevelManager.cs` → Singleton. Loads/Generates levels, manages move count, handles Restart/Next Level.
-- `PuzzleController.cs` → Singleton. Generates tiles, tracks green tile clicks.
-- `MoveCounter.cs` → Singleton. Tracks moves remaining, triggers lose event.
-- `PuzzleTile.cs` → Handles individual tile behavior and clicks.
+### Adding Custom Puzzle Logic
 
-### Audio
-- `AudioManager.cs` → Singleton. Manages Music and SFX sources.
-- `AudioSettings.cs` → Configurable settings for volume, mute, etc.
+- **Custom Puzzle Type**: Any puzzle (tile-based, car blocks, numbers, etc.)
+- **Starting Point**: `PuzzleController.cs` handles grid and tile logic.
+- **Tile Behavior**: Extend `PuzzleTile.cs` or replace tile prefab for custom behavior.
+- **Level Generation**: Modify or extend `ProceduralLevelGenerator.cs` to create procedural or static level patterns.
+- **Move Tracking**: Use `MoveCounter.cs` to track moves.
+- **Level Management**: Use `LevelManager.cs` for progression, `GameFlowManager.cs` for scene transitions.
 
-### Generation
-- `ProceduralLevelGenerator.cs` → Generates LevelData based on level index.
-- `LevelData.cs` → Stores grid size and tile info.
-- `LevelConfig.cs` → ScriptableObject for configuring levels.
+### Linking Custom Puzzle
 
-### Input
-- `TileInputHandler.cs` → Detects clicks/taps on tiles and forwards to `PuzzleTile`.
+1. Replace `tilePrefab` in `PuzzleController` with your custom prefab.
+2. Update `ProceduralLevelGenerator` to generate your custom tiles.
+3. Use `PuzzleTile` or your custom tile script to handle click/interactions.
+4. `MoveCounter` and `LevelManager` will integrate automatically for level win/lose logic.
 
-### Loading System
-**Command Pattern** is used to load services in sequence:
-- `LoadStaticDataCommand` → Placeholder for static data.
-- `LoadServiceCommand` → Initialize any required services.
-- `LoadPlayerProgressCommand` → Loads saved level progress.
-- `LoadAudioCommand` → Initializes AudioManager.
+### Commands Execution
 
-**LoadingManager.cs** → Runs commands sequentially and updates `LoadingUIController`.
+- **LoadStaticDataCommand**: Load all static assets/data.
+- **LoadPlayerProgressCommand**: Loads saved level index.
+- **LoadAudioCommand**: Prepares audio system.
+- Commands run sequentially in **LoadingManager** and update `LoadingUIController`.
 
-### UI
-- Each Panel has its own controller (e.g., `HomePanelController.cs`) to handle children.
-- `UIManager.cs` → Shows/Hides Win/Lose screens, updates HUD.
-- `WinScreen.cs` & `LoseScreen.cs` → Handle button events: Next Level, Restart, Home.
+### UI Handling
+
+- `UIManager.cs` controls HUD, WinScreen, LoseScreen.
+- Each panel has its own controller for buttons and functionality.
+- **Home button**: Uses `GameFlowManager.Instance.GoToMainMenu()`
+- **Play button**: Uses `GameFlowManager.Instance.StartGameplay()`
 
 ---
 
-## Prefabs & Scene Objects
-- **AudioSystem.prefab** → Contains MusicSource & SFXSource. Assign clips in editor.
-- **PuzzleTile.prefab** → Base prefab for any puzzle tile. Can be extended for different puzzle types.
-- **UI Prefabs** → HUDCanvas, LoadingCanvas, LoseScreenPanel, MainMenuCanvas, WinScreenPanel.
+## 📝 Notes
 
-> All scene objects are already setup. Developers only need to assign audio clips or add new puzzle visuals.
-
----
-
-## How to Extend for Custom Puzzle
-1. **Tile-based Puzzles**:
-    - Extend `PuzzleTile` for new behaviors (e.g., CarBlockTile, NumberTile).
-    - Use `PuzzleController` to generate grid for any tile prefab.
-2. **Non-tile Puzzles**:
-    - Create your puzzle prefab and manager.
-    - Call `GameEvents.OnLevelWin?.Invoke()` when puzzle is solved.
-    - Use `MoveCounter.Instance.UseMove()` to decrement moves if needed.
-3. **Linking**:
-    - Gameplay scene references (PuzzleController, MoveCounter, LevelGenerator) are automatically linked.
-    - LevelManager remains singleton; only assign scene-specific references once in scene.
-
-> This template is designed to be modular. Developers can reuse `MoveCounter`, `PuzzleController`, `LevelManager` for any new puzzle type without rewriting core logic.
+- **Singletons**: LevelManager, PuzzleController, MoveCounter are singletons.
+- **Scene Flow**: Loading Scene → MainMenu → Gameplay.
+- **Extensibility**: This template allows easy addition of new puzzle types by modifying `PuzzleController` and `ProceduralLevelGenerator`.
 
 ---
 
-## Getting Started
-1. Open `MainMenu` scene.
-2. Ensure `AudioSystem.prefab` has Music & SFX clips assigned.
-3. Click **Play** → Gameplay scene will load.
-4. Tile clicks reduce moves. Green tiles completion triggers WinScreen. Moves exhausted triggers LoseScreen.
-5. Navigation buttons allow returning Home, Store, Map, Settings.
+## 📌 Summary
 
----
+- Template handles procedural levels, moves, win/lose logic.
+- Commands system ensures sequential loading of game systems.
+- UI is modular and reusable.
+- Audio system is included.
+- Users can replace or extend tile types and level logic without changing core systems.
 
-## Notes
-- `LevelManager` is singleton and persists between scenes.
-- `PuzzleController` & `MoveCounter` are scene objects. Their references are registered to `LevelManager` on scene load.
-- Commands in LoadingScene can be extended by adding new classes implementing `ILoadingCommand`.
-- Developers can adjust grid size, number of green tiles, or add special tile types via `ProceduralLevelGenerator` and `LevelData`.
-
----
-
-## Summary
-This template provides a **flexible foundation** for any puzzle game, allowing you to focus on creating unique puzzles without re-implementing core systems like level generation, UI, audio, or scene management.
-
+This template is designed to provide a **plug-and-play s
