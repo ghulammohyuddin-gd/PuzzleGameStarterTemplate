@@ -2,6 +2,7 @@
 using Template.Runtime.Controllers.Interfaces;
 using Template.Runtime.Generation;
 using UnityEngine;
+using PuzzleTemplate.Runtime;
 
 namespace Template.Runtime.Controllers
 {

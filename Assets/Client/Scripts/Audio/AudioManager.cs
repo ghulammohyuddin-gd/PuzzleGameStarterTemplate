@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Template.Runtime.Core;
+using PuzzleTemplate.Runtime;
 
 namespace Template.Runtime.Audio
 {

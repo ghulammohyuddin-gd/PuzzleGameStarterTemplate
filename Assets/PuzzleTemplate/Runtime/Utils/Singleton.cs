@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Template.Runtime.Core
+namespace PuzzleTemplate.Runtime
 {
     public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {

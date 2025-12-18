@@ -1,4 +1,5 @@
-﻿using Template.Runtime.Core;
+﻿using PuzzleTemplate.Runtime;
+using Template.Runtime.Core;
 using UnityEngine;
 
 namespace Template.Runtime.Controllers

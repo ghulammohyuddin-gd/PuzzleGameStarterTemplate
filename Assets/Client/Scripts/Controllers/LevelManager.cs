@@ -4,6 +4,7 @@ using Template.Runtime.Generation;
 using Template.Runtime.Persistance;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using PuzzleTemplate.Runtime;
 
 namespace Template.Runtime.Controllers
 {
