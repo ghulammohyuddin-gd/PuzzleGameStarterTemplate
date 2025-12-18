@@ -21,9 +21,33 @@ namespace Template.Runtime.Controllers
         public int TotalGreenTiles => totalGreenTiles;
         public List<GameObject> ActiveTiles => activeTiles;
 
+        private void Awake()
+        {
+            if (tilePrefab == null)
+            {
+                tilePrefab = Resources.Load<GameObject>("Prefabs/Tiles/PuzzleTile");
+                if (tilePrefab == null)
+                {
+                    Debug.LogError("GridManager: Could not find tile prefab at Resources/Prefabs/Tiles/PuzzleTile");
+                }
+            }
+        }
+
+        /// <summary>Sets the tile prefab to use for grid generation.</summary>
+        public void SetTilePrefab(GameObject prefab)
+        {
+            tilePrefab = prefab;
+        }
+
         /// <summary>Generates a grid based on level data and randomizes tile types.</summary>
         public void GenerateGrid(LevelData levelData)
         {
+            if (tilePrefab == null)
+            {
+                Debug.LogError("GridManager.GenerateGrid: tilePrefab is not assigned!");
+                return;
+            }
+
             ResetGrid();
 
             int gridSize = levelData.GridSize;
@@ -52,6 +76,8 @@ namespace Template.Runtime.Controllers
                     activeTiles.Add(tile);
                 }
             }
+
+            Debug.Log($"GridManager: Generated {gridSize}x{gridSize} grid with {totalGreenTiles} green tiles.");
         }
 
         /// <summary>Marks a green tile as clicked and increments the click counter.</summary>

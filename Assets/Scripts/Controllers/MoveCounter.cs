@@ -34,7 +34,18 @@ namespace Template.Runtime.Controllers
 
             if (movesLeft <= 0)
             {
-                GameEvents.OnLevelLose?.Invoke();
+                // Only trigger lose when there are still unclicked green tiles
+                var pc = PuzzleController.Instance;
+                if (pc != null && pc.GridManager != null)
+                {
+                    int remainingGreen = pc.GridManager.TotalGreenTiles - pc.GridManager.GetClickedGreenTileCount();
+                    if (remainingGreen > 0)
+                        GameEvents.OnLevelLose?.Invoke();
+                }
+                else
+                {
+                    GameEvents.OnLevelLose?.Invoke();
+                }
             }
         }
 

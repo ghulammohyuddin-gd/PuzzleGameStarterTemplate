@@ -7,7 +7,7 @@ namespace Template.Runtime.Controllers
     public class WinConditionChecker : MonoBehaviour, IWinConditionChecker
     {
         [SerializeField]
-        private IGridManager gridManager;
+        private GridManager gridManager;
 
         [SerializeField]
         private MoveCounter moveCounter;
@@ -15,9 +15,18 @@ namespace Template.Runtime.Controllers
         private void OnEnable()
         {
             if (gridManager == null)
-                gridManager = GetComponent<IGridManager>();
+            {
+                gridManager = GetComponent<GridManager>();
+                if (gridManager == null)
+                    gridManager = FindFirstObjectByType<GridManager>();
+            }
+
             if (moveCounter == null)
+            {
                 moveCounter = GetComponent<MoveCounter>();
+                if (moveCounter == null)
+                    moveCounter = FindFirstObjectByType<MoveCounter>();
+            }
 
             PuzzleTile.OnTileClicked += OnTileClicked;
         }
@@ -52,9 +61,14 @@ namespace Template.Runtime.Controllers
 
         private void OnTileClicked(PuzzleTile tile)
         {
-            if (tile.Type == PuzzleTile.TileType.Green && moveCounter != null)
+            if (moveCounter != null)
             {
                 moveCounter.UseMove();
+            }
+
+            if (tile.Type == PuzzleTile.TileType.Green)
+            {
+                PuzzleController.Instance?.OnGreenTileClicked();
             }
         }
     }
