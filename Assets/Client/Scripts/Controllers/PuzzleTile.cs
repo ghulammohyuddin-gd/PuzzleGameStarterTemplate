@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Template.Runtime.Controllers
+namespace Client.Runtime.Controllers
 {
     /// <summary>Represents an individual puzzle tile with click and visual state management.</summary>
     public class PuzzleTile : MonoBehaviour

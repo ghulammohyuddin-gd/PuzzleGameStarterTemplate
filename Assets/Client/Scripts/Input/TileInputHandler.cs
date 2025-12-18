@@ -1,8 +1,8 @@
-﻿using Template.Runtime.Controllers;
-using Template.Runtime.Input.Interfaces;
+﻿using Client.Runtime.Controllers;
+using Client.Runtime.Input.Interfaces;
 using UnityEngine;
 
-namespace Template.Runtime.Input
+namespace Client.Runtime.Input
 {
     /// <summary>Handles mouse input detection and tile raycasting.</summary>
     public class TileInputHandler : MonoBehaviour, IInputHandler

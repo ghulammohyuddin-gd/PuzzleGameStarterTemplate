@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Template.Runtime.Persistance
+namespace Client.Runtime.Persistance
 {
     /// <summary>
     /// Handles saving and loading player progress (current level, etc.)

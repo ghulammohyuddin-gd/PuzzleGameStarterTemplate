@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Template.Runtime.UI
+namespace Client.Runtime.UI
 {
     public class PlayButtonHandler : MonoBehaviour
     {

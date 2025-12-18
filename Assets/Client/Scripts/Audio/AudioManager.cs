@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
-using Template.Runtime.Core;
 using PuzzleTemplate.Runtime;
 
-namespace Template.Runtime.Audio
+namespace Client.Runtime.Audio
 {
     public class AudioManager : Singleton<AudioManager>
     {

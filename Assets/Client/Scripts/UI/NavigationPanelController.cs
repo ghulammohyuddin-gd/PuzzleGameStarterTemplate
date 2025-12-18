@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Template.Runtime.UI
+namespace Client.Runtime.UI
 {
     public class NavigationPanelController : MonoBehaviour
     {

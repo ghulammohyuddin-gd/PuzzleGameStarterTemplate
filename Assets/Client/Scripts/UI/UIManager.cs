@@ -1,9 +1,8 @@
 ﻿using Client.Runtime;
 using PuzzleTemplate.Runtime;
-using Template.Runtime.Core;
 using UnityEngine;
 
-namespace Template.Runtime.UI
+namespace Client.Runtime.UI
 {
     public class UIManager : MonoBehaviour
     {

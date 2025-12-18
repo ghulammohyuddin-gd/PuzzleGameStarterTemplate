@@ -1,8 +1,8 @@
 ﻿using PuzzleTemplate.Runtime;
-using Template.Runtime.Controllers;
+using Client.Runtime.Controllers;
 using UnityEngine.SceneManagement;
 
-namespace Template.Runtime.Core
+namespace Client.Runtime
 {
     public class GameFlowManager : Singleton<GameFlowManager> // Changed inheritance
     {

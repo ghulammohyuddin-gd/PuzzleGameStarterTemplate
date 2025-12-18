@@ -1,13 +1,12 @@
-﻿using Template.Runtime.Core;
-using Template.Runtime.Controllers.Interfaces;
-using Template.Runtime.Generation;
-using Template.Runtime.Persistance;
+﻿using Client.Runtime.Controllers.Interfaces;
+using Client.Runtime.Generation;
+using Client.Runtime.Persistance;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using PuzzleTemplate.Runtime;
 using Client.Runtime;
 
-namespace Template.Runtime.Controllers
+namespace Client.Runtime.Controllers
 {
     /// <summary>Manages level progression, initialization, and state transitions.</summary>
     public class LevelManager : Singleton<LevelManager>

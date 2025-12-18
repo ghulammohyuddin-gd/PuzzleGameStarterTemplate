@@ -1,9 +1,8 @@
-﻿using Template.Runtime.Core;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Template.Runtime.UI
+namespace Client.Runtime.UI
 {
     public class HomePanelController : MonoBehaviour
     {

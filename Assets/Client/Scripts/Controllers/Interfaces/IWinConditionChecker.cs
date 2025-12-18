@@ -1,4 +1,4 @@
-namespace Template.Runtime.Controllers.Interfaces
+namespace Client.Runtime.Controllers.Interfaces
 {
     /// <summary>Defines the contract for evaluating win and lose conditions.</summary>
     public interface IWinConditionChecker

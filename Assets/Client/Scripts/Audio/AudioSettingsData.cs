@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Template.Runtime.Audio
+namespace Client.Runtime.Audio
 {
     [System.Serializable]
     public class AudioSettingsData

@@ -1,4 +1,4 @@
-﻿namespace Template.Runtime.Generation
+﻿namespace Client.Runtime.Generation
 {
     /// <summary>Contains data for a single puzzle level.</summary>
     [System.Serializable]

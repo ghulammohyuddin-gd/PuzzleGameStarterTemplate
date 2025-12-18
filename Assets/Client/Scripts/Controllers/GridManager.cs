@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Template.Runtime.Controllers.Interfaces;
-using Template.Runtime.Generation;
+using Client.Runtime.Controllers.Interfaces;
+using Client.Runtime.Generation;
 using UnityEngine;
 
-namespace Template.Runtime.Controllers
+namespace Client.Runtime.Controllers
 {
     /// <summary>Manages grid generation, tile creation, and tile state tracking.</summary>
     public class GridManager : MonoBehaviour, IGridManager

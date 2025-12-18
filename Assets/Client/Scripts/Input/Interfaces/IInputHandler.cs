@@ -1,7 +1,7 @@
-using Template.Runtime.Controllers;
+using Client.Runtime.Controllers;
 using UnityEngine;
 
-namespace Template.Runtime.Input.Interfaces
+namespace Client.Runtime.Input.Interfaces
 {
     /// <summary>Defines the contract for input handling and tile detection.</summary>
     public interface IInputHandler

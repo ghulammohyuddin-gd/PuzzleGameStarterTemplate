@@ -1,9 +1,8 @@
 ﻿using Client.Runtime;
 using PuzzleTemplate.Runtime;
-using Template.Runtime.Core;
 using UnityEngine;
 
-namespace Template.Runtime.Controllers
+namespace Client.Runtime.Controllers
 {
     /// <summary>Manages move count and lose conditions based on remaining moves.</summary>
     public class MoveCounter : Singleton<MoveCounter>

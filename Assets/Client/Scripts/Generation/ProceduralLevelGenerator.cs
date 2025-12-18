@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Template.Runtime.Generation
+namespace Client.Runtime.Generation
 {
     /// <summary>Generates level data procedurally based on difficulty scaling.</summary>
     [System.Serializable]

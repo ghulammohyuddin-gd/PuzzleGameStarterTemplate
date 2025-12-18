@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using PuzzleTemplate.Runtime;
-using Template.Runtime.Persistance;
+using Client.Runtime.Persistance;
 using UnityEngine;
 
 namespace Client.Runtime

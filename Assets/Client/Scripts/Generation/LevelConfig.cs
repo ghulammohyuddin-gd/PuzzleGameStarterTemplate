@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Template.Runtime.Generation
+namespace Client.Runtime.Generation
 {
     /// <summary>Scriptable object containing difficulty configuration for level generation.</summary>
     [CreateAssetMenu(menuName = "Puzzle/LevelConfig")]

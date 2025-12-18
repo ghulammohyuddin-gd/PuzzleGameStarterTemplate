@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Template.Runtime.Controllers;
-using Template.Runtime.Core;
+using Client.Runtime.Controllers;
 
-namespace Template.Runtime.UI
+namespace Client.Runtime.UI
 {
     public class LoseScreen : MonoBehaviour
     {

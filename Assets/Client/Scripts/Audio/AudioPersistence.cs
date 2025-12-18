@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Template.Runtime.Audio
+namespace Client.Runtime.Audio
 {
     public interface IAudioPersistence
     {

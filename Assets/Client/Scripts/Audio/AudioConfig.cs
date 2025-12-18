@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Template.Runtime.Audio
+namespace Client.Runtime.Audio
 {
     [CreateAssetMenu(fileName = "AudioConfig", menuName = "Template/Audio/Config")]
     public class AudioConfig : ScriptableObject

@@ -1,11 +1,10 @@
-﻿using Template.Runtime.Core;
-using Template.Runtime.Controllers.Interfaces;
-using Template.Runtime.Generation;
+﻿using Client.Runtime.Controllers.Interfaces;
+using Client.Runtime.Generation;
 using UnityEngine;
 using PuzzleTemplate.Runtime;
 using Client.Runtime;
 
-namespace Template.Runtime.Controllers
+namespace Client.Runtime.Controllers
 {
     /// <summary>Orchestrates puzzle game flow and coordinates between systems.</summary>
     public class PuzzleController : Singleton<PuzzleController>

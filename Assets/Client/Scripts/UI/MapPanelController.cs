@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Template.Runtime.UI
+namespace Client.Runtime.UI
 {
     public class MapPanelController : MonoBehaviour
     {

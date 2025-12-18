@@ -1,5 +1,5 @@
 using PuzzleTemplate.Runtime;
-using Template.Runtime.Generation;
+using Client.Runtime.Generation;
 
 namespace Client.Runtime
 {

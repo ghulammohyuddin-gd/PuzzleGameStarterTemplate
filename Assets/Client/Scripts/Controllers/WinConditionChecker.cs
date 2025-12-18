@@ -1,7 +1,7 @@
-using Template.Runtime.Controllers.Interfaces;
+using Client.Runtime.Controllers.Interfaces;
 using UnityEngine;
 
-namespace Template.Runtime.Controllers
+namespace Client.Runtime.Controllers
 {
     /// <summary>Checks and manages game win and lose conditions.</summary>
     public class WinConditionChecker : MonoBehaviour, IWinConditionChecker

@@ -1,7 +1,7 @@
-using Template.Runtime.Generation;
+using Client.Runtime.Generation;
 using UnityEngine;
 
-namespace Template.Runtime.Controllers.Interfaces
+namespace Client.Runtime.Controllers.Interfaces
 {
     /// <summary>Defines the contract for grid management and tile state tracking.</summary>
     public interface IGridManager
