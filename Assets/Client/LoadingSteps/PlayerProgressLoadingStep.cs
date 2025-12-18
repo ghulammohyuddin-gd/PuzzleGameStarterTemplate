@@ -1,16 +1,19 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using PuzzleTemplate.Runtime;
+using Template.Runtime.Persistance;
 using UnityEngine;
 
 namespace Template.Runtime.Loading.Commands
 {
-    public class LoadAudioCommand : LoadingStepBase
+    public class PlayerProgressLoadingStep : LoadingStepBase
     {
 
         public override UniTask ExecuteAsync(CancellationToken cToken = default)
         {
-            Debug.Log("Loading audio system...");
+            Debug.Log("Loading player progress...");
+
+            ProgressManager.LoadLevel();
             return UniTask.CompletedTask;
         }
 

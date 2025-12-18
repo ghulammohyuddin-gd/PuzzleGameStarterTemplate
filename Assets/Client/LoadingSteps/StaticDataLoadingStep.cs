@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Template.Runtime.Loading.Commands
 {
-    public class LoadStaticDataCommand : LoadingStepBase
+    public class StaticDataLoadingStep : LoadingStepBase
     {
         public override UniTask ExecuteAsync(CancellationToken cToken = default)
         {

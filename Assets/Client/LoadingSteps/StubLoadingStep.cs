@@ -5,11 +5,14 @@ using UnityEngine;
 
 namespace Template.Runtime.Loading.Commands
 {
-    public class LoadServicesCommand : LoadingStepBase
+    public class StubLoadingStep : LoadingStepBase
     {
+        [SerializeField] private string description;
+
         public override UniTask ExecuteAsync(CancellationToken cToken = default)
         {
-            Debug.Log("Initializing services...");
+            Debug.Log($"Stub: {description}");
+
             return UniTask.Delay(500, cancellationToken: cToken);
         }
 
