@@ -1,9 +1,5 @@
 ﻿using Template.Runtime.Controllers;
-using UnityEngine;
 using UnityEngine.SceneManagement;
-using Template.Runtime.Core;
-using PuzzleTemplate.Runtime;
-using System; // Added for Singleton<T> - ensuring it's there
 
 namespace Template.Runtime.Core
 {
@@ -18,14 +14,7 @@ namespace Template.Runtime.Core
             // Existing custom logic
             // Subscribe to scene loaded to initialize LevelManager
             SceneManager.sceneLoaded += OnSceneLoaded;
-            EventBus.Subscribe<LoadingCompletedEvent>(HandleLoadingCompleted);
         }
-
-        private void HandleLoadingCompleted(LoadingCompletedEvent @event)
-        {
-            GoToMainMenu();
-        }
-
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {

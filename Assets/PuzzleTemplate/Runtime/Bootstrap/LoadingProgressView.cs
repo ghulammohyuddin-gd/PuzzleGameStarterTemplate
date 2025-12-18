@@ -17,13 +17,11 @@ namespace PuzzleTemplate.Runtime
         protected virtual void RegisterEvents()
         {
             EventBus.Subscribe<LoadingStepExecutedEvent>(UpdateProgress);
-            EventBus.Subscribe<LoadingCompletedEvent>(OnLoadingCompleted);
         }
 
         protected virtual void UnRegisterEvents()
         {
             EventBus.Unsubscribe<LoadingStepExecutedEvent>(UpdateProgress);
-            EventBus.Unsubscribe<LoadingCompletedEvent>(OnLoadingCompleted);
         }
 
         protected virtual void UpdateProgress(LoadingStepExecutedEvent @event)
@@ -32,7 +30,5 @@ namespace PuzzleTemplate.Runtime
             _progressBar.value = value;
             _progressText.text = $"{Mathf.RoundToInt(value * 100)}%";
         }
-
-        protected virtual void OnLoadingCompleted(LoadingCompletedEvent @event) => gameObject.SetActive(false);
     }
 }

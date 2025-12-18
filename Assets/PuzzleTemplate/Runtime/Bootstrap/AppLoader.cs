@@ -12,7 +12,6 @@ namespace PuzzleTemplate.Runtime
         protected virtual void Start()
         {
             UniTask.Void(ExecuteStepsAsync, this.GetCancellationTokenOnDestroy());
-            DontDestroyOnLoad(gameObject);
         }
 
         protected virtual async UniTaskVoid ExecuteStepsAsync(CancellationToken cToken = default)
@@ -27,8 +26,6 @@ namespace PuzzleTemplate.Runtime
 
                 EventBus.Raise(new LoadingStepExecutedEvent(progress));
             }
-
-            EventBus.Raise(new LoadingCompletedEvent());
         }
     }
 }
