@@ -2,29 +2,30 @@
 
 namespace Template.Runtime.Generation
 {
+    /// <summary>Generates level data procedurally based on difficulty scaling.</summary>
     [System.Serializable]
     public class ProceduralLevelGenerator : MonoBehaviour
     {
-        [Header("Grid Settings")]
-        public int baseGridSize = 3;             // Starting grid size
-        public int maxGridSize = 5;              // Maximum grid size allowed
-        public int incrementEveryNLevels = 1;    // Increase grid size every N levels
+        /// <summary>Starting grid size for level 1.</summary>
+        [SerializeField]
+        private int baseGridSize = 3;
 
-        // Generate a new level data for a given level index
+        /// <summary>Maximum grid size to prevent excessive difficulty scaling.</summary>
+        [SerializeField]
+        private int maxGridSize = 5;
+
+        /// <summary>Number of levels between each grid size increase.</summary>
+        [SerializeField]
+        private int incrementEveryNLevels = 1;
+
+        /// <summary>Generates level data for the given level index with progressive difficulty.</summary>
         public LevelData GenerateLevel(int levelIndex)
         {
             LevelData level = new LevelData();
 
-            // Calculate how many steps of increase
             int increaseSteps = levelIndex / incrementEveryNLevels;
             int newGridSize = baseGridSize + increaseSteps;
-
-            // Clamp to maximum grid size
             level.GridSize = Mathf.Min(newGridSize, maxGridSize);
-
-            // TODO: Add procedural rules for green/red tiles, obstacles, power-ups, etc.
-
-            Debug.Log($"Generated Level {levelIndex + 1} -> GridSize: {level.GridSize}");
 
             return level;
         }

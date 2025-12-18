@@ -1,4 +1,5 @@
 ﻿using Template.Runtime.Core;
+using Template.Runtime.Controllers.Interfaces;
 using Template.Runtime.Generation;
 using Template.Runtime.Persistance;
 using UnityEngine;
@@ -6,24 +7,24 @@ using UnityEngine.SceneManagement;
 
 namespace Template.Runtime.Controllers
 {
-    public class LevelManager : Singleton<LevelManager> // Changed inheritance
+    /// <summary>Manages level progression, initialization, and state transitions.</summary>
+    public class LevelManager : Singleton<LevelManager>
     {
-        // Removed: public static LevelManager Instance { get; private set; }
+        [SerializeField]
+        private PuzzleController puzzleController;
 
-        [Header("References (Scene Objects)")]
-        public PuzzleController puzzleController;
-        public MoveCounter moveCounter;
-        public ProceduralLevelGenerator levelGenerator;
+        [SerializeField]
+        private MoveCounter moveCounter;
+
+        [SerializeField]
+        private ProceduralLevelGenerator levelGenerator;
 
         private int currentLevelIndex = 0;
         private LevelData currentLevel;
 
-        protected override void Awake() // Changed to protected override
+        protected override void Awake()
         {
-            base.Awake(); // Call base Singleton Awake logic
-
-            // Existing custom logic
-            // Listen for scene load
+            base.Awake();
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
@@ -32,20 +33,18 @@ namespace Template.Runtime.Controllers
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
-        // Called whenever a new scene is loaded
+        /// <summary>Called whenever a new scene is loaded to reassign scene-specific references.</summary>
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             if (scene.name == "GamePlay")
             {
-                // Reassign scene-specific references
                 if (puzzleController == null)
-                    puzzleController = FindObjectOfType<PuzzleController>();
+                    puzzleController = FindFirstObjectByType<PuzzleController>();
                 if (moveCounter == null)
-                    moveCounter = FindObjectOfType<MoveCounter>();
+                    moveCounter = FindFirstObjectByType<MoveCounter>();
                 if (levelGenerator == null)
-                    levelGenerator = FindObjectOfType<ProceduralLevelGenerator>();
+                    levelGenerator = FindFirstObjectByType<ProceduralLevelGenerator>();
 
-                // Initialize level if references are ready
                 if (puzzleController != null && moveCounter != null && levelGenerator != null)
                     InitializeLevelManager();
                 else
@@ -53,17 +52,14 @@ namespace Template.Runtime.Controllers
             }
         }
 
-        /// <summary>
-        /// Explicit initialization for starting or restarting a session.
-        /// Call this whenever entering Gameplay scene.
-        /// </summary>
-        /// <param name="startLevelIndex">Optional start level index, default -1 loads last saved</param>
+        /// <summary>Initializes the level manager for a new gameplay session.</summary>
         public void InitializeLevelManager(int startLevelIndex = -1)
         {
             currentLevelIndex = startLevelIndex >= 0 ? startLevelIndex : ProgressManager.LoadLevel();
             LoadNextLevel();
         }
 
+        /// <summary>Loads and initializes the next level.</summary>
         public void LoadNextLevel()
         {
             if (puzzleController == null || moveCounter == null || levelGenerator == null)
@@ -72,25 +68,23 @@ namespace Template.Runtime.Controllers
                 return;
             }
 
-            // Save progress
             ProgressManager.SaveLevel(currentLevelIndex);
-
-            // Generate level data
             currentLevel = levelGenerator.GenerateLevel(currentLevelIndex);
+            puzzleController.InitializePuzzle(currentLevel);
 
-            // Generate tiles
-            puzzleController.GenerateGrid(currentLevel);
+            IGridManager gridManager = puzzleController.GridManager;
+            if (gridManager != null)
+            {
+                moveCounter.Initialize(gridManager.TotalGreenTiles + 1);
+            }
 
-            // Initialize moves
-            moveCounter.Initialize(puzzleController.TotalGreenTiles + 1);
-
-            // Fire events
             GameEvents.OnLevelChanged?.Invoke(currentLevelIndex);
             GameEvents.OnLevelGenerated?.Invoke(currentLevel);
 
             currentLevelIndex++;
         }
 
+        /// <summary>Restarts the current level.</summary>
         public void RestartLevel()
         {
             if (currentLevelIndex > 0)
@@ -98,13 +92,15 @@ namespace Template.Runtime.Controllers
             LoadNextLevel();
         }
 
+        /// <summary>Resets the game to the initial state.</summary>
         public void ResetGame()
         {
             currentLevelIndex = 0;
-            puzzleController?.ResetController();
+            puzzleController?.ResetPuzzle();
             moveCounter?.Initialize(0);
         }
 
+        /// <summary>Gets the current level index.</summary>
         public int GetCurrentLevelIndex() => currentLevelIndex;
     }
 }

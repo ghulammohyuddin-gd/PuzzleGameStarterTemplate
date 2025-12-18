@@ -3,34 +3,45 @@ using UnityEngine;
 
 namespace Template.Runtime.Controllers
 {
-    public class MoveCounter : Singleton<MoveCounter> // Changed inheritance
+    /// <summary>Manages move count and lose conditions based on remaining moves.</summary>
+    public class MoveCounter : Singleton<MoveCounter>
     {
-        // Removed: public static MoveCounter Instance { get; private set; }
+        private int movesLeft;
 
-        public int MovesLeft { get; private set; }
+        /// <summary>Gets the current number of remaining moves.</summary>
+        public int MovesLeft => movesLeft;
 
-        protected override void Awake() // Changed to protected override
+        protected override void Awake()
         {
-            base.Awake(); // Call base Singleton Awake logic
-            // No additional custom logic needed here for now
+            base.Awake();
         }
 
+        /// <summary>Initializes the move counter with the specified move limit.</summary>
         public void Initialize(int moveLimit)
         {
-            MovesLeft = moveLimit;
-            GameEvents.OnMovesChanged?.Invoke(MovesLeft);
+            movesLeft = moveLimit;
+            GameEvents.OnMovesChanged?.Invoke(movesLeft);
         }
 
+        /// <summary>Consumes one move and checks lose conditions.</summary>
         public void UseMove()
         {
-            if (MovesLeft <= 0) return;
+            if (movesLeft <= 0)
+                return;
 
-            MovesLeft--;
-            GameEvents.OnMovesChanged?.Invoke(MovesLeft);
+            movesLeft--;
+            GameEvents.OnMovesChanged?.Invoke(movesLeft);
 
-            // Lose condition: moves over & green tiles remain
-            if (MovesLeft <= 0 && PuzzleController.Instance != null && PuzzleController.Instance.TotalGreenTiles > 0)
+            if (movesLeft <= 0)
+            {
                 GameEvents.OnLevelLose?.Invoke();
+            }
+        }
+
+        /// <summary>Resets the move counter.</summary>
+        public void Reset()
+        {
+            movesLeft = 0;
         }
     }
 }

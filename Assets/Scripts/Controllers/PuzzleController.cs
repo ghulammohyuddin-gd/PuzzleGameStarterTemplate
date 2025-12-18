@@ -1,88 +1,48 @@
-﻿using System.Collections.Generic;
-using Template.Runtime.Core;
+﻿using Template.Runtime.Core;
+using Template.Runtime.Controllers.Interfaces;
 using Template.Runtime.Generation;
 using UnityEngine;
 
 namespace Template.Runtime.Controllers
 {
-    public class PuzzleController : Singleton<PuzzleController> // Changed inheritance
+    /// <summary>Orchestrates puzzle game flow and coordinates between systems.</summary>
+    public class PuzzleController : Singleton<PuzzleController>
     {
-        // Removed: public static PuzzleController Instance { get; private set; }
+        private IGridManager gridManager;
+        private IWinConditionChecker winConditionChecker;
 
-        public GameObject tilePrefab;
-        public float spacing = 1f;
-
-        private List<GameObject> activeTiles = new List<GameObject>();
-        private int totalGreenTiles = 0;
-        private int greenTilesClicked = 0;
-
-        public int TotalGreenTiles => totalGreenTiles;
-
-        protected override void Awake() // Changed to protected override
+        protected override void Awake()
         {
-            base.Awake(); // Call base Singleton Awake logic
-            // No additional custom logic needed here for now
+            base.Awake();
+            gridManager = GetComponent<IGridManager>();
+            winConditionChecker = GetComponent<IWinConditionChecker>();
         }
 
-        public void GenerateGrid(LevelData level)
+        /// <summary>Initializes the puzzle for a new level.</summary>
+        public void InitializePuzzle(LevelData levelData)
         {
-            // Clear previous tiles
-            foreach (var tile in activeTiles)
-                Destroy(tile);
-            activeTiles.Clear();
-
-            totalGreenTiles = 0;
-            greenTilesClicked = 0;
-
-            int gridSize = level.GridSize;
-            float offset = (gridSize - 1) * spacing / 2f;
-
-            for (int x = 0; x < gridSize; x++)
-            {
-                for (int y = 0; y < gridSize; y++)
-                {
-                    GameObject tile = Instantiate(tilePrefab, transform);
-                    tile.transform.localPosition = new Vector3(x * spacing - offset, y * spacing - offset, 0);
-
-                    PuzzleTile puzzleTile = tile.GetComponent<PuzzleTile>();
-
-                    // Randomly assign Green/Red
-                    puzzleTile.tileType = (Random.value > 0.5f) ? PuzzleTile.TileType.Green : PuzzleTile.TileType.Red;
-
-                    var sr = tile.GetComponent<SpriteRenderer>();
-                    if (sr != null)
-                        sr.color = (puzzleTile.tileType == PuzzleTile.TileType.Green) ? Color.green : Color.red;
-
-                    if (puzzleTile.tileType == PuzzleTile.TileType.Green)
-                        totalGreenTiles++;
-
-                    activeTiles.Add(tile);
-                }
-            }
-
-            Debug.Log($"Level Generated: TotalGreenTiles = {totalGreenTiles}");
+            gridManager?.ResetGrid();
+            gridManager?.GenerateGrid(levelData);
+            winConditionChecker?.Reset();
         }
 
-        public void GreenTileClicked()
+        /// <summary>Handles notification that a green tile was clicked.</summary>
+        public void OnGreenTileClicked()
         {
-            greenTilesClicked++;
-            Debug.Log($"Green Tiles Clicked: {greenTilesClicked}/{totalGreenTiles}");
+            gridManager?.OnGreenTileClicked();
 
-            if (greenTilesClicked >= totalGreenTiles)
-            {
-                Debug.Log("All green tiles clicked! Level Won!");
+            if (winConditionChecker != null && winConditionChecker.IsWinConditionMet())
                 GameEvents.OnLevelWin?.Invoke();
-            }
         }
 
-        public void ResetController()
+        /// <summary>Resets the puzzle to its initial state.</summary>
+        public void ResetPuzzle()
         {
-            foreach (var tile in activeTiles)
-                Destroy(tile);
-
-            activeTiles.Clear();
-            totalGreenTiles = 0;
-            greenTilesClicked = 0;
+            gridManager?.ResetGrid();
+            winConditionChecker?.Reset();
         }
+
+        /// <summary>Gets the grid manager instance.</summary>
+        public IGridManager GridManager => gridManager;
     }
 }
