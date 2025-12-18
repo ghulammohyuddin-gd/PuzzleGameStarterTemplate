@@ -3,20 +3,16 @@ using UnityEngine;
 
 namespace Template.Runtime.Controllers
 {
-    public class MoveCounter : MonoBehaviour
+    public class MoveCounter : Singleton<MoveCounter> // Changed inheritance
     {
-        public static MoveCounter Instance { get; private set; }
+        // Removed: public static MoveCounter Instance { get; private set; }
 
         public int MovesLeft { get; private set; }
 
-        private void Awake()
+        protected override void Awake() // Changed to protected override
         {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            Instance = this;
+            base.Awake(); // Call base Singleton Awake logic
+            // No additional custom logic needed here for now
         }
 
         public void Initialize(int moveLimit)

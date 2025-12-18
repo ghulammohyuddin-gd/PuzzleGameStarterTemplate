@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 namespace Template.Runtime.Controllers
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : Singleton<LevelManager> // Changed inheritance
     {
-        public static LevelManager Instance { get; private set; }
+        // Removed: public static LevelManager Instance { get; private set; }
 
         [Header("References (Scene Objects)")]
         public PuzzleController puzzleController;
@@ -18,18 +18,11 @@ namespace Template.Runtime.Controllers
         private int currentLevelIndex = 0;
         private LevelData currentLevel;
 
-        private void Awake()
+        protected override void Awake() // Changed to protected override
         {
-            // Singleton setup
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
+            base.Awake(); // Call base Singleton Awake logic
 
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-
+            // Existing custom logic
             // Listen for scene load
             SceneManager.sceneLoaded += OnSceneLoaded;
         }

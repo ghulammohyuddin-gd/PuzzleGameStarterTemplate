@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Template.Runtime.Core; // Added for Singleton<T>
 
 namespace Template.Runtime.Audio
 {
@@ -6,9 +7,9 @@ namespace Template.Runtime.Audio
     /// Central audio controller (music + SFX)
     /// Safe to use even when no AudioClips are assigned
     /// </summary>
-    public class AudioManager : MonoBehaviour
+    public class AudioManager : Singleton<AudioManager> // Changed inheritance
     {
-        public static AudioManager Instance { get; private set; }
+        // Removed: public static AudioManager Instance { get; private set; }
 
         [Header("Audio Sources")]
         [SerializeField] private AudioSource musicSource;
@@ -17,17 +18,11 @@ namespace Template.Runtime.Audio
         private const string AUDIO_KEY = "AudioSettings";
         private AudioSettingsData settings;
 
-        private void Awake()
+        protected override void Awake() // Changed to protected override
         {
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
+            base.Awake(); // Call base Singleton Awake logic
 
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-
+            // Existing custom logic
             LoadSettings();
             ApplySettings();
         }

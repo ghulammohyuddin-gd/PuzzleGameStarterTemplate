@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Template.Runtime.Controllers
 {
-    public class PuzzleController : MonoBehaviour
+    public class PuzzleController : Singleton<PuzzleController> // Changed inheritance
     {
-        public static PuzzleController Instance { get; private set; }
+        // Removed: public static PuzzleController Instance { get; private set; }
 
         public GameObject tilePrefab;
         public float spacing = 1f;
@@ -18,14 +18,10 @@ namespace Template.Runtime.Controllers
 
         public int TotalGreenTiles => totalGreenTiles;
 
-        private void Awake()
+        protected override void Awake() // Changed to protected override
         {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            Instance = this;
+            base.Awake(); // Call base Singleton Awake logic
+            // No additional custom logic needed here for now
         }
 
         public void GenerateGrid(LevelData level)
