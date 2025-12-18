@@ -1,27 +1,31 @@
+﻿using PuzzleGameStarterTemplate.Controllers;
 using UnityEngine;
 
-public class TileInputHandler : MonoBehaviour
+namespace PuzzleGameStarterTemplate.Input
 {
-    private Camera mainCam;
-
-    void Start()
+    public class TileInputHandler : MonoBehaviour
     {
-        mainCam = Camera.main;
-    }
+        private Camera mainCam;
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
+        void Start()
         {
-            Vector2 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+            mainCam = Camera.main;
+        }
 
-            if (hit.collider != null)
+        void Update()
+        {
+            if (UnityEngine.Input.GetMouseButtonDown(0))
             {
-                PuzzleTile tile = hit.collider.GetComponent<PuzzleTile>();
-                if (tile != null && !tile.IsClicked)
+                Vector2 mousePos = mainCam.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+                if (hit.collider != null)
                 {
-                    tile.HandleClick();
+                    PuzzleTile tile = hit.collider.GetComponent<PuzzleTile>();
+                    if (tile != null && !tile.IsClicked)
+                    {
+                        tile.HandleClick();
+                    }
                 }
             }
         }

@@ -1,15 +1,20 @@
-using System.Collections;
+﻿using System.Collections;
+using PuzzleGameStarterTemplate.Loading.Core;
+using PuzzleGameStarterTemplate.Persistance;
 using UnityEngine;
 
-public class LoadPlayerProgressCommand : LoadingCommandBase
+namespace PuzzleGameStarterTemplate.Loading.Commands
 {
-    public override IEnumerator Execute()
+    public class LoadPlayerProgressCommand : LoadingCommandBase
     {
-        Debug.Log("Loading player progress...");
+        public override IEnumerator Execute()
+        {
+            Debug.Log("Loading player progress...");
 
-        ProgressManager.LoadLevel();
+            ProgressManager.LoadLevel();
 
-        // Simulate async load / future backend hook
-        yield return null;
+            // Simulate async load / future backend hook
+            yield return null;
+        }
     }
 }

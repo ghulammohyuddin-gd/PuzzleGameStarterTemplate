@@ -1,13 +1,17 @@
-using System.Collections;
+﻿using System.Collections;
+using PuzzleGameStarterTemplate.Loading.Core;
 using UnityEngine;
 
-public class LoadStubCommand : LoadingCommandBase
+namespace PuzzleGameStarterTemplate.Loading.Commands
 {
-    [SerializeField] private string description;
-
-    public override IEnumerator Execute()
+    public class LoadStubCommand : LoadingCommandBase
     {
-        Debug.Log($"Stub: {description}");
-        yield return new WaitForSeconds(0.3f);
+        [SerializeField] private string description;
+
+        public override IEnumerator Execute()
+        {
+            Debug.Log($"Stub: {description}");
+            yield return new WaitForSeconds(0.3f);
+        }
     }
 }

@@ -1,33 +1,37 @@
+﻿using PuzzleGameStarterTemplate.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HUDController : MonoBehaviour
+namespace PuzzleGameStarterTemplate.UI
 {
-    public TextMeshProUGUI movesText;
-    public TextMeshProUGUI levelNo;
-
-    void OnEnable()
+    public class HUDController : MonoBehaviour
     {
-        GameEvents.OnMovesChanged += UpdateMoves;
-        GameEvents.OnLevelChanged += UpdateLevelText;
-    }
+        public TextMeshProUGUI movesText;
+        public TextMeshProUGUI levelNo;
 
-    void OnDisable()
-    {
-        GameEvents.OnMovesChanged -= UpdateMoves;
-        GameEvents.OnLevelChanged -= UpdateLevelText;
-    }
+        void OnEnable()
+        {
+            GameEvents.OnMovesChanged += UpdateMoves;
+            GameEvents.OnLevelChanged += UpdateLevelText;
+        }
 
-    void UpdateMoves(int moves)
-    {
-        if (movesText != null)
-            movesText.text = "Moves: " + moves;
-    }
+        void OnDisable()
+        {
+            GameEvents.OnMovesChanged -= UpdateMoves;
+            GameEvents.OnLevelChanged -= UpdateLevelText;
+        }
 
-    void UpdateLevelText(int level)
-    {
-        if (levelNo != null)
-            levelNo.text = "Level: " + (level + 1); // +1 to show 1-based
+        void UpdateMoves(int moves)
+        {
+            if (movesText != null)
+                movesText.text = "Moves: " + moves;
+        }
+
+        void UpdateLevelText(int level)
+        {
+            if (levelNo != null)
+                levelNo.text = "Level: " + (level + 1); // +1 to show 1-based
+        }
     }
 }

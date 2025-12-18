@@ -1,31 +1,35 @@
+﻿using PuzzleGameStarterTemplate.Core;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+namespace PuzzleGameStarterTemplate.UI
 {
-    public GameObject winPanel;
-    public GameObject losePanel;
-
-    void OnEnable()
+    public class UIManager : MonoBehaviour
     {
-        GameEvents.OnLevelWin += ShowWin;
-        GameEvents.OnLevelLose += ShowLose;
-    }
+        public GameObject winPanel;
+        public GameObject losePanel;
 
-    void OnDisable()
-    {
-        GameEvents.OnLevelWin -= ShowWin;
-        GameEvents.OnLevelLose -= ShowLose;
-    }
+        void OnEnable()
+        {
+            GameEvents.OnLevelWin += ShowWin;
+            GameEvents.OnLevelLose += ShowLose;
+        }
 
-    void ShowWin()
-    {
-        if (winPanel != null)
-            winPanel.SetActive(true);
-    }
+        void OnDisable()
+        {
+            GameEvents.OnLevelWin -= ShowWin;
+            GameEvents.OnLevelLose -= ShowLose;
+        }
 
-    void ShowLose()
-    {
-        if (losePanel != null)
-            losePanel.SetActive(true);
+        void ShowWin()
+        {
+            if (winPanel != null)
+                winPanel.SetActive(true);
+        }
+
+        void ShowLose()
+        {
+            if (losePanel != null)
+                losePanel.SetActive(true);
+        }
     }
 }

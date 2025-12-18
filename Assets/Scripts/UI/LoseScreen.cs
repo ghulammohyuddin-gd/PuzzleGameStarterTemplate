@@ -1,52 +1,56 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using PuzzleGameStarterTemplate.Controllers;
+using PuzzleGameStarterTemplate.Core;
 
-public class LoseScreen : MonoBehaviour
+namespace PuzzleGameStarterTemplate.UI
 {
-    [Header("Buttons")]
-    public Button restartButton;
-    public Button homeButton; // NEW
-
-    private LevelManager levelManager;
-
-    void Awake()
+    public class LoseScreen : MonoBehaviour
     {
-        // Cache LevelManager reference
-        levelManager = LevelManager.Instance;
-    }
+        [Header("Buttons")]
+        public Button restartButton;
+        public Button homeButton; // NEW
 
-    void OnEnable()
-    {
-        // Add listeners
-        if (restartButton != null)
-            restartButton.onClick.AddListener(OnRestartClicked);
+        private LevelManager levelManager;
 
-        if (homeButton != null)
-            homeButton.onClick.AddListener(OnHomeClicked);
-    }
+        void Awake()
+        {
+            // Cache LevelManager reference
+            levelManager = LevelManager.Instance;
+        }
 
-    void OnDisable()
-    {
-        // Remove listeners
-        if (restartButton != null)
-            restartButton.onClick.RemoveListener(OnRestartClicked);
+        void OnEnable()
+        {
+            // Add listeners
+            if (restartButton != null)
+                restartButton.onClick.AddListener(OnRestartClicked);
 
-        if (homeButton != null)
-            homeButton.onClick.RemoveListener(OnHomeClicked);
-    }
+            if (homeButton != null)
+                homeButton.onClick.AddListener(OnHomeClicked);
+        }
 
-    private void OnRestartClicked()
-    {
-        gameObject.SetActive(false);
-        if (levelManager != null)
-            levelManager.RestartLevel();
-    }
+        void OnDisable()
+        {
+            // Remove listeners
+            if (restartButton != null)
+                restartButton.onClick.RemoveListener(OnRestartClicked);
 
-    private void OnHomeClicked()
-    {
-        gameObject.SetActive(false);
-        // Reset gameplay state
-        GameFlowManager.Instance?.GoToMainMenu();
+            if (homeButton != null)
+                homeButton.onClick.RemoveListener(OnHomeClicked);
+        }
+
+        private void OnRestartClicked()
+        {
+            gameObject.SetActive(false);
+            if (levelManager != null)
+                levelManager.RestartLevel();
+        }
+
+        private void OnHomeClicked()
+        {
+            gameObject.SetActive(false);
+            // Reset gameplay state
+            GameFlowManager.Instance?.GoToMainMenu();
+        }
     }
 }

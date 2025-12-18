@@ -1,29 +1,32 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-[System.Serializable]
-public class ProceduralLevelGenerator : MonoBehaviour
+namespace PuzzleGameStarterTemplate.Generation
 {
-    [Header("Grid Settings")]
-    public int baseGridSize = 3;             // Starting grid size
-    public int maxGridSize = 5;              // Maximum grid size allowed
-    public int incrementEveryNLevels = 1;    // Increase grid size every N levels
-
-    // Generate a new level data for a given level index
-    public LevelData GenerateLevel(int levelIndex)
+    [System.Serializable]
+    public class ProceduralLevelGenerator : MonoBehaviour
     {
-        LevelData level = new LevelData();
+        [Header("Grid Settings")]
+        public int baseGridSize = 3;             // Starting grid size
+        public int maxGridSize = 5;              // Maximum grid size allowed
+        public int incrementEveryNLevels = 1;    // Increase grid size every N levels
 
-        // Calculate how many steps of increase
-        int increaseSteps = levelIndex / incrementEveryNLevels;
-        int newGridSize = baseGridSize + increaseSteps;
+        // Generate a new level data for a given level index
+        public LevelData GenerateLevel(int levelIndex)
+        {
+            LevelData level = new LevelData();
 
-        // Clamp to maximum grid size
-        level.GridSize = Mathf.Min(newGridSize, maxGridSize);
+            // Calculate how many steps of increase
+            int increaseSteps = levelIndex / incrementEveryNLevels;
+            int newGridSize = baseGridSize + increaseSteps;
 
-        // TODO: Add procedural rules for green/red tiles, obstacles, power-ups, etc.
+            // Clamp to maximum grid size
+            level.GridSize = Mathf.Min(newGridSize, maxGridSize);
 
-        Debug.Log($"Generated Level {levelIndex + 1} -> GridSize: {level.GridSize}");
+            // TODO: Add procedural rules for green/red tiles, obstacles, power-ups, etc.
 
-        return level;
+            Debug.Log($"Generated Level {levelIndex + 1} -> GridSize: {level.GridSize}");
+
+            return level;
+        }
     }
 }

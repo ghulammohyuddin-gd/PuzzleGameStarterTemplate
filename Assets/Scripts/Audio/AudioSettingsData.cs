@@ -1,9 +1,12 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-[System.Serializable]
-public class AudioSettingsData
+namespace PuzzleGameStarterTemplate.Audio
 {
-    public float musicVolume = 1f;
-    public float sfxVolume = 1f;
-    public bool isMuted = false;
+    [System.Serializable]
+    public class AudioSettingsData
+    {
+        public float musicVolume = 1f;
+        public float sfxVolume = 1f;
+        public bool isMuted = false;
+    }
 }

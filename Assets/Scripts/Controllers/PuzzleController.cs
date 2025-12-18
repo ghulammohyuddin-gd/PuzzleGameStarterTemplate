@@ -1,87 +1,92 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using PuzzleGameStarterTemplate.Core;
+using PuzzleGameStarterTemplate.Generation;
 using UnityEngine;
 
-public class PuzzleController : MonoBehaviour
+namespace PuzzleGameStarterTemplate.Controllers
 {
-    public static PuzzleController Instance { get; private set; }
-
-    public GameObject tilePrefab;
-    public float spacing = 1f;
-
-    private List<GameObject> activeTiles = new List<GameObject>();
-    private int totalGreenTiles = 0;
-    private int greenTilesClicked = 0;
-
-    public int TotalGreenTiles => totalGreenTiles;
-
-    private void Awake()
+    public class PuzzleController : MonoBehaviour
     {
-        if (Instance != null && Instance != this)
+        public static PuzzleController Instance { get; private set; }
+
+        public GameObject tilePrefab;
+        public float spacing = 1f;
+
+        private List<GameObject> activeTiles = new List<GameObject>();
+        private int totalGreenTiles = 0;
+        private int greenTilesClicked = 0;
+
+        public int TotalGreenTiles => totalGreenTiles;
+
+        private void Awake()
         {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
-
-    public void GenerateGrid(LevelData level)
-    {
-        // Clear previous tiles
-        foreach (var tile in activeTiles)
-            Destroy(tile);
-        activeTiles.Clear();
-
-        totalGreenTiles = 0;
-        greenTilesClicked = 0;
-
-        int gridSize = level.GridSize;
-        float offset = (gridSize - 1) * spacing / 2f;
-
-        for (int x = 0; x < gridSize; x++)
-        {
-            for (int y = 0; y < gridSize; y++)
+            if (Instance != null && Instance != this)
             {
-                GameObject tile = Instantiate(tilePrefab, transform);
-                tile.transform.localPosition = new Vector3(x * spacing - offset, y * spacing - offset, 0);
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+        }
 
-                PuzzleTile puzzleTile = tile.GetComponent<PuzzleTile>();
+        public void GenerateGrid(LevelData level)
+        {
+            // Clear previous tiles
+            foreach (var tile in activeTiles)
+                Destroy(tile);
+            activeTiles.Clear();
 
-                // Randomly assign Green/Red
-                puzzleTile.tileType = (Random.value > 0.5f) ? PuzzleTile.TileType.Green : PuzzleTile.TileType.Red;
+            totalGreenTiles = 0;
+            greenTilesClicked = 0;
 
-                var sr = tile.GetComponent<SpriteRenderer>();
-                if (sr != null)
-                    sr.color = (puzzleTile.tileType == PuzzleTile.TileType.Green) ? Color.green : Color.red;
+            int gridSize = level.GridSize;
+            float offset = (gridSize - 1) * spacing / 2f;
 
-                if (puzzleTile.tileType == PuzzleTile.TileType.Green)
-                    totalGreenTiles++;
+            for (int x = 0; x < gridSize; x++)
+            {
+                for (int y = 0; y < gridSize; y++)
+                {
+                    GameObject tile = Instantiate(tilePrefab, transform);
+                    tile.transform.localPosition = new Vector3(x * spacing - offset, y * spacing - offset, 0);
 
-                activeTiles.Add(tile);
+                    PuzzleTile puzzleTile = tile.GetComponent<PuzzleTile>();
+
+                    // Randomly assign Green/Red
+                    puzzleTile.tileType = (Random.value > 0.5f) ? PuzzleTile.TileType.Green : PuzzleTile.TileType.Red;
+
+                    var sr = tile.GetComponent<SpriteRenderer>();
+                    if (sr != null)
+                        sr.color = (puzzleTile.tileType == PuzzleTile.TileType.Green) ? Color.green : Color.red;
+
+                    if (puzzleTile.tileType == PuzzleTile.TileType.Green)
+                        totalGreenTiles++;
+
+                    activeTiles.Add(tile);
+                }
+            }
+
+            Debug.Log($"Level Generated: TotalGreenTiles = {totalGreenTiles}");
+        }
+
+        public void GreenTileClicked()
+        {
+            greenTilesClicked++;
+            Debug.Log($"Green Tiles Clicked: {greenTilesClicked}/{totalGreenTiles}");
+
+            if (greenTilesClicked >= totalGreenTiles)
+            {
+                Debug.Log("All green tiles clicked! Level Won!");
+                GameEvents.OnLevelWin?.Invoke();
             }
         }
 
-        Debug.Log($"Level Generated: TotalGreenTiles = {totalGreenTiles}");
-    }
-
-    public void GreenTileClicked()
-    {
-        greenTilesClicked++;
-        Debug.Log($"Green Tiles Clicked: {greenTilesClicked}/{totalGreenTiles}");
-
-        if (greenTilesClicked >= totalGreenTiles)
+        public void ResetController()
         {
-            Debug.Log("All green tiles clicked! Level Won!");
-            GameEvents.OnLevelWin?.Invoke();
+            foreach (var tile in activeTiles)
+                Destroy(tile);
+
+            activeTiles.Clear();
+            totalGreenTiles = 0;
+            greenTilesClicked = 0;
         }
-    }
-
-    public void ResetController()
-    {
-        foreach (var tile in activeTiles)
-            Destroy(tile);
-
-        activeTiles.Clear();
-        totalGreenTiles = 0;
-        greenTilesClicked = 0;
     }
 }

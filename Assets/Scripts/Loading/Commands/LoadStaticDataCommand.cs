@@ -1,11 +1,15 @@
-using System.Collections;
+﻿using System.Collections;
+using PuzzleGameStarterTemplate.Loading.Core;
 using UnityEngine;
 
-public class LoadStaticDataCommand : LoadingCommandBase
+namespace PuzzleGameStarterTemplate.Loading.Commands
 {
-    public override IEnumerator Execute()
+    public class LoadStaticDataCommand : LoadingCommandBase
     {
-        Debug.Log("Loading static data...");
-        yield return new WaitForSeconds(0.5f); // stub
+        public override IEnumerator Execute()
+        {
+            Debug.Log("Loading static data...");
+            yield return new WaitForSeconds(0.5f); // stub
+        }
     }
 }

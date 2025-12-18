@@ -1,52 +1,56 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using PuzzleGameStarterTemplate.Controllers;
+using PuzzleGameStarterTemplate.Core;
 
-public class WinScreen : MonoBehaviour
+namespace PuzzleGameStarterTemplate.UI
 {
-    [Header("Buttons")]
-    public Button nextLevelButton;
-    public Button homeButton; // NEW
-
-    private LevelManager levelManager;
-
-    void Awake()
+    public class WinScreen : MonoBehaviour
     {
-        // Cache LevelManager reference
-        levelManager = LevelManager.Instance;
-    }
+        [Header("Buttons")]
+        public Button nextLevelButton;
+        public Button homeButton; // NEW
 
-    void OnEnable()
-    {
-        // Add listeners
-        if (nextLevelButton != null)
-            nextLevelButton.onClick.AddListener(OnNextLevelClicked);
+        private LevelManager levelManager;
 
-        if (homeButton != null)
-            homeButton.onClick.AddListener(OnHomeClicked);
-    }
+        void Awake()
+        {
+            // Cache LevelManager reference
+            levelManager = LevelManager.Instance;
+        }
 
-    void OnDisable()
-    {
-        // Remove listeners
-        if (nextLevelButton != null)
-            nextLevelButton.onClick.RemoveListener(OnNextLevelClicked);
+        void OnEnable()
+        {
+            // Add listeners
+            if (nextLevelButton != null)
+                nextLevelButton.onClick.AddListener(OnNextLevelClicked);
 
-        if (homeButton != null)
-            homeButton.onClick.RemoveListener(OnHomeClicked);
-    }
+            if (homeButton != null)
+                homeButton.onClick.AddListener(OnHomeClicked);
+        }
 
-    private void OnNextLevelClicked()
-    {
-        gameObject.SetActive(false);
-        if (levelManager != null)
-            levelManager.LoadNextLevel();
-    }
+        void OnDisable()
+        {
+            // Remove listeners
+            if (nextLevelButton != null)
+                nextLevelButton.onClick.RemoveListener(OnNextLevelClicked);
 
-    private void OnHomeClicked()
-    {
-        gameObject.SetActive(false);
-        GameFlowManager.Instance?.GoToMainMenu();
+            if (homeButton != null)
+                homeButton.onClick.RemoveListener(OnHomeClicked);
+        }
 
+        private void OnNextLevelClicked()
+        {
+            gameObject.SetActive(false);
+            if (levelManager != null)
+                levelManager.LoadNextLevel();
+        }
+
+        private void OnHomeClicked()
+        {
+            gameObject.SetActive(false);
+            GameFlowManager.Instance?.GoToMainMenu();
+
+        }
     }
 }

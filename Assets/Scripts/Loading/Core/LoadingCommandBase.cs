@@ -1,7 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public abstract class LoadingCommandBase : MonoBehaviour, ILoadingCommand
+namespace PuzzleGameStarterTemplate.Loading.Core
 {
-    public abstract IEnumerator Execute();
+    public abstract class LoadingCommandBase : MonoBehaviour, ILoadingCommand
+    {
+        public abstract IEnumerator Execute();
+    }
 }

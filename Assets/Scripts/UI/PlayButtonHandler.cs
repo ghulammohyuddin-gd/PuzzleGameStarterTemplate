@@ -1,10 +1,13 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayButtonHandler : MonoBehaviour
+namespace PuzzleGameStarterTemplate.UI
 {
-    public void OnPlayClicked()
+    public class PlayButtonHandler : MonoBehaviour
     {
-        SceneManager.LoadScene("Gameplay");
+        public void OnPlayClicked()
+        {
+            SceneManager.LoadScene("Gameplay");
+        }
     }
 }

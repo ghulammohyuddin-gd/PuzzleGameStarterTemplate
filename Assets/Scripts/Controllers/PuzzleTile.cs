@@ -1,31 +1,35 @@
+﻿using PuzzleGameStarterTemplate.Audio;
 using UnityEngine;
 
-public class PuzzleTile : MonoBehaviour
+namespace PuzzleGameStarterTemplate.Controllers
 {
-    public enum TileType { Green, Red }
-    public TileType tileType;
-
-    private bool clicked = false;
-    public bool IsClicked => clicked;
-
-    public void HandleClick()
+    public class PuzzleTile : MonoBehaviour
     {
-        if (clicked) return;
-        clicked = true;
+        public enum TileType { Green, Red }
+        public TileType tileType;
 
-        // Reduce moves
-        MoveCounter.Instance?.UseMove();
+        private bool clicked = false;
+        public bool IsClicked => clicked;
 
-        // Notify PuzzleController if green
-        if (tileType == TileType.Green)
-            PuzzleController.Instance?.GreenTileClicked();
+        public void HandleClick()
+        {
+            if (clicked) return;
+            clicked = true;
 
-        // Gray out tile
-        var sr = GetComponent<SpriteRenderer>();
-        if (sr != null)
-            sr.color = Color.gray;
+            // Reduce moves
+            MoveCounter.Instance?.UseMove();
 
-        // Play click sound
-        AudioManager.Instance?.PlaySFX(null);
+            // Notify PuzzleController if green
+            if (tileType == TileType.Green)
+                PuzzleController.Instance?.GreenTileClicked();
+
+            // Gray out tile
+            var sr = GetComponent<SpriteRenderer>();
+            if (sr != null)
+                sr.color = Color.gray;
+
+            // Play click sound
+            AudioManager.Instance?.PlaySFX(null);
+        }
     }
 }

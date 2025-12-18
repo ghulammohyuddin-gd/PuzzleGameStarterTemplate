@@ -1,32 +1,36 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using PuzzleGameStarterTemplate.Loading.UI;
 
-public class LoadingManager : MonoBehaviour
+namespace PuzzleGameStarterTemplate.Loading.Core
 {
-    [Header("Loading Commands (Order Matters)")]
-     [SerializeField] private List<LoadingCommandBase> commands;
-
-    [Header("UI")]
-    [SerializeField] private LoadingUIController ui;
-
-    private void Start()
+    public class LoadingManager : MonoBehaviour
     {
-        StartCoroutine(ExecuteCommands());
-    }
+        [Header("Loading Commands (Order Matters)")]
+         [SerializeField] private List<LoadingCommandBase> commands;
 
-    private IEnumerator ExecuteCommands()
-    {
-        int total = commands.Count;
+        [Header("UI")]
+        [SerializeField] private LoadingUIController ui;
 
-        for (int i = 0; i < total; i++)
+        private void Start()
         {
-            yield return StartCoroutine(commands[i].Execute());
-
-            float progress = (float)(i + 1) / total;
-            ui.UpdateProgress(progress);
+            StartCoroutine(ExecuteCommands());
         }
 
-        ui.OnLoadingComplete();
+        private IEnumerator ExecuteCommands()
+        {
+            int total = commands.Count;
+
+            for (int i = 0; i < total; i++)
+            {
+                yield return StartCoroutine(commands[i].Execute());
+
+                float progress = (float)(i + 1) / total;
+                ui.UpdateProgress(progress);
+            }
+
+            ui.OnLoadingComplete();
+        }
     }
 }

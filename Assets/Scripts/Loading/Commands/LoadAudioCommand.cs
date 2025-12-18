@@ -1,15 +1,19 @@
-using System.Collections;
+﻿using System.Collections;
+using PuzzleGameStarterTemplate.Audio;
+using PuzzleGameStarterTemplate.Loading.Core;
 using UnityEngine;
 
-public class LoadAudioCommand : LoadingCommandBase
+namespace PuzzleGameStarterTemplate.Loading.Commands
 {
-    public override IEnumerator Execute()
+    public class LoadAudioCommand : LoadingCommandBase
     {
-        Debug.Log("Loading audio system...");
+        public override IEnumerator Execute()
+        {
+            Debug.Log("Loading audio system...");
 
-        AudioManager.Instance.Initialize();
+            AudioManager.Instance.Initialize();
 
-        yield return null;
+            yield return null;
+        }
     }
-
 }

@@ -1,6 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 
-public interface ILoadingCommand
+namespace PuzzleGameStarterTemplate.Loading.Core
 {
-    IEnumerator Execute();
+    public interface ILoadingCommand
+    {
+        IEnumerator Execute();
+    }
 }

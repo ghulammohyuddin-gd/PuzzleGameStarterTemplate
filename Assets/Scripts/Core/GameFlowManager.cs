@@ -1,40 +1,44 @@
+﻿using PuzzleGameStarterTemplate.Controllers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameFlowManager : MonoBehaviour
+namespace PuzzleGameStarterTemplate.Core
 {
-    public static GameFlowManager Instance { get; private set; }
-
-    private void Awake()
+    public class GameFlowManager : MonoBehaviour
     {
-        if (Instance != null && Instance != this)
+        public static GameFlowManager Instance { get; private set; }
+
+        private void Awake()
         {
-            Destroy(gameObject);
-            return;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+            // Subscribe to scene loaded to initialize LevelManager
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
 
-        // Subscribe to scene loaded to initialize LevelManager
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name == "GamePlay")
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            // Initialize LevelManager explicitly for this scene
-            LevelManager.Instance?.InitializeLevelManager();
+            if (scene.name == "GamePlay")
+            {
+                // Initialize LevelManager explicitly for this scene
+                LevelManager.Instance?.InitializeLevelManager();
+            }
         }
-    }
 
-    public void GoToMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
+        public void GoToMainMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
 
-    public void StartGameplay()
-    {
-        SceneManager.LoadScene("Gameplay");
+        public void StartGameplay()
+        {
+            SceneManager.LoadScene("Gameplay");
+        }
     }
 }

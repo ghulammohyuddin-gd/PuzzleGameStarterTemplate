@@ -1,11 +1,15 @@
-using System.Collections;
+﻿using System.Collections;
+using PuzzleGameStarterTemplate.Loading.Core;
 using UnityEngine;
 
-public class LoadServicesCommand : LoadingCommandBase
+namespace PuzzleGameStarterTemplate.Loading.Commands
 {
-    public override IEnumerator Execute()
+    public class LoadServicesCommand : LoadingCommandBase
     {
-        Debug.Log("Initializing services...");
-        yield return new WaitForSeconds(0.5f); // stub
+        public override IEnumerator Execute()
+        {
+            Debug.Log("Initializing services...");
+            yield return new WaitForSeconds(0.5f); // stub
+        }
     }
 }

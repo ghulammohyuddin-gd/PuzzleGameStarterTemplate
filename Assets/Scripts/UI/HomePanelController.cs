@@ -1,24 +1,28 @@
+﻿using PuzzleGameStarterTemplate.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class HomePanelController : MonoBehaviour
+namespace PuzzleGameStarterTemplate.UI
 {
-    [SerializeField] private Button playButton;
-
-    void OnEnable()
+    public class HomePanelController : MonoBehaviour
     {
-        playButton.onClick.AddListener(OnPlayClicked);
-    }
+        [SerializeField] private Button playButton;
 
-    void OnDisable()
-    {
-        playButton.onClick.RemoveListener(OnPlayClicked);
-    }
+        void OnEnable()
+        {
+            playButton.onClick.AddListener(OnPlayClicked);
+        }
 
-    void OnPlayClicked()
-    {
-        // Reset game and load Gameplay scene
-        GameFlowManager.Instance?.StartGameplay();
+        void OnDisable()
+        {
+            playButton.onClick.RemoveListener(OnPlayClicked);
+        }
+
+        void OnPlayClicked()
+        {
+            // Reset game and load Gameplay scene
+            GameFlowManager.Instance?.StartGameplay();
+        }
     }
 }
