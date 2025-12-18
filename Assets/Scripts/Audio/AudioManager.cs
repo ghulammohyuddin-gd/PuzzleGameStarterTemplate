@@ -1,127 +1,81 @@
 ﻿using UnityEngine;
-using Template.Runtime.Core; // Added for Singleton<T>
+using Template.Runtime.Core;
 
 namespace Template.Runtime.Audio
 {
-    /// <summary>
-    /// Central audio controller (music + SFX)
-    /// Safe to use even when no AudioClips are assigned
-    /// </summary>
-    public class AudioManager : Singleton<AudioManager> // Changed inheritance
+    public class AudioManager : Singleton<AudioManager>
     {
-        // Removed: public static AudioManager Instance { get; private set; }
-
-        [Header("Audio Sources")]
+        [Header("Emitters")]
         [SerializeField] private AudioSource musicSource;
         [SerializeField] private AudioSource sfxSource;
 
-        private const string AUDIO_KEY = "AudioSettings";
-        private AudioSettingsData settings;
+        [Header("Configuration")]
+        [SerializeField] private AudioConfig config;
 
-        protected override void Awake() // Changed to protected override
+        private AudioSettingsData _settings;
+        private IAudioPersistence _persistence;
+
+        protected override void Awake()
         {
-            base.Awake(); // Call base Singleton Awake logic
-
-            // Existing custom logic
-            LoadSettings();
-            ApplySettings();
+            base.Awake();
+            // Default to PlayerPrefs, but could be injected otherwise
+            _persistence = new PlayerPrefsPersistence();
+            LoadAndApply();
         }
-
-        public void Initialize()
-        {
-            Debug.Log("AudioManager initialized (no clips required)");
-        }
-
-        #region Music
 
         public void PlayMusic(AudioClip clip, bool loop = true)
         {
-            if (clip == null || musicSource == null)
-                return;
-
-            if (musicSource.clip == clip && musicSource.isPlaying)
-                return;
+            if (clip == null || musicSource.clip == clip) return;
 
             musicSource.clip = clip;
             musicSource.loop = loop;
             musicSource.Play();
         }
 
-        public void StopMusic()
+        public void PlaySFX(AudioClip clip, float pitchRandomness = 0.1f)
         {
-            if (musicSource != null && musicSource.isPlaying)
-                musicSource.Stop();
-        }
+            if (clip == null) return;
 
-        #endregion
-
-        #region SFX
-
-        public void PlaySFX(AudioClip clip)
-        {
-            if (clip == null || sfxSource == null)
-                return;
-
+            // Production Tip: Add slight pitch variation for better feel in puzzles
+            sfxSource.pitch = 1f + Random.Range(-pitchRandomness, pitchRandomness);
             sfxSource.PlayOneShot(clip);
+            sfxSource.pitch = 1f;
         }
 
-        #endregion
+        #region Volume Control
 
-        #region Volume & Mute
-
-        public void SetMusicVolume(float value)
+        public void SetMusicVolume(float volume)
         {
-            settings.musicVolume = Mathf.Clamp01(value);
-            ApplySettings();
-            SaveSettings();
+            _settings.musicVolume = Mathf.Clamp01(volume);
+            UpdateVolumes();
         }
 
-        public void SetSFXVolume(float value)
+        public void SetSfxVolume(float volume)
         {
-            settings.sfxVolume = Mathf.Clamp01(value);
-            ApplySettings();
-            SaveSettings();
+            _settings.sfxVolume = Mathf.Clamp01(volume);
+            UpdateVolumes();
         }
 
-        public void ToggleMute(bool mute)
+        private void UpdateVolumes()
         {
-            settings.isMuted = mute;
-            ApplySettings();
-            SaveSettings();
+            float muteMultiplier = _settings.isMuted ? 0 : 1;
+            musicSource.volume = _settings.musicVolume * muteMultiplier;
+            sfxSource.volume = _settings.sfxVolume * muteMultiplier;
+            _persistence.Save(_settings);
         }
 
-        #endregion
-
-        #region Persistence
-
-        private void SaveSettings()
+        private void LoadAndApply()
         {
-            string json = JsonUtility.ToJson(settings);
-            PlayerPrefs.SetString(AUDIO_KEY, json);
-            PlayerPrefs.Save();
-        }
+            _settings = _persistence.Load();
 
-        private void LoadSettings()
-        {
-            if (PlayerPrefs.HasKey(AUDIO_KEY))
+            // Fallback to config if first time running
+            if (_settings.musicVolume <= 0 && !_settings.isMuted)
             {
-                settings = JsonUtility.FromJson<AudioSettingsData>(
-                    PlayerPrefs.GetString(AUDIO_KEY)
-                );
+                _settings.musicVolume = config.defaultMusicVolume;
+                _settings.sfxVolume = config.defaultSfxVolume;
             }
-            else
-            {
-                settings = new AudioSettingsData();
-            }
-        }
 
-        private void ApplySettings()
-        {
-            if (musicSource != null)
-                musicSource.volume = settings.isMuted ? 0f : settings.musicVolume;
-
-            if (sfxSource != null)
-                sfxSource.volume = settings.isMuted ? 0f : settings.sfxVolume;
+            UpdateVolumes();
         }
 
         #endregion

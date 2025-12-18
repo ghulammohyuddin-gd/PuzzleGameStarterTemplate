@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec6c2c0535c64585b0737ba2196908b, type: 3}
   m_Name: LevelConfig
   m_EditorClassIdentifier: 
-  BaseGridSize: 5
+  BaseGridSize: 3
   MinMoves: 10
   MaxMoves: 20
   DifficultyFactor: 0.5

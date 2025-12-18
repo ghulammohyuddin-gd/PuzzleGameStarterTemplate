@@ -11,8 +11,6 @@ namespace Template.Runtime.Loading.Commands
         {
             Debug.Log("Loading audio system...");
 
-            AudioManager.Instance.Initialize();
-
             yield return null;
         }
     }
