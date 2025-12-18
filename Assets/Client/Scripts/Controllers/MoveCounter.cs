@@ -1,4 +1,5 @@
-﻿using PuzzleTemplate.Runtime;
+﻿using Client.Runtime;
+using PuzzleTemplate.Runtime;
 using Template.Runtime.Core;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ namespace Template.Runtime.Controllers
         public void Initialize(int moveLimit)
         {
             movesLeft = moveLimit;
-            GameEvents.OnMovesChanged?.Invoke(movesLeft);
+            EventBus.Raise(new MovesChangedEvent(movesLeft));
         }
 
         /// <summary>Consumes one move and checks lose conditions.</summary>
@@ -31,7 +32,7 @@ namespace Template.Runtime.Controllers
                 return;
 
             movesLeft--;
-            GameEvents.OnMovesChanged?.Invoke(movesLeft);
+            EventBus.Raise(new MovesChangedEvent(movesLeft));
 
             if (movesLeft <= 0)
             {
@@ -41,11 +42,11 @@ namespace Template.Runtime.Controllers
                 {
                     int remainingGreen = pc.GridManager.TotalGreenTiles - pc.GridManager.GetClickedGreenTileCount();
                     if (remainingGreen > 0)
-                        GameEvents.OnLevelLose?.Invoke();
+                        EventBus.Raise(new LevelLoseEvent());
                 }
                 else
                 {
-                    GameEvents.OnLevelLose?.Invoke();
+                    EventBus.Raise(new LevelLoseEvent());
                 }
             }
         }

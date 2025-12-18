@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 using PuzzleTemplate.Runtime;
 using UnityEngine;
 
-namespace Template.Runtime.Loading.Commands
+namespace Client.Runtime
 {
     public class StaticDataLoadingStep : LoadingStepBase
     {

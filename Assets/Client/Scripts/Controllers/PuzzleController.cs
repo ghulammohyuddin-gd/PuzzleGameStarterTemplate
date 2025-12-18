@@ -3,6 +3,7 @@ using Template.Runtime.Controllers.Interfaces;
 using Template.Runtime.Generation;
 using UnityEngine;
 using PuzzleTemplate.Runtime;
+using Client.Runtime;
 
 namespace Template.Runtime.Controllers
 {
@@ -97,7 +98,7 @@ namespace Template.Runtime.Controllers
             gridManager.OnGreenTileClicked();
 
             if (winConditionChecker != null && winConditionChecker.IsWinConditionMet())
-                GameEvents.OnLevelWin?.Invoke();
+                EventBus.Raise(new LevelWinEvent());
         }
 
         /// <summary>Resets the puzzle to its initial state.</summary>

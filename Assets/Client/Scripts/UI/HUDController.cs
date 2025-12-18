@@ -1,7 +1,10 @@
-﻿using Template.Runtime.Core;
+﻿using Client.Runtime;
+using PuzzleTemplate.Runtime;
+using Template.Runtime.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 namespace Template.Runtime.UI
 {
@@ -12,26 +15,26 @@ namespace Template.Runtime.UI
 
         void OnEnable()
         {
-            GameEvents.OnMovesChanged += UpdateMoves;
-            GameEvents.OnLevelChanged += UpdateLevelText;
+            EventBus.Subscribe<MovesChangedEvent>(UpdateMoves);
+            EventBus.Subscribe<LevelChangedEvent>(UpdateLevelText);
         }
 
         void OnDisable()
         {
-            GameEvents.OnMovesChanged -= UpdateMoves;
-            GameEvents.OnLevelChanged -= UpdateLevelText;
+            EventBus.Unsubscribe<MovesChangedEvent>(UpdateMoves);
+            EventBus.Unsubscribe<LevelChangedEvent>(UpdateLevelText);
         }
 
-        void UpdateMoves(int moves)
+        void UpdateMoves(MovesChangedEvent ev)
         {
             if (movesText != null)
-                movesText.text = "Moves: " + moves;
+                movesText.text = "Moves: " + ev.MovesLeft;
         }
 
-        void UpdateLevelText(int level)
+        void UpdateLevelText(LevelChangedEvent ev)
         {
             if (levelNo != null)
-                levelNo.text = "Level: " + (level + 1); // +1 to show 1-based
+                levelNo.text = "Level: " + (ev.CurrentLevelIdx + 1); // +1 to show 1-based
         }
     }
 }

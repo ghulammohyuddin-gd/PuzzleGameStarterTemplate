@@ -3,14 +3,15 @@ using Cysharp.Threading.Tasks;
 using PuzzleTemplate.Runtime;
 using UnityEngine;
 
-namespace Template.Runtime.Loading.Commands
+namespace Client.Runtime
 {
-    public class ServicesLoadingStep : LoadingStepBase
+    public class AudioLoadingStep : LoadingStepBase
     {
+
         public override UniTask ExecuteAsync(CancellationToken cToken = default)
         {
-            Debug.Log("Initializing services...");
-            return UniTask.Delay(500, cancellationToken: cToken);
+            Debug.Log("Loading audio system...");
+            return UniTask.CompletedTask;
         }
 
     }

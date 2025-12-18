@@ -4,7 +4,7 @@ using PuzzleTemplate.Runtime;
 using Template.Runtime.Persistance;
 using UnityEngine;
 
-namespace Template.Runtime.Loading.Commands
+namespace Client.Runtime
 {
     public class PlayerProgressLoadingStep : LoadingStepBase
     {

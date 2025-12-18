@@ -5,6 +5,7 @@ using Template.Runtime.Persistance;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using PuzzleTemplate.Runtime;
+using Client.Runtime;
 
 namespace Template.Runtime.Controllers
 {
@@ -79,8 +80,8 @@ namespace Template.Runtime.Controllers
                 moveCounter.Initialize(gridManager.TotalGreenTiles + 1);
             }
 
-            GameEvents.OnLevelChanged?.Invoke(currentLevelIndex);
-            GameEvents.OnLevelGenerated?.Invoke(currentLevel);
+            EventBus.Raise(new LevelChangedEvent(currentLevelIndex));
+            EventBus.Raise(new LevelGeneratedEvent(currentLevel));
 
             currentLevelIndex++;
         }

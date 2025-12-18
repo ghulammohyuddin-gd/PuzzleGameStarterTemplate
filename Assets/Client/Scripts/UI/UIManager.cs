@@ -1,4 +1,6 @@
-﻿using Template.Runtime.Core;
+﻿using Client.Runtime;
+using PuzzleTemplate.Runtime;
+using Template.Runtime.Core;
 using UnityEngine;
 
 namespace Template.Runtime.UI
@@ -10,23 +12,23 @@ namespace Template.Runtime.UI
 
         void OnEnable()
         {
-            GameEvents.OnLevelWin += ShowWin;
-            GameEvents.OnLevelLose += ShowLose;
+            EventBus.Subscribe<LevelWinEvent>(ShowWin);
+            EventBus.Subscribe<LevelLoseEvent>(ShowLose);
         }
 
         void OnDisable()
         {
-            GameEvents.OnLevelWin -= ShowWin;
-            GameEvents.OnLevelLose -= ShowLose;
+            EventBus.Unsubscribe<LevelWinEvent>(ShowWin);
+            EventBus.Unsubscribe<LevelLoseEvent>(ShowLose);
         }
 
-        void ShowWin()
+        void ShowWin(LevelWinEvent ev)
         {
             if (winPanel != null)
                 winPanel.SetActive(true);
         }
 
-        void ShowLose()
+        void ShowLose(LevelLoseEvent ev)
         {
             if (losePanel != null)
                 losePanel.SetActive(true);
