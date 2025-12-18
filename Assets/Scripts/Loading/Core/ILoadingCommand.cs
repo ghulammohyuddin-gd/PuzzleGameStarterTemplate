@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace PuzzleGameStarterTemplate.Loading.Core
+namespace Template.Runtime.Loading.Core
 {
     public interface ILoadingCommand
     {

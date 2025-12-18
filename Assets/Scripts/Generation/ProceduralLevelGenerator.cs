@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PuzzleGameStarterTemplate.Generation
+namespace Template.Runtime.Generation
 {
     [System.Serializable]
     public class ProceduralLevelGenerator : MonoBehaviour

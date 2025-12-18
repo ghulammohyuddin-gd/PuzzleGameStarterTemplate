@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using PuzzleGameStarterTemplate.Controllers;
-using PuzzleGameStarterTemplate.Core;
+using Template.Runtime.Controllers;
+using Template.Runtime.Core;
 
-namespace PuzzleGameStarterTemplate.UI
+namespace Template.Runtime.UI
 {
     public class WinScreen : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PuzzleGameStarterTemplate.UI
+namespace Template.Runtime.UI
 {
     public class MainMenuUIManager : MonoBehaviour
     {

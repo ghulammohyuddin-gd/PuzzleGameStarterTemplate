@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PuzzleGameStarterTemplate.UI
+namespace Template.Runtime.UI
 {
     public class SettingsPanelController : MonoBehaviour
     {

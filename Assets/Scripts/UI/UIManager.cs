@@ -1,7 +1,7 @@
-﻿using PuzzleGameStarterTemplate.Core;
+﻿using Template.Runtime.Core;
 using UnityEngine;
 
-namespace PuzzleGameStarterTemplate.UI
+namespace Template.Runtime.UI
 {
     public class UIManager : MonoBehaviour
     {

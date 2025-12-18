@@ -1,7 +1,7 @@
-﻿using PuzzleGameStarterTemplate.Audio;
+﻿using Template.Runtime.Audio;
 using UnityEngine;
 
-namespace PuzzleGameStarterTemplate.Controllers
+namespace Template.Runtime.Controllers
 {
     public class PuzzleTile : MonoBehaviour
     {

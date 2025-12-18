@@ -1,7 +1,7 @@
-﻿using PuzzleGameStarterTemplate.Controllers;
+﻿using Template.Runtime.Controllers;
 using UnityEngine;
 
-namespace PuzzleGameStarterTemplate.Input
+namespace Template.Runtime.Input
 {
     public class TileInputHandler : MonoBehaviour
     {

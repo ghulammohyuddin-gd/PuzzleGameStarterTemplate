@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace PuzzleGameStarterTemplate.UI
+namespace Template.Runtime.UI
 {
     public class NavigationPanelController : MonoBehaviour
     {

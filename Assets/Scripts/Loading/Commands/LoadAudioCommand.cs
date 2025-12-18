@@ -1,9 +1,9 @@
 ﻿using System.Collections;
-using PuzzleGameStarterTemplate.Audio;
-using PuzzleGameStarterTemplate.Loading.Core;
+using Template.Runtime.Audio;
+using Template.Runtime.Loading.Core;
 using UnityEngine;
 
-namespace PuzzleGameStarterTemplate.Loading.Commands
+namespace Template.Runtime.Loading.Commands
 {
     public class LoadAudioCommand : LoadingCommandBase
     {

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using PuzzleGameStarterTemplate.Loading.UI;
+using Template.Runtime.Loading.UI;
 
-namespace PuzzleGameStarterTemplate.Loading.Core
+namespace Template.Runtime.Loading.Core
 {
     public class LoadingManager : MonoBehaviour
     {

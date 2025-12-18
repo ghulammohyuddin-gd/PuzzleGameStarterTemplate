@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PuzzleGameStarterTemplate.Audio
+namespace Template.Runtime.Audio
 {
     [System.Serializable]
     public class AudioSettingsData

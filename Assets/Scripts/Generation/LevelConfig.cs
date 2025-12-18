@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PuzzleGameStarterTemplate.Generation
+namespace Template.Runtime.Generation
 {
     [CreateAssetMenu(menuName = "Puzzle/LevelConfig")]
     public class LevelConfig : ScriptableObject

@@ -1,9 +1,9 @@
 ﻿using System.Collections;
-using PuzzleGameStarterTemplate.Loading.Core;
-using PuzzleGameStarterTemplate.Persistance;
+using Template.Runtime.Loading.Core;
+using Template.Runtime.Persistance;
 using UnityEngine;
 
-namespace PuzzleGameStarterTemplate.Loading.Commands
+namespace Template.Runtime.Loading.Commands
 {
     public class LoadPlayerProgressCommand : LoadingCommandBase
     {

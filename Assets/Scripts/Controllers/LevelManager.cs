@@ -1,10 +1,10 @@
-﻿using PuzzleGameStarterTemplate.Core;
-using PuzzleGameStarterTemplate.Generation;
-using PuzzleGameStarterTemplate.Persistance;
+﻿using Template.Runtime.Core;
+using Template.Runtime.Generation;
+using Template.Runtime.Persistance;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace PuzzleGameStarterTemplate.Controllers
+namespace Template.Runtime.Controllers
 {
     public class LevelManager : MonoBehaviour
     {

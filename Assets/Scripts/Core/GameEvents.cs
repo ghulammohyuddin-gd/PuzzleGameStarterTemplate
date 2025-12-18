@@ -1,8 +1,8 @@
 ﻿using System;
-using PuzzleGameStarterTemplate.Generation;
+using Template.Runtime.Generation;
 using UnityEngine;
 
-namespace PuzzleGameStarterTemplate.Core
+namespace Template.Runtime.Core
 {
     public static class GameEvents
     {

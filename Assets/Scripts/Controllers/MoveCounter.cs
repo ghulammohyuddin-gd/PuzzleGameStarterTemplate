@@ -1,7 +1,7 @@
-﻿using PuzzleGameStarterTemplate.Core;
+﻿using Template.Runtime.Core;
 using UnityEngine;
 
-namespace PuzzleGameStarterTemplate.Controllers
+namespace Template.Runtime.Controllers
 {
     public class MoveCounter : MonoBehaviour
     {

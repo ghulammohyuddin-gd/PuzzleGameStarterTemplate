@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using PuzzleGameStarterTemplate.Core;
-using PuzzleGameStarterTemplate.Generation;
+using Template.Runtime.Core;
+using Template.Runtime.Generation;
 using UnityEngine;
 
-namespace PuzzleGameStarterTemplate.Controllers
+namespace Template.Runtime.Controllers
 {
     public class PuzzleController : MonoBehaviour
     {

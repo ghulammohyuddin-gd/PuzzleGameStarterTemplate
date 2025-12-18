@@ -1,9 +1,9 @@
-﻿using PuzzleGameStarterTemplate.Core;
+﻿using Template.Runtime.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace PuzzleGameStarterTemplate.UI
+namespace Template.Runtime.UI
 {
     public class HomePanelController : MonoBehaviour
     {

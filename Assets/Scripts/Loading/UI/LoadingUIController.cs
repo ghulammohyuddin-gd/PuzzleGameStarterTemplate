@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using PuzzleGameStarterTemplate.Core;
+using Template.Runtime.Core;
 
-namespace PuzzleGameStarterTemplate.Loading.UI
+namespace Template.Runtime.Loading.UI
 {
     public class LoadingUIController : MonoBehaviour
     {

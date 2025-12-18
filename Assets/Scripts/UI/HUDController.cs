@@ -1,9 +1,9 @@
-﻿using PuzzleGameStarterTemplate.Core;
+﻿using Template.Runtime.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PuzzleGameStarterTemplate.UI
+namespace Template.Runtime.UI
 {
     public class HUDController : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PuzzleGameStarterTemplate.Persistance
+namespace Template.Runtime.Persistance
 {
     /// <summary>
     /// Handles saving and loading player progress (current level, etc.)

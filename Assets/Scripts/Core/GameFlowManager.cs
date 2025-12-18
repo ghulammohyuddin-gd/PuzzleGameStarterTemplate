@@ -1,8 +1,8 @@
-﻿using PuzzleGameStarterTemplate.Controllers;
+﻿using Template.Runtime.Controllers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace PuzzleGameStarterTemplate.Core
+namespace Template.Runtime.Core
 {
     public class GameFlowManager : MonoBehaviour
     {

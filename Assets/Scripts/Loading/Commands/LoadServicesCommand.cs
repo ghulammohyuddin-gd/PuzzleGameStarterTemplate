@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using PuzzleGameStarterTemplate.Loading.Core;
+using Template.Runtime.Loading.Core;
 using UnityEngine;
 
-namespace PuzzleGameStarterTemplate.Loading.Commands
+namespace Template.Runtime.Loading.Commands
 {
     public class LoadServicesCommand : LoadingCommandBase
     {
