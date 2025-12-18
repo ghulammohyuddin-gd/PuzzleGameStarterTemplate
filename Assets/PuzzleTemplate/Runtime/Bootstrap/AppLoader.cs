@@ -23,11 +23,12 @@ namespace PuzzleTemplate.Runtime
             {
                 await _steps[i].ExecuteAsync(cToken);
 
-                float progress = (float)(i + 1) / total;
-                // publish loading step complete event here
+                var progress = (float)(i + 1) / total;
+
+                EventBus.Raise(new LoadingStepExecutedEvent(progress));
             }
 
-            // publish loading complete event here
+            EventBus.Raise(new LoadingCompletedEvent());
         }
     }
 }
