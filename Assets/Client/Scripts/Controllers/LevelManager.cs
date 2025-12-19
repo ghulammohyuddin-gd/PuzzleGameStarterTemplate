@@ -73,10 +73,10 @@ namespace Client.Runtime.Controllers
             currentLevel = levelGenerator.GenerateLevel(currentLevelIndex);
             puzzleController.InitializePuzzle(currentLevel);
 
-            IGridManager gridManager = puzzleController.GridManager;
-            if (gridManager != null)
+            var gm = GridManager.Instance;
+            if (gm != null)
             {
-                moveCounter.Initialize(gridManager.TotalGreenTiles + 1);
+                moveCounter.Initialize(gm.TotalGreenTiles + 1);
             }
 
             EventBus.Raise(new LevelChangedEvent(currentLevelIndex));

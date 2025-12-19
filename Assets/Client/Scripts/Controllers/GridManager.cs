@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using Client.Runtime.Controllers.Interfaces;
 using Client.Runtime.Generation;
+using PuzzleTemplate.Runtime;
 using UnityEngine;
 
 namespace Client.Runtime.Controllers
 {
     /// <summary>Manages grid generation, tile creation, and tile state tracking.</summary>
-    public class GridManager : MonoBehaviour, IGridManager
+    public class GridManager : Singleton<GridManager>
     {
         [SerializeField]
         private GameObject tilePrefab;

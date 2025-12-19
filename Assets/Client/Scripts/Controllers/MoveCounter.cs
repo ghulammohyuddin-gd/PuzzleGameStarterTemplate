@@ -37,9 +37,10 @@ namespace Client.Runtime.Controllers
             {
                 // Only trigger lose when there are still unclicked green tiles
                 var pc = PuzzleController.Instance;
-                if (pc != null && pc.GridManager != null)
+                var gm = GridManager.Instance;
+                if (pc != null && gm != null)
                 {
-                    int remainingGreen = pc.GridManager.TotalGreenTiles - pc.GridManager.GetClickedGreenTileCount();
+                    int remainingGreen = gm.TotalGreenTiles - gm.GetClickedGreenTileCount();
                     if (remainingGreen > 0)
                         EventBus.Raise(new LevelLoseEvent());
                 }
