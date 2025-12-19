@@ -11,15 +11,13 @@ namespace Client.Runtime.UI
 
         private IWinConditionChecker _checker;
 
-        public void SetWinConditionChecker(IWinConditionChecker checker) => _checker = checker;
-
-        protected override void Awake()
+        public void SetWinConditionChecker(IWinConditionChecker checker)
         {
-            base.Awake();
+            _checker = checker;
             _checker.OnWin += OnLevelWin;
             _checker.OnLose += OnLevelLose;
         }
-
+        
         private void OnDestroy()
         {
             _checker.OnWin -= OnLevelWin;
