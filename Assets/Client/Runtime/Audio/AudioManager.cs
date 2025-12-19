@@ -3,7 +3,7 @@ using PuzzleTemplate.Runtime;
 
 namespace Client.Runtime.Audio
 {
-    public class AudioManager : Singleton<AudioManager>
+    public class AudioManager : MonoBehaviour
     {
         [Header("Emitters")]
         [SerializeField] private AudioSource musicSource;
@@ -15,9 +15,8 @@ namespace Client.Runtime.Audio
         private AudioSettingsData _settings;
         private IAudioPersistence _persistence;
 
-        protected override void Awake()
+        private void Awake()
         {
-            base.Awake();
             // Default to PlayerPrefs, but could be injected otherwise
             _persistence = new AudioPersistence();
             LoadAndApply();

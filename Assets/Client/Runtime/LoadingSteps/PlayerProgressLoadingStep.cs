@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using PuzzleTemplate.Runtime;
-using Client.Runtime.Persistance;
 using UnityEngine;
 
 namespace Client.Runtime
@@ -13,7 +12,7 @@ namespace Client.Runtime
         {
             Debug.Log("Loading player progress...");
 
-            ProgressManager.LoadLevel();
+            PrefsManager.LoadLevel();
             return UniTask.CompletedTask;
         }
 

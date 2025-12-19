@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Client.Runtime.Controllers;
 using PuzzleTemplate.Runtime.UI;
+using PuzzleTemplate.Runtime;
 
 namespace Client.Runtime.UI
 {
@@ -27,7 +27,7 @@ namespace Client.Runtime.UI
         private void OnNextButtonClicked()
         {
             gameObject.SetActive(false);
-            LevelManager.Instance.LoadNextLevel();
+            EventBus.Raise(new LoadNextLevelEvent());
         }
 
         private void OnHomeClicked()

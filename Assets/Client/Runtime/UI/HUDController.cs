@@ -1,39 +1,43 @@
-﻿using Client.Runtime;
-using PuzzleTemplate.Runtime;
+﻿using PuzzleTemplate.Runtime;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 namespace Client.Runtime.UI
 {
     public class HUDController : MonoBehaviour
     {
-        public TextMeshProUGUI movesText;
-        public TextMeshProUGUI levelNo;
+        [SerializeField] private TMP_Text _movesText;
+        [SerializeField] private TMP_Text _levelNo;
 
-        void OnEnable()
+        private TilePuzzle _puzzle;
+        private int _level;
+
+        public void SetPuzzle(IPuzzle puzzle)
         {
-            EventBus.Subscribe<MovesChangedEvent>(UpdateMoves);
-            EventBus.Subscribe<LevelChangedEvent>(UpdateLevelText);
+            _puzzle = (TilePuzzle)puzzle;
+            _level = PrefsManager.LoadLevel() + 1;
         }
 
-        void OnDisable()
+        private void OnEnable()
         {
-            EventBus.Unsubscribe<MovesChangedEvent>(UpdateMoves);
-            EventBus.Unsubscribe<LevelChangedEvent>(UpdateLevelText);
+            if (_puzzle == null) return;
+
+            _puzzle.OnAdvance += UpdateMoves;
+
+            EventBus.Subscribe<LoadNextLevelEvent>(UpdateLevelText);
         }
 
-        void UpdateMoves(MovesChangedEvent ev)
+        private void OnDisable()
         {
-            if (movesText != null)
-                movesText.text = "Moves: " + ev.MovesLeft;
+            if (_puzzle == null) return;
+
+            _puzzle.OnAdvance -= UpdateMoves;
+
+            EventBus.Unsubscribe<LoadNextLevelEvent>(UpdateLevelText);
         }
 
-        void UpdateLevelText(LevelChangedEvent ev)
-        {
-            if (levelNo != null)
-                levelNo.text = "Level: " + (ev.CurrentLevelIdx + 1); // +1 to show 1-based
-        }
+        private void UpdateMoves() => _movesText.text = "Moves: " + _puzzle.MovesLeft;
+
+        private void UpdateLevelText(LoadNextLevelEvent ev) => _levelNo.text = "Level: " + _level;
     }
 }

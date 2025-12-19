@@ -1,7 +1,7 @@
 ﻿using UnityEngine.UI;
-using Client.Runtime.Controllers;
 using PuzzleTemplate.Runtime.UI;
 using UnityEngine;
+using PuzzleTemplate.Runtime;
 
 namespace Client.Runtime.UI
 {
@@ -27,7 +27,7 @@ namespace Client.Runtime.UI
         private void OnRestartClicked()
         {
             gameObject.SetActive(false);
-            LevelManager.Instance.RestartLevel();
+            EventBus.Raise(new RestartLevelEvent());
         }
 
         private void OnHomeClicked()

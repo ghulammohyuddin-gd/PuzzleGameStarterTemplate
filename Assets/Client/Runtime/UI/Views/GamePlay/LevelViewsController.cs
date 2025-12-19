@@ -9,21 +9,25 @@ namespace Client.Runtime.UI
         [SerializeField] private string _winViewKey;
         [SerializeField] private string _loseViewKey;
 
+        private IWinConditionChecker _checker;
+
+        public void SetWinConditionChecker(IWinConditionChecker checker) => _checker = checker;
+
         protected override void Awake()
         {
             base.Awake();
-            EventBus.Subscribe<LevelWinEvent>(OnLevelWin);
-            EventBus.Subscribe<LevelLoseEvent>(OnLevelLose);
+            _checker.OnWin += OnLevelWin;
+            _checker.OnLose += OnLevelLose;
         }
 
         private void OnDestroy()
         {
-            EventBus.Unsubscribe<LevelWinEvent>(OnLevelWin);
-            EventBus.Unsubscribe<LevelLoseEvent>(OnLevelLose);
+            _checker.OnWin -= OnLevelWin;
+            _checker.OnLose -= OnLevelLose;
         }
 
-        private void OnLevelWin(LevelWinEvent @event) => SwitchView(_winViewKey);
+        private void OnLevelWin() => SwitchView(_winViewKey);
 
-        private void OnLevelLose(LevelLoseEvent @event) => SwitchView(_loseViewKey);
+        private void OnLevelLose() => SwitchView(_loseViewKey);
     }
 }
