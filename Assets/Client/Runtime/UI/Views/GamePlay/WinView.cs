@@ -33,7 +33,7 @@ namespace Client.Runtime.UI
         private void OnHomeClicked()
         {
             gameObject.SetActive(false);
-            GameFlowManager.Instance.GoToMainMenu();
+            Statics.GoToMainMenu();
         }
     }
 }

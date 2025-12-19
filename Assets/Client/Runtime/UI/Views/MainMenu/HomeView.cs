@@ -24,7 +24,7 @@ namespace Client.Runtime.UI
 
         private void OnPlayClicked()
         {
-            GameFlowManager.Instance.StartGameplay();
+           Statics.GoToGameplay();
         }
     }
 }
