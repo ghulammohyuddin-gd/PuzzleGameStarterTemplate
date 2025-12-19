@@ -1,4 +1,4 @@
-namespace PuzzleTemplate.Runtime
+namespace PuzzleTemplate.Runtime.UI
 {
     public interface IUIComponent : IState
     {

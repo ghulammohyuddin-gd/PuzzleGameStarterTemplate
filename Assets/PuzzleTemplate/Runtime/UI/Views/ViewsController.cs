@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace PuzzleTemplate.Runtime
+namespace PuzzleTemplate.Runtime.UI
 {
     public class ViewsController : MonoBehaviour
     {

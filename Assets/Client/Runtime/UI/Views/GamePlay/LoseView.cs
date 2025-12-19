@@ -1,6 +1,6 @@
 ﻿using UnityEngine.UI;
 using Client.Runtime.Controllers;
-using PuzzleTemplate.Runtime;
+using PuzzleTemplate.Runtime.UI;
 using UnityEngine;
 
 namespace Client.Runtime.UI

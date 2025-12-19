@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PuzzleTemplate.Runtime
+namespace PuzzleTemplate.Runtime.UI
 {
     public abstract class UIComponent : MonoBehaviour, IUIComponent
     {

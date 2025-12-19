@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Client.Runtime.Controllers;
-using PuzzleTemplate.Runtime;
+using PuzzleTemplate.Runtime.UI;
 
 namespace Client.Runtime.UI
 {

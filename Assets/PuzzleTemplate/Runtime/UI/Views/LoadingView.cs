@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 using TMPro;
 
-namespace PuzzleTemplate.Runtime
+namespace PuzzleTemplate.Runtime.UI
 {
-    public class LoadingProgressView : MonoBehaviour
+    public class LoadingView : UIComponent
     {
         [Header("UI Elements")]
         [SerializeField] protected Slider _progressBar;

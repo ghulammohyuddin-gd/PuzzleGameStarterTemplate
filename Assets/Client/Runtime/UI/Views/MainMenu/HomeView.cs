@@ -1,4 +1,4 @@
-﻿using PuzzleTemplate.Runtime;
+﻿using PuzzleTemplate.Runtime.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
