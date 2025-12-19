@@ -21,18 +21,6 @@ namespace Client.Runtime.Controllers
         public int TotalGreenTiles => totalGreenTiles;
         public List<GameObject> ActiveTiles => activeTiles;
 
-        private void Awake()
-        {
-            if (tilePrefab == null)
-            {
-                tilePrefab = Resources.Load<GameObject>("Prefabs/Tiles/PuzzleTile");
-                if (tilePrefab == null)
-                {
-                    Debug.LogError("GridManager: Could not find tile prefab at Resources/Prefabs/Tiles/PuzzleTile");
-                }
-            }
-        }
-
         /// <summary>Generates a grid based on level data and randomizes tile types.</summary>
         public void GenerateGrid(LevelData levelData)
         {
