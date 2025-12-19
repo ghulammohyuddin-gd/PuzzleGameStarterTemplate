@@ -6,22 +6,22 @@ namespace PuzzleTemplate.Runtime
     public class MainMenuView : MonoBehaviour
     {
         [SerializeField] protected string _defaultView;
-        [SerializeField] protected UIComponent[] _uiComponents;
+        [SerializeField] protected UIComponent[] _views;
 
         protected readonly IStateMachine _stateMachine = new StateMachine();
 
         public void SwitchView(string key)
         {
-            var uiComponent = _uiComponents.FirstOrDefault(c => c.Key == key);
-            if (uiComponent != null)
+            var view = _views.FirstOrDefault(c => c.Key == key);
+            if (view != null)
             {
-                _stateMachine.SwitchState(uiComponent);
+                _stateMachine.SwitchState(view);
             }
         }
 
         protected void Awake()
         {
-            foreach (var uiComponent in _uiComponents)
+            foreach (var uiComponent in _views)
             {
                 _stateMachine.TryRegisterState(uiComponent);
             }

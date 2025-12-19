@@ -363,6 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c4cd19ee26a4aefac02af420d438d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _key: store
 --- !u!1 &2474959571670579461
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +481,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PuzzleTemplate.Runtime::PuzzleTemplate.Runtime.MainMenuView
   _defaultView: home
-  _uiComponents: []
+  _views:
+  - {fileID: 1958354749871338822}
+  - {fileID: 4510953908468029428}
+  - {fileID: 3384737205228202440}
+  - {fileID: 5655799509868598082}
+  - {fileID: 8174568791842022715}
 --- !u!1 &2947028912003247381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,6 +1333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d1b0ba4e3f24bfaaf42d457d80157c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _key: map
 --- !u!1 &5691045065156294419
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,6 +1544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f92bbfbba3d04834806cf0c857e4fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _key: home
   playButton: {fileID: 2449513649194353239}
 --- !u!1 &6149062597858785537
 GameObject:
@@ -1764,6 +1772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11d8187b92fd04c55a3aaf487a8e01fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _key: leaderboard
 --- !u!1 &6412206162888836595
 GameObject:
   m_ObjectHideFlags: 0
@@ -2800,6 +2809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6445c3ede0c9c4160b3f266ecdafa250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _key: settings
 --- !u!1 &8750406794572698590
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,10 +4,12 @@ namespace PuzzleTemplate.Runtime
     {
         IState CurrentState { get; }
 
-        bool TryRegisterState<TState>(TState state) where TState : IState;
+        bool TryRegisterState(IState state);
 
-        void SwitchState<TState>(TState state) where TState : IState;
+        void SwitchState(IState newState);
 
-        void Reset();
+        void Stop();
+
+        void Clear();
     }
 }
