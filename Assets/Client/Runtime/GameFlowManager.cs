@@ -4,16 +4,11 @@ using UnityEngine.SceneManagement;
 
 namespace Client.Runtime
 {
-    public class GameFlowManager : Singleton<GameFlowManager> // Changed inheritance
+    public class GameFlowManager : Singleton<GameFlowManager>
     {
-        // Removed: public static GameFlowManager Instance { get; private set; }
-
-        protected override void Awake() // Changed to protected override
+        protected override void Awake()
         {
-            base.Awake(); // Call base Singleton Awake logic
-
-            // Existing custom logic
-            // Subscribe to scene loaded to initialize LevelManager
+            base.Awake();
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
@@ -26,8 +21,7 @@ namespace Client.Runtime
         {
             if (scene.name == "GamePlay")
             {
-                // Initialize LevelManager explicitly for this scene
-                LevelManager.Instance?.InitializeLevelManager();
+                LevelManager.Instance.InitializeLevelManager();
             }
         }
 
