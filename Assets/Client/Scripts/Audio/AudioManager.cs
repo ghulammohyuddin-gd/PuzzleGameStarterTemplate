@@ -39,7 +39,6 @@ namespace Client.Runtime.Audio
             // Production Tip: Add slight pitch variation for better feel in puzzles
             sfxSource.pitch = 1f + Random.Range(-pitchRandomness, pitchRandomness);
             sfxSource.PlayOneShot(clip);
-            sfxSource.pitch = 1f;
         }
 
         #region Volume Control

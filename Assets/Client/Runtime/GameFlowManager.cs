@@ -17,6 +17,11 @@ namespace Client.Runtime
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
+        private void OnDestroy()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             if (scene.name == "GamePlay")

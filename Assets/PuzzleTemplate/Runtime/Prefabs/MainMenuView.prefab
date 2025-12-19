@@ -103,20 +103,23 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -237,20 +240,23 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -281,7 +287,7 @@ GameObject:
   - component: {fileID: 2741195652739479713}
   - component: {fileID: 4510953908468029428}
   m_Layer: 5
-  m_Name: StorePanel
+  m_Name: Store - View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -369,9 +375,9 @@ GameObject:
   - component: {fileID: 543283047264520296}
   - component: {fileID: 8882862298965675124}
   - component: {fileID: 6402947558170290010}
-  - component: {fileID: 693374823711444305}
+  - component: {fileID: 87778414442648244}
   m_Layer: 5
-  m_Name: MainMenuCanvas
+  m_Name: MainMenuView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -433,12 +439,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1440, y: 2560}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -461,7 +467,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &693374823711444305
+--- !u!114 &87778414442648244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -470,14 +476,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2474959571670579461}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41c7b85937b3844d4a0d14acf8e06cdb, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c939e0dfe70f384b84a5f8c3b141e9d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  homePanel: {fileID: 5989146519070673058}
-  storePanel: {fileID: 2147630178123669509}
-  leaderboardPanel: {fileID: 6345214854684772029}
-  mapPanel: {fileID: 5162100901876482752}
-  settingsPanel: {fileID: 8701922117559362565}
+  m_EditorClassIdentifier: PuzzleTemplate.Runtime::PuzzleTemplate.Runtime.MainMenuView
+  _defaultView: home
+  _uiComponents: []
 --- !u!1 &2947028912003247381
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,20 +584,23 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -625,7 +631,7 @@ GameObject:
   - component: {fileID: 2507884692973290466}
   - component: {fileID: 7739964199191232935}
   m_Layer: 5
-  m_Name: HomeButton
+  m_Name: Home - Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -732,7 +738,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2507884692973290466}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 87778414442648244}
+        m_TargetAssemblyTypeName: PuzzleTemplate.Runtime.MainMenuView, PuzzleTemplate.Runtime
+        m_MethodName: SwitchView
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: home
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3749210641419249896
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,20 +854,23 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -970,20 +991,23 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1012,7 +1036,6 @@ GameObject:
   - component: {fileID: 8968758680930975612}
   - component: {fileID: 7311697176908273785}
   - component: {fileID: 2421926476631641756}
-  - component: {fileID: 5228521223959519969}
   m_Layer: 5
   m_Name: BottomNavBar
   m_TagString: Untagged
@@ -1082,24 +1105,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5228521223959519969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4352029037538849387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95a69e0c7932041cfa5aa7d0953eabfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  homeButton: {fileID: 7739964199191232935}
-  storeButton: {fileID: 6895108691076012386}
-  leaderboardButton: {fileID: 6580092731188859063}
-  mapButton: {fileID: 1293056851943170943}
-  settingsButton: {fileID: 975954251056855280}
-  uiManager: {fileID: 0}
 --- !u!1 &4688580515582462568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1113,7 +1118,7 @@ GameObject:
   - component: {fileID: 1242661169961891378}
   - component: {fileID: 6580092731188859063}
   m_Layer: 5
-  m_Name: LeaderBoard Button
+  m_Name: LeaderBoard - Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1220,7 +1225,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1242661169961891378}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 87778414442648244}
+        m_TargetAssemblyTypeName: PuzzleTemplate.Runtime.MainMenuView, PuzzleTemplate.Runtime
+        m_MethodName: SwitchView
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: leaderboard
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5162100901876482752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1234,7 +1251,7 @@ GameObject:
   - component: {fileID: 3676411836809745167}
   - component: {fileID: 5655799509868598082}
   m_Layer: 5
-  m_Name: MapPanel
+  m_Name: Map - View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1444,7 +1461,7 @@ GameObject:
   - component: {fileID: 9217599934197963008}
   - component: {fileID: 1958354749871338822}
   m_Layer: 5
-  m_Name: HomePanel
+  m_Name: Home - View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1624,20 +1641,23 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1668,7 +1688,7 @@ GameObject:
   - component: {fileID: 5401708559763455575}
   - component: {fileID: 3384737205228202440}
   m_Layer: 5
-  m_Name: LeaderBoardPanel
+  m_Name: LeaderBoard - View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1847,20 +1867,23 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1981,20 +2004,23 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -2025,7 +2051,7 @@ GameObject:
   - component: {fileID: 8670666833039195729}
   - component: {fileID: 975954251056855280}
   m_Layer: 5
-  m_Name: SettingsButton
+  m_Name: Settings - Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2132,7 +2158,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8670666833039195729}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 87778414442648244}
+        m_TargetAssemblyTypeName: PuzzleTemplate.Runtime.MainMenuView, PuzzleTemplate.Runtime
+        m_MethodName: SwitchView
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: settings
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7993069501915433569
 GameObject:
   m_ObjectHideFlags: 0
@@ -2236,20 +2274,23 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -2280,7 +2321,7 @@ GameObject:
   - component: {fileID: 150218353694435249}
   - component: {fileID: 6895108691076012386}
   m_Layer: 5
-  m_Name: StoreButton
+  m_Name: Store - Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2387,7 +2428,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 150218353694435249}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 87778414442648244}
+        m_TargetAssemblyTypeName: PuzzleTemplate.Runtime.MainMenuView, PuzzleTemplate.Runtime
+        m_MethodName: SwitchView
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: store
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8230788470547881082
 GameObject:
   m_ObjectHideFlags: 0
@@ -2401,7 +2454,7 @@ GameObject:
   - component: {fileID: 4240497711759331769}
   - component: {fileID: 1293056851943170943}
   m_Layer: 5
-  m_Name: MapButton
+  m_Name: Map - Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2508,7 +2561,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4240497711759331769}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 87778414442648244}
+        m_TargetAssemblyTypeName: PuzzleTemplate.Runtime.MainMenuView, PuzzleTemplate.Runtime
+        m_MethodName: SwitchView
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: map
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8352810456023772854
 GameObject:
   m_ObjectHideFlags: 0
@@ -2612,20 +2677,23 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -2656,7 +2724,7 @@ GameObject:
   - component: {fileID: 1208094714161972317}
   - component: {fileID: 8174568791842022715}
   m_Layer: 5
-  m_Name: SettingsPanel
+  m_Name: Settings - View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
