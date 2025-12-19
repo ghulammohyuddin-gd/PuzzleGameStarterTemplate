@@ -19,7 +19,7 @@ namespace Client.Runtime.Audio
         {
             base.Awake();
             // Default to PlayerPrefs, but could be injected otherwise
-            _persistence = new PlayerPrefsPersistence();
+            _persistence = new AudioPersistence();
             LoadAndApply();
         }
 

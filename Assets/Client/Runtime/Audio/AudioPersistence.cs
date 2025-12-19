@@ -8,7 +8,7 @@ namespace Client.Runtime.Audio
         AudioSettingsData Load();
     }
 
-    public class PlayerPrefsPersistence : IAudioPersistence
+    public class AudioPersistence : IAudioPersistence
     {
         private const string Key = "AudioSettings";
         public void Save(AudioSettingsData data) => PlayerPrefs.SetString(Key, JsonUtility.ToJson(data));
