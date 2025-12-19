@@ -6,7 +6,7 @@ namespace PuzzleTemplate.Runtime
 {
     public class AppLoader : MonoBehaviour
     {
-        [Header("Loading Commands (Order Matters)")]
+        [Header("(Order Matters)")]
         [SerializeField] protected LoadingStepBase[] _steps;
 
         protected virtual void Start()

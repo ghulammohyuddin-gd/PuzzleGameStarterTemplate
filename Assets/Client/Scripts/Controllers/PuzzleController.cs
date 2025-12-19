@@ -24,48 +24,6 @@ namespace Client.Runtime.Controllers
         /// <summary>Initializes GridManager and WinConditionChecker, creating them if they don't exist.</summary>
         private void InitializeComponents()
         {
-            if (gridManager == null)
-            {
-                gridManager = GetComponent<GridManager>();
-                if (gridManager == null)
-                    gridManager = FindFirstObjectByType<GridManager>();
-                if (gridManager == null)
-                {
-                    GameObject gridObj = new GameObject("GridManager");
-                    gridObj.transform.SetParent(transform);
-                    gridManager = gridObj.AddComponent<GridManager>();
-                    Debug.Log("PuzzleController: Created GridManager dynamically.");
-                }
-            }
-
-            if (gridManager != null)
-            {
-                GameObject tilePrefab = Resources.Load<GameObject>("Prefabs/Tiles/PuzzleTile");
-                if (tilePrefab != null)
-                {
-                    gridManager.SetTilePrefab(tilePrefab);
-                    Debug.Log("PuzzleController: Loaded tile prefab and assigned to GridManager.");
-                }
-                else
-                {
-                    Debug.LogError("PuzzleController: Could not load tile prefab from Resources!");
-                }
-            }
-
-            if (winConditionChecker == null)
-            {
-                winConditionChecker = GetComponent<WinConditionChecker>();
-                if (winConditionChecker == null)
-                    winConditionChecker = FindFirstObjectByType<WinConditionChecker>();
-                if (winConditionChecker == null)
-                {
-                    GameObject winObj = new GameObject("WinConditionChecker");
-                    winObj.transform.SetParent(transform);
-                    winConditionChecker = winObj.AddComponent<WinConditionChecker>();
-                    Debug.Log("PuzzleController: Created WinConditionChecker dynamically.");
-                }
-            }
-
             if (gridManager != null)
                 Debug.Log("PuzzleController: GridManager initialized successfully.");
             if (winConditionChecker != null)

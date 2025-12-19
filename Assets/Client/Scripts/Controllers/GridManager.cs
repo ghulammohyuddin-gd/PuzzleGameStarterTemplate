@@ -33,12 +33,6 @@ namespace Client.Runtime.Controllers
             }
         }
 
-        /// <summary>Sets the tile prefab to use for grid generation.</summary>
-        public void SetTilePrefab(GameObject prefab)
-        {
-            tilePrefab = prefab;
-        }
-
         /// <summary>Generates a grid based on level data and randomizes tile types.</summary>
         public void GenerateGrid(LevelData levelData)
         {
