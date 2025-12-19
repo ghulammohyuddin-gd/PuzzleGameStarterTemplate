@@ -889,7 +889,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1703570382}
-  - component: {fileID: 1703570383}
   - component: {fileID: 1703570384}
   m_Layer: 5
   m_Name: Views
@@ -919,22 +918,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1703570383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703570381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c939e0dfe70f384b84a5f8c3b141e9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: PuzzleTemplate.Runtime::PuzzleTemplate.Runtime.ViewsController
-  _defaultView: 
-  _views:
-  - {fileID: 1799848825}
-  - {fileID: 862480251}
 --- !u!114 &1703570384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -947,7 +930,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca497b5e29a27401787228e58b41756a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Client.Runtime::Client.Runtime.UI.ViewSwitchHandler
-  _viewsController: {fileID: 1703570383}
+  _defaultView: 
+  _views:
+  - {fileID: 1799848825}
+  - {fileID: 862480251}
   _winViewKey: win
   _loseViewKey: lose
 --- !u!1 &1729188044

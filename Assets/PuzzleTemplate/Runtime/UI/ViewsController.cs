@@ -10,7 +10,7 @@ namespace PuzzleTemplate.Runtime
 
         protected readonly IStateMachine _stateMachine = new StateMachine();
 
-        public void SwitchView(string key)
+        public virtual void SwitchView(string key)
         {
             var view = _views.FirstOrDefault(c => c.Key == key);
             if (view != null)
@@ -19,7 +19,7 @@ namespace PuzzleTemplate.Runtime
             }
         }
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             foreach (var uiComponent in _views)
             {
@@ -27,7 +27,7 @@ namespace PuzzleTemplate.Runtime
             }
         }
 
-        protected void Start()
+        protected virtual void Start()
         {
             SwitchView(_defaultView);
         }

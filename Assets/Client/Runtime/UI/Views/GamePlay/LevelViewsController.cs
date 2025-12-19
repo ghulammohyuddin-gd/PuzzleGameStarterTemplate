@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace Client.Runtime.UI
 {
-    public sealed class ViewSwitchHandler : MonoBehaviour
+    public sealed class LevelViewsController : ViewsController
     {
-        [SerializeField] private ViewsController _viewsController;
         [SerializeField] private string _winViewKey;
         [SerializeField] private string _loseViewKey;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             EventBus.Subscribe<LevelWinEvent>(OnLevelWin);
             EventBus.Subscribe<LevelLoseEvent>(OnLevelLose);
         }
@@ -21,8 +21,8 @@ namespace Client.Runtime.UI
             EventBus.Unsubscribe<LevelLoseEvent>(OnLevelLose);
         }
 
-        private void OnLevelWin(LevelWinEvent @event) => _viewsController.SwitchView(_winViewKey);
+        private void OnLevelWin(LevelWinEvent @event) => SwitchView(_winViewKey);
 
-        private void OnLevelLose(LevelLoseEvent @event) => _viewsController.SwitchView(_loseViewKey);
+        private void OnLevelLose(LevelLoseEvent @event) => SwitchView(_loseViewKey);
     }
 }
