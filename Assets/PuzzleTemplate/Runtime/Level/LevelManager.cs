@@ -46,8 +46,8 @@ namespace PuzzleTemplate.Runtime
         {
             var puzzleData = _puzzleDataProvider.GetData();
             _puzzle = _puzzleGenerator.Generate(puzzleData);
-            _winConditionChecker.Initialise(_puzzle);
             _puzzle.Initialise();
+            _winConditionChecker.Initialise(_puzzle);
             EventBus.Raise(new LevelStartedEvent(_puzzle));
         }
 

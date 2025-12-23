@@ -8,12 +8,13 @@ namespace Client.Runtime
     {
         [SerializeField] private int _minGridSize = 3;
         [SerializeField] private int _maxGridSize = 10;
+        [SerializeField] private float _seconds = -1;
 
         public IPuzzleData GetData()
         {
             var level = PrefsManager.LoadLevel();
             var gridSize = Math.Clamp(level + 3, _minGridSize, _maxGridSize);
-            return new TilePuzzleData(gridSize);
+            return new TilePuzzleData(gridSize, _seconds);
         }
 
         private void Awake() => RegisterEvents();

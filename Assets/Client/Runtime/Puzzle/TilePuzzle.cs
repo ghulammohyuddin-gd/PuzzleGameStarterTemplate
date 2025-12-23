@@ -8,16 +8,19 @@ namespace Client.Runtime
     public sealed class TilePuzzle : IPuzzle
     {
         public readonly IList<Tile> Tiles;
+        public readonly float Seconds;
 
         public event Action OnAdvance;
 
-        public TilePuzzle(IList<Tile> tiles) => Tiles = tiles;
+        public TilePuzzle(IList<Tile> tiles, float seconds)
+        {
+            Tiles = tiles;
+            Seconds = seconds;
+        }
 
         public int TotalGreenTiles { get; private set; }
 
         public int CurrentGreenTiles => Tiles.Count(t => t.Type == TileType.Green);
-
-        public int MovesLeft { get; private set; }
 
         public void Initialise()
         {
@@ -26,41 +29,16 @@ namespace Client.Runtime
                 tile.SetType(GetRandomTileType());
             }
             TotalGreenTiles = Tiles.Count(t => t.Type == TileType.Green);
-            MovesLeft = TotalGreenTiles + 1;
-            RegisterClicks();
         }
 
         public void Reset()
         {
-            UnregisterClicks();
             TotalGreenTiles = 0;
 
             foreach (var tile in Tiles)
             {
                 UnityEngine.Object.Destroy(tile.gameObject);
             }
-        }
-
-        private void RegisterClicks()
-        {
-            foreach (var tile in Tiles)
-            {
-                tile.OnClick += HandleClick;
-            }
-        }
-
-        private void UnregisterClicks()
-        {
-            foreach (var tile in Tiles)
-            {
-                tile.OnClick -= HandleClick;
-            }
-        }
-
-        private void HandleClick()
-        {
-            MovesLeft--;
-            OnAdvance.SafeInvoke();
         }
 
         private TileType GetRandomTileType() => (UnityEngine.Random.value > 0.5f) ? TileType.Green : TileType.Red;

@@ -8,43 +8,50 @@ namespace Client.Runtime.UI
     {
         [SerializeField] private TMP_Text _movesText;
         [SerializeField] private TMP_Text _levelNo;
+        [SerializeField] private GameObject _winConditionCheckerRef;
 
-        private TilePuzzle _puzzle;
+        private IWinConditionChecker _winConditionChecker;
 
-        public void Reset()
+        private void Awake()
         {
-            _puzzle.OnAdvance -= UpdateMoves;
+            _winConditionChecker = _winConditionCheckerRef.GetComponent<IWinConditionChecker>();
+            RegisterEvents();
         }
-
-        private void Awake() => RegisterEvents();
 
         private void OnDestroy() => UnregisterEvents();
 
-        private void RegisterEvents() => EventBus.Subscribe<LevelStartedEvent>(HandleLevelStarted);
+        private void RegisterEvents()
+        {
+            EventBus.Subscribe<LevelStartedEvent>(HandleLevelStarted);
+            _winConditionChecker.OnAdvance += UpdateRemainingText;
+        }
 
         private void UnregisterEvents()
         {
             EventBus.Unsubscribe<LevelStartedEvent>(HandleLevelStarted);
-            if (_puzzle != null)
-            {
-                _puzzle.OnAdvance -= UpdateMoves;
-            }
+            _winConditionChecker.OnAdvance -= UpdateRemainingText;
         }
 
         private void HandleLevelStarted(LevelStartedEvent @event)
         {
-            if (_puzzle != null)
-            {
-                _puzzle.OnAdvance -= UpdateMoves;
-            }
-
-            _puzzle = (TilePuzzle)@event.Puzzle;
-            _puzzle.OnAdvance += UpdateMoves;
             UpdateLevelText();
-            UpdateMoves();
+            UpdateRemainingText();
         }
 
-        private void UpdateMoves() => _movesText.SetText($"Moves: {_puzzle.MovesLeft}");
+        private void UpdateRemainingText()
+        {
+            if (_winConditionChecker is TilePuzzleMovesWinCondition movesWinCondition)
+            {
+                _movesText.SetText($"Moves: {movesWinCondition.MovesLeft}");
+                return;
+            }
+
+            if (_winConditionChecker is TilePuzzleTimeWinCondition timeWinCondition)
+            {
+                _movesText.SetText($"Time: {(int)timeWinCondition.SecondsLeft}");
+                return;
+            }
+        }
 
         private void UpdateLevelText() => _levelNo.SetText($"Level: {PrefsManager.LoadLevel() + 1}");
     }

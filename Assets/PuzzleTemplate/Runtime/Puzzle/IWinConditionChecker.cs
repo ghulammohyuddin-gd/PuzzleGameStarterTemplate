@@ -6,6 +6,7 @@ namespace PuzzleTemplate.Runtime
     {
         event Action OnWin;
         event Action OnLose;
+        event Action OnAdvance;
 
         void Initialise(IPuzzle puzzle);
 

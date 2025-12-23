@@ -31,7 +31,7 @@ namespace Client.Runtime
                 spawned.Add(tile);
             }
 
-            return new TilePuzzle(spawned);
+            return new TilePuzzle(spawned, tilePuzzleData.Seconds);
         }
     }
 }

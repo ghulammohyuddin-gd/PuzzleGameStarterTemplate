@@ -8,23 +8,47 @@ namespace Client.Runtime
     {
         public event Action OnWin;
         public event Action OnLose;
+        public event Action OnAdvance;
 
         private TilePuzzle _puzzle;
+
+        public int MovesLeft { get; private set; }
 
         public void Initialise(IPuzzle puzzle)
         {
             _puzzle = (TilePuzzle)puzzle;
-            _puzzle.OnAdvance += HandleAdvance;
+            RegisterClicks();
+            MovesLeft = _puzzle.TotalGreenTiles + 1;
         }
 
         public void Reset()
         {
-            _puzzle.OnAdvance -= HandleAdvance;
+            UnregisterClicks();
+            MovesLeft = 0;
             _puzzle = null;
         }
 
-        private void HandleAdvance()
+        private void RegisterClicks()
         {
+            foreach (var tile in _puzzle.Tiles)
+            {
+                tile.OnClick += HandleClick;
+            }
+        }
+
+        private void UnregisterClicks()
+        {
+            foreach (var tile in _puzzle.Tiles)
+            {
+                tile.OnClick -= HandleClick;
+            }
+        }
+
+        private void HandleClick()
+        {
+            MovesLeft--;
+            OnAdvance.SafeInvoke();
+
             if (IsWinConditionMet())
             {
                 OnWin.SafeInvoke();
@@ -40,6 +64,6 @@ namespace Client.Runtime
 
         private bool IsWinConditionMet() => _puzzle.CurrentGreenTiles <= 0;
 
-        private bool IsLoseConditionMet() => _puzzle.MovesLeft <= 0 && !IsWinConditionMet();
+        private bool IsLoseConditionMet() => MovesLeft <= 0 && !IsWinConditionMet();
     }
 }
