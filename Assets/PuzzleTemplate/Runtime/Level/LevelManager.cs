@@ -4,6 +4,7 @@ namespace PuzzleTemplate.Runtime
 {
     public class LevelManager : MonoBehaviour
     {
+        [Header("Dependencies")]
         [SerializeField] protected GameObject _winConditionCheckerRef;
         [SerializeField] protected GameObject _puzzleGeneratorRef;
         [SerializeField] protected GameObject _puzzleDataProviderRef;
@@ -23,7 +24,7 @@ namespace PuzzleTemplate.Runtime
 
         protected virtual void Start() => StartLevel();
 
-        protected virtual void Destroy() => UnregisterEvents();
+        protected virtual void OnDestroy() => UnregisterEvents();
 
         protected virtual void RegisterEvents()
         {
