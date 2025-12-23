@@ -1,157 +1,78 @@
 # Puzzle Game Starter Template
 
-Welcome to the **Puzzle Game Starter Template** for Unity. This project provides a robust starting point for any tile-based or puzzle game, with procedural levels, UI, audio, and game flow management.
+This repository contains a starter template for creating puzzle games in Unity. It provides a foundational framework with essential systems to help you focus on building your unique puzzle logic and game content.
 
----
+The template is designed with a clean separation between the core, reusable framework and the specific game implementation, making it easy to extend and customize.
 
-## üìÇ Project Structure
+## Core Features
 
-### Scenes
+*   **Scene Management**: Pre-configured scenes for Main Menu, Loading, and Gameplay.
+*   **State Machine**: A robust state machine to manage high-level game states (e.g., `MainMenu`, `GamePlay`).
+*   **Event Bus**: A decoupled event system for communication between different game components, reducing dependencies and improving modularity.
+*   **Level Management**: A `LevelManager` to handle level loading, progression, and setup.
+*   **Prefs Management**: A `PrefsManager` for basic data persistence (e.g., saving and loading player settings).
+*   **Modular Project Structure**: A clear distinction between the reusable `PuzzleTemplate` framework and the game-specific `Client` code.
 
-- **Loading Scene**
-  - **LoadingCanvas**: Displays progress bar for loading commands.
-  - **LoadingManager**: Executes commands sequentially (LoadStaticDataCommand, LoadPlayerProgressCommand, LoadAudioCommand, etc.).
-  - **AudioSystem**: Contains MusicSource and SFXSource (assign clips in the Inspector).
-  - **GameFlowManager**: Handles scene transitions and game state resets.
+## Architecture
 
-- **MainMenu Scene**
-  - **MainMenuCanvas**: Root canvas for main menu UI.
-    - Panels: HomePanel, StorePanel, LeaderboardPanel, MapPanel, SettingsPanel.
-    - **PlayButtonHandler**: Handles play button input.
-    - **NavigationPanelController**: Handles bottom navigation buttons.
-  - **TileInputHandler**: Handles global tile input for gameplay scene.
-  - **UI Root**: Contains HUDCanvas and ResultCanvas.
-    - **UIManager**: Manages HUD, WinScreen, LoseScreen.
+The template's architecture is built on the principle of separating reusable, generic systems from the specific game logic.
 
-- **Gameplay Scene**
-  - **PuzzleController**: Generates grid based on procedural level.
-  - **LevelManager**: Singleton managing level progression.
-  - **MoveCounter**: Tracks moves for current level.
-  - **ProceduralLevelGenerator**: Generates LevelData for each level.
-  - **PuzzleTile Prefabs**: Tiles for gameplay grid.
-  - **HUDCanvas / ResultCanvas**: Display HUD and Win/Lose screens.
+### Separation of Concerns: `PuzzleTemplate` vs. `Client`
 
-### Scripts
+*   **`Assets/PuzzleTemplate`**: This is the core framework. It contains all the domain-agnostic systems that can be reused across different puzzle games. It includes the `Bootstrap`, `EventBus`, `StateMachine`, and abstract `Puzzle` definitions. You should generally not need to modify the code in this directory.
 
-#### Audio
-- `AudioManager.cs`: Handles playing music and SFX.
-- `AudioSettings.cs`: Configuration for audio.
+*   **`Assets/Client`**: This is your game. It contains the concrete implementation of your puzzle, including specific game logic, prefabs (`PuzzleTile.prefab`), scenes (`GamePlay.unity`), and managers (`LevelManager.cs`). This is where you will spend most of your development time.
 
-#### Controllers
-- `LevelManager.cs`: Handles level progression, singleton.
-- `PuzzleController.cs`: Handles grid generation and tile interactions.
-- `MoveCounter.cs`: Tracks and manages moves.
-- `PuzzleTile.cs`: Individual tile behavior.
+### Application Flow
 
-#### Core
-- `GameFlowManager.cs`: Manages scene transitions and game resets.
-- `GameEvents.cs`: Event system for level updates.
+1.  **Bootstrap**: The game starts from the `Loading` scene, where a `Bootstrap` script initializes core systems like the `EventBus` and `StateMachine`.
+2.  **State Machine**: The `StateMachine` then transitions to the `MainMenuState`, loading the `MainMenu` scene.
+3.  **User Interaction**: When the player clicks a 'Play' button, a UI event is fired via the `EventBus`.
+4.  **Level Management**: The `LevelManager` listens for this event and proceeds to load the `GamePlay` scene, setting up the puzzle for the first level.
+5.  **Gameplay**: The player interacts with puzzle elements. These interactions trigger events on the `EventBus`, which are handled by your puzzle logic within the `Client`.
+6.  **Puzzle Completion**: When a puzzle is solved, a `PuzzleSolvedEvent` can be fired, allowing the `LevelManager` or UI to react by loading the next level or showing a victory screen.
 
-#### Generation
-- `LevelConfig.cs`: ScriptableObject for level settings.
-- `LevelData.cs`: Holds level-specific data.
-- `ProceduralLevelGenerator.cs`: Procedural generation logic.
+## How to Extend the Template
 
-#### Input
-- `TileInputHandler.cs`: Captures player input for tile clicks.
+This template is designed to be easily extended. Here are the common steps for building your own puzzle game.
 
-#### Loading
-- **Core**
-  - `ILoadingCommand.cs`: Interface for loading commands.
-  - `LoadingCommandBase.cs`: Base class for loading commands.
-  - `LoadingManager.cs`: Executes loading commands sequentially.
-- **Commands**
-  - `LoadStaticDataCommand.cs`: Loads static game data.
-  - `LoadPlayerProgressCommand.cs`: Loads saved progress.
-  - `LoadAudioCommand.cs`: Loads AudioSystem.
-- **UI**
-  - `LoadingUIController.cs`: Updates progress bar and loading text.
+### 1. Create Your Puzzle Logic
 
-#### Persistence
-- `ProgressManager.cs`: Save/load player progress using PlayerPrefs.
+*   Inherit from the base puzzle classes/interfaces found in `Assets/PuzzleTemplate/Runtime/Puzzle`.
+*   Implement your specific game rules and logic inside a new script within the `Assets/Client/Runtime/Puzzle` directory.
+*   Create new prefabs for your puzzle pieces in `Assets/Client/Prefabs/` and associate your new scripts with them.
 
-#### UI
-- `HomePanelController.cs`
-- `HUDController.cs`
-- `LeaderBoardPanelController.cs`
-- `LoseScreen.cs`
-- `MainMenuUIManager.cs`
-- `MapPanelController.cs`
-- `NavigationPanelController.cs`
-- `PlayButtonHandler.cs`
-- `SettingsPanelController.cs`
-- `StorePanelController.cs`
-- `UIManager.cs`
-- `WinScreen.cs`
+### 2. Create New Levels
 
-### Prefabs
-- **AudioSystem**: Contains MusicSource and SFXSource.
-- **Tiles**: PuzzleTile prefab.
-- **UI**: HUDCanvas, LoadingCanvas, LoseScreenPanel, MainMenuCanvas, WinScreenPanel.
+*   The `LevelManager.cs` (`Assets/Client/Runtime/LevelManager.cs`) is responsible for loading level data.
+*   You can extend it to load level data from ScriptableObjects, JSON files, or any other source.
+*   Add your level configuration data and register it with the `LevelManager`.
 
-### ScriptableObjects
-- **LevelConfig**: Configure procedural level settings.
+### 3. Customize the UI
 
----
+*   Modify the UI prefabs located in `Assets/Client/Prefabs/Views/`.
+*   Connect your new UI elements to the `EventBus` to send and receive events. For example, a new button in the main menu could fire a `StartNewGameModeEvent`.
 
-## üöÄ Getting Started
+## Project Structure
 
-1. **Open `Loading` Scene** first.
-2. Ensure **AudioSystem** has MusicSource and SFXSource clips assigned.
-3. Run scene: LoadingManager will execute commands and show progress.
-4. After loading, **MainMenu Scene** appears.
-5. Tap **Play** ‚Üí loads Gameplay Scene.
-
----
-
-## ‚ö° Usage Guide
-
-### Adding Custom Puzzle Logic
-
-- **Custom Puzzle Type**: Any puzzle (tile-based, car blocks, numbers, etc.)
-- **Starting Point**: `PuzzleController.cs` handles grid and tile logic.
-- **Tile Behavior**: Extend `PuzzleTile.cs` or replace tile prefab for custom behavior.
-- **Level Generation**: Modify or extend `ProceduralLevelGenerator.cs` to create procedural or static level patterns.
-- **Move Tracking**: Use `MoveCounter.cs` to track moves.
-- **Level Management**: Use `LevelManager.cs` for progression, `GameFlowManager.cs` for scene transitions.
-
-### Linking Custom Puzzle
-
-1. Replace `tilePrefab` in `PuzzleController` with your custom prefab.
-2. Update `ProceduralLevelGenerator` to generate your custom tiles.
-3. Use `PuzzleTile` or your custom tile script to handle click/interactions.
-4. `MoveCounter` and `LevelManager` will integrate automatically for level win/lose logic.
-
-### Commands Execution
-
-- **LoadStaticDataCommand**: Load all static assets/data.
-- **LoadPlayerProgressCommand**: Loads saved level index.
-- **LoadAudioCommand**: Prepares audio system.
-- Commands run sequentially in **LoadingManager** and update `LoadingUIController`.
-
-### UI Handling
-
-- `UIManager.cs` controls HUD, WinScreen, LoseScreen.
-- Each panel has its own controller for buttons and functionality.
-- **Home button**: Uses `GameFlowManager.Instance.GoToMainMenu()`
-- **Play button**: Uses `GameFlowManager.Instance.StartGameplay()`
-
----
-
-## üìù Notes
-
-- **Singletons**: LevelManager, PuzzleController, MoveCounter are singletons.
-- **Scene Flow**: Loading Scene ‚Üí MainMenu ‚Üí Gameplay.
-- **Extensibility**: This template allows easy addition of new puzzle types by modifying `PuzzleController` and `ProceduralLevelGenerator`.
-
----
-
-## üìå Summary
-
-- Template handles procedural levels, moves, win/lose logic.
-- Commands system ensures sequential loading of game systems.
-- UI is modular and reusable.
-- Audio system is included.
-- Users can replace or extend tile types and level logic without changing core systems.
-
-This template is designed to provide a **plug-and-play s
+```
+.
++-- Assets
+¶   +-- Client/               # Your game-specific implementation
+¶   ¶   +-- Runtime
+¶   ¶   ¶   +-- LevelManager.cs # Manages level loading and progression
+¶   ¶   ¶   +-- ...
+¶   ¶   +-- Prefabs/            # Game element prefabs (e.g., PuzzleTile)
+¶   ¶   +-- Scenes/             # Game scenes (e.g., GamePlay, MainMenu)
+¶   ¶
+¶   +-- PuzzleTemplate/       # The core, reusable framework
+¶       +-- Runtime
+¶       ¶   +-- Bootstrap/      # Application entry point & initialization
+¶       ¶   +-- EventBus/       # Global event system
+¶       ¶   +-- StateMachine/   # Game state management
+¶       ¶   +-- Puzzle/         # Abstract puzzle definitions
+¶       +-- ...
+¶
++-- ProjectSettings/          # Unity project settings
++-- Packages/                 # Package manifests
+```
