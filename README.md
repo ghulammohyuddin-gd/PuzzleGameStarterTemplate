@@ -14,6 +14,7 @@ The template is designed with a clean separation between the core, reusable fram
 *   **Level Management**: A `LevelManager` to handle level loading, progression, and setup.
 *   **Prefs Management**: A `PrefsManager` for basic data persistence.
 *   **Modular Project Structure**: A clear distinction between the reusable `PuzzleTemplate` framework and the game-specific `Client` code.
+*   **Safe Area**: A `Safe Area Handler` for UI handling across different mobile devices.
 
 ## Architecture
 
@@ -65,21 +66,21 @@ This template is designed to be easily extended.
 ```
 .
 +-- Assets
-¦   +-- Client/               # Your game-specific implementation
-¦   ¦   +-- Runtime
-¦   ¦   ¦   +-- LevelManager.cs # Manages level loading and progression
-¦   ¦   ¦   +-- ...
-¦   ¦   +-- Prefabs/            # Game element prefabs (e.g., PuzzleTile)
-¦   ¦   +-- Scenes/             # Game scenes (e.g., GamePlay, MainMenu)
-¦   ¦
-¦   +-- PuzzleTemplate/       # The core, reusable framework
-¦       +-- Runtime
-¦       ¦   +-- Bootstrap/      # Application entry point & initialization
-¦       ¦   +-- EventBus/       # Global event system
-¦       ¦   +-- StateMachine/   # Game state management
-¦       ¦   +-- Puzzle/         # Abstract puzzle definitions
-¦       +-- ...
-¦
+ï¿½   +-- Client/               # Your game-specific implementation
+ï¿½   ï¿½   +-- Runtime
+ï¿½   ï¿½   ï¿½   +-- LevelManager.cs # Manages level loading and progression
+ï¿½   ï¿½   ï¿½   +-- ...
+ï¿½   ï¿½   +-- Prefabs/            # Game element prefabs (e.g., PuzzleTile)
+ï¿½   ï¿½   +-- Scenes/             # Game scenes (e.g., GamePlay, MainMenu)
+ï¿½   ï¿½
+ï¿½   +-- PuzzleTemplate/       # The core, reusable framework
+ï¿½       +-- Runtime
+ï¿½       ï¿½   +-- Bootstrap/      # Application entry point & initialization
+ï¿½       ï¿½   +-- EventBus/       # Global event system
+ï¿½       ï¿½   +-- StateMachine/   # Game state management
+ï¿½       ï¿½   +-- Puzzle/         # Abstract puzzle definitions
+ï¿½       +-- ...
+ï¿½
 +-- ProjectSettings/          # Unity project settings
 +-- Packages/                 # Package manifests
 ```
