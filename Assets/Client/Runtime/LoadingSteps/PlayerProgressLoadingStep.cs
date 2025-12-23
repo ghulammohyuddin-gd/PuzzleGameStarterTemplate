@@ -12,7 +12,6 @@ namespace Client.Runtime
         {
             Debug.Log("Loading player progress...");
 
-            PrefsManager.LoadLevel();
             return UniTask.CompletedTask;
         }
 

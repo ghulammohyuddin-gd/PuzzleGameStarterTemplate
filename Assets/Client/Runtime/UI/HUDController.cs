@@ -11,17 +11,37 @@ namespace Client.Runtime.UI
 
         private TilePuzzle _puzzle;
 
-        public void Initialise(IPuzzle puzzle)
-        {
-            _puzzle = (TilePuzzle)puzzle;
-            _puzzle.OnAdvance += UpdateMoves;
-            UpdateLevelText();
-            UpdateMoves();
-        }
-
         public void Reset()
         {
             _puzzle.OnAdvance -= UpdateMoves;
+        }
+
+        private void Awake() => RegisterEvents();
+
+        private void OnDestroy() => UnregisterEvents();
+
+        private void RegisterEvents() => EventBus.Subscribe<LevelStartedEvent>(HandleLevelStarted);
+
+        private void UnregisterEvents()
+        {
+            EventBus.Unsubscribe<LevelStartedEvent>(HandleLevelStarted);
+            if (_puzzle != null)
+            {
+                _puzzle.OnAdvance -= UpdateMoves;
+            }
+        }
+
+        private void HandleLevelStarted(LevelStartedEvent @event)
+        {
+            if (_puzzle != null)
+            {
+                _puzzle.OnAdvance -= UpdateMoves;
+            }
+
+            _puzzle = (TilePuzzle)@event.Puzzle;
+            _puzzle.OnAdvance += UpdateMoves;
+            UpdateLevelText();
+            UpdateMoves();
         }
 
         private void UpdateMoves() => _movesText.SetText($"Moves: {_puzzle.MovesLeft}");

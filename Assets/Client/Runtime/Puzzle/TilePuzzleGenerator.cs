@@ -6,12 +6,10 @@ using UnityEngine.UI;
 
 namespace Client.Runtime
 {
-    [RequireComponent(typeof(GridLayoutGroup))]
     public sealed class TilePuzzleGenerator : MonoBehaviour, IPuzzleGenerator
     {
         [SerializeField] private Tile _tilePrefab;
-
-        private GridLayoutGroup _layout;
+        [SerializeField] private GridLayoutGroup _layout;
 
         public IPuzzle Generate(IPuzzleData data)
         {
@@ -29,16 +27,11 @@ namespace Client.Runtime
 
             for (var x = 0; x < len; x++)
             {
-                var tile = Instantiate(_tilePrefab, transform);
+                var tile = Instantiate(_tilePrefab, _layout.transform);
                 spawned.Add(tile);
             }
 
             return new TilePuzzle(spawned);
-        }
-
-        private void Awake()
-        {
-            _layout = GetComponent<GridLayoutGroup>();
         }
     }
 }

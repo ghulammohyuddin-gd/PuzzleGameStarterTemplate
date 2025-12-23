@@ -1,9 +1,10 @@
 using System;
 using PuzzleTemplate.Runtime;
+using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class TilePuzzleWinConditionChecker : IWinConditionChecker
+    public sealed class TilePuzzleWinConditionChecker : MonoBehaviour, IWinConditionChecker
     {
         public event Action OnWin;
         public event Action OnLose;

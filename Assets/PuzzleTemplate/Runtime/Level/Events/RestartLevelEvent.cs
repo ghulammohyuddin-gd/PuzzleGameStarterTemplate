@@ -1,6 +1,4 @@
-using PuzzleTemplate.Runtime;
-
-namespace Client.Runtime
+namespace PuzzleTemplate.Runtime
 {
     public readonly struct RestartLevelEvent : IEvent
     {
