@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PuzzleTemplate.Runtime.UI
 {
-    public class ViewsController : MonoBehaviour
+    public class ViewsController : MonoBehaviour, IViewsController
     {
         [SerializeField] protected string _defaultView;
         [SerializeField] protected UIComponent[] _views;

@@ -34,6 +34,11 @@ namespace Client.Runtime
         {
             UnregisterClicks();
             TotalGreenTiles = 0;
+
+            foreach (var tile in Tiles)
+            {
+                UnityEngine.Object.Destroy(tile.gameObject);
+            }
         }
 
         private void RegisterClicks()

@@ -2,15 +2,16 @@
 using PuzzleTemplate.Runtime;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Client.Runtime
 {
-    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(Image))]
     public sealed class Tile : MonoBehaviour, IPointerClickHandler
     {
         public event Action OnClick;
 
-        private SpriteRenderer _sr;
+        private Image _img;
 
         public TileType Type { get; private set; }
 
@@ -25,7 +26,7 @@ namespace Client.Runtime
         public void SetType(TileType type)
         {
             Type = type;
-            _sr.color = type switch
+            _img.color = type switch
             {
                 TileType.Green => Color.green,
                 TileType.Red => Color.red,
@@ -35,7 +36,7 @@ namespace Client.Runtime
 
         private void Awake()
         {
-            _sr = GetComponent<SpriteRenderer>();
+            _img = GetComponent<Image>();
             SetType(TileType.Tapped);
         }
     }

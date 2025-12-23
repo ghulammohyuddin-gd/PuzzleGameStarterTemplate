@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab15443db6434c9aabdb7fff96548ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movesText: {fileID: 3064900854873399627}
-  levelNo: {fileID: 4999498471652000464}
+  _movesText: {fileID: 3064900854873399627}
+  _levelNo: {fileID: 4999498471652000464}
 --- !u!1 &1705338194892316664
 GameObject:
   m_ObjectHideFlags: 0

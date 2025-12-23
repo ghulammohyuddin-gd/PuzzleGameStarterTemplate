@@ -10,15 +10,16 @@ namespace Client.Runtime
 
         private TilePuzzle _puzzle;
 
-        public void SetPuzzle(IPuzzle puzzle)
+        public void Initialise(IPuzzle puzzle)
         {
-            if (_puzzle != null)
-            {
-                _puzzle.OnAdvance -= HandleAdvance;
-            }
-
             _puzzle = (TilePuzzle)puzzle;
             _puzzle.OnAdvance += HandleAdvance;
+        }
+
+        public void Reset()
+        {
+            _puzzle.OnAdvance -= HandleAdvance;
+            _puzzle = null;
         }
 
         private void HandleAdvance()
@@ -36,7 +37,7 @@ namespace Client.Runtime
             }
         }
 
-        private bool IsWinConditionMet() => _puzzle.CurrentGreenTiles >= _puzzle.TotalGreenTiles;
+        private bool IsWinConditionMet() => _puzzle.CurrentGreenTiles <= 0;
 
         private bool IsLoseConditionMet() => _puzzle.MovesLeft <= 0 && !IsWinConditionMet();
     }

@@ -10,34 +10,22 @@ namespace Client.Runtime.UI
         [SerializeField] private TMP_Text _levelNo;
 
         private TilePuzzle _puzzle;
-        private int _level;
 
-        public void SetPuzzle(IPuzzle puzzle)
+        public void Initialise(IPuzzle puzzle)
         {
             _puzzle = (TilePuzzle)puzzle;
-            _level = PrefsManager.LoadLevel() + 1;
-        }
-
-        private void OnEnable()
-        {
-            if (_puzzle == null) return;
-
             _puzzle.OnAdvance += UpdateMoves;
-
-            EventBus.Subscribe<LoadNextLevelEvent>(UpdateLevelText);
+            UpdateLevelText();
+            UpdateMoves();
         }
 
-        private void OnDisable()
+        public void Reset()
         {
-            if (_puzzle == null) return;
-
             _puzzle.OnAdvance -= UpdateMoves;
-
-            EventBus.Unsubscribe<LoadNextLevelEvent>(UpdateLevelText);
         }
 
         private void UpdateMoves() => _movesText.text = "Moves: " + _puzzle.MovesLeft;
 
-        private void UpdateLevelText(LoadNextLevelEvent ev) => _levelNo.text = "Level: " + _level;
+        private void UpdateLevelText() => _levelNo.text = "Level: " + PrefsManager.LoadLevel() + 1;
     }
 }

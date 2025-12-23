@@ -7,6 +7,8 @@ namespace PuzzleTemplate.Runtime
         event Action OnWin;
         event Action OnLose;
 
-        void SetPuzzle(IPuzzle puzzle);
+        void Initialise(IPuzzle puzzle);
+
+        void Reset();
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Client.Runtime.UI;
+﻿using Client.Runtime.UI;
 using PuzzleTemplate.Runtime;
 using UnityEngine;
 
@@ -9,31 +8,29 @@ namespace Client.Runtime
     {
         [SerializeField] private HUDController _hudController;
         [SerializeField] private LevelViewsController _viewsController;
-        [SerializeField] private TilePuzzleGenerator _puzzleGenerator;
-        [SerializeField] private int _gridSize = 5;
+        [SerializeField] private MonoBehaviour _puzzleGeneratorGo;
+        [SerializeField] private TilePuzzleData _puzzleData;
 
         private readonly IWinConditionChecker _checker = new TilePuzzleWinConditionChecker();
+        private IPuzzleGenerator _puzzleGenerator;
+
         private IPuzzle _puzzle;
+
+        private void Awake()
+        {
+            _puzzleGenerator = _puzzleGeneratorGo as IPuzzleGenerator;
+        }
 
         private void Start()
         {
-            RegisterEvents();
             _viewsController.SetWinConditionChecker(_checker);
+            RegisterEvents();
             StartLevel();
         }
 
         private void Destroy()
         {
-
             UnregisterEvents();
-        }
-
-        private void StartLevel()
-        {
-            _puzzle = _puzzleGenerator.Generate(new TilePuzzleData(_gridSize));
-            _checker.SetPuzzle(_puzzle);
-            _hudController.SetPuzzle(_puzzle);
-            _puzzle.Initialise();
         }
 
         private void RegisterEvents()
@@ -50,14 +47,30 @@ namespace Client.Runtime
 
         private void HandleLoadNext(LoadNextLevelEvent @event)
         {
-            _gridSize += 1;
+            _puzzleData = new TilePuzzleData(_puzzleData.GridSize + 1);
+            ResetLevel();
             StartLevel();
         }
 
         private void HandleRestart(RestartLevelEvent @event)
         {
-            _puzzle.Reset();
+            ResetLevel();
+            StartLevel();
+        }
+
+        private void StartLevel()
+        {
+            _puzzle = _puzzleGenerator.Generate(_puzzleData);
+            _checker.Initialise(_puzzle);
             _puzzle.Initialise();
+            _hudController.Initialise(_puzzle);
+        }
+
+        private void ResetLevel()
+        {
+            _checker.Reset();
+            _hudController.Reset();
+            _puzzle.Reset();
         }
     }
 }

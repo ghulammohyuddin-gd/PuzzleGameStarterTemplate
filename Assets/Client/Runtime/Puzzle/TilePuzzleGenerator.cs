@@ -2,13 +2,16 @@ using System;
 using System.Collections.Generic;
 using PuzzleTemplate.Runtime;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Client.Runtime
 {
+    [RequireComponent(typeof(GridLayoutGroup))]
     public sealed class TilePuzzleGenerator : MonoBehaviour, IPuzzleGenerator
     {
         [SerializeField] private Tile _tilePrefab;
-        [SerializeField] private float _tileSpacing = 1f;
+
+        private GridLayoutGroup _layout;
 
         public IPuzzle Generate(IPuzzleData data)
         {
@@ -18,20 +21,24 @@ namespace Client.Runtime
             }
 
             int gridSize = tilePuzzleData.GridSize;
-            var offset = (gridSize - 1) * _tileSpacing / 2f;
+            _layout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            _layout.constraintCount = gridSize;
+
+            var len = gridSize * gridSize;
             var spawned = new List<Tile>();
 
-            for (int x = 0; x < gridSize; x++)
+            for (var x = 0; x < len; x++)
             {
-                for (int y = 0; y < gridSize; y++)
-                {
-                    var tile = Instantiate(_tilePrefab, transform);
-                    tile.transform.localPosition = new Vector3(x * _tileSpacing - offset, y * _tileSpacing - offset, 0);
-                    spawned.Add(tile);
-                }
+                var tile = Instantiate(_tilePrefab, transform);
+                spawned.Add(tile);
             }
 
             return new TilePuzzle(spawned);
+        }
+
+        private void Awake()
+        {
+            _layout = GetComponent<GridLayoutGroup>();
         }
     }
 }
