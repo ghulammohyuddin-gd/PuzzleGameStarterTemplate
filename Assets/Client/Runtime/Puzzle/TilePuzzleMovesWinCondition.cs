@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class TilePuzzleWinConditionChecker : MonoBehaviour, IWinConditionChecker
+    public sealed class TilePuzzleMovesWinCondition : MonoBehaviour, IWinConditionChecker
     {
         public event Action OnWin;
         public event Action OnLose;
