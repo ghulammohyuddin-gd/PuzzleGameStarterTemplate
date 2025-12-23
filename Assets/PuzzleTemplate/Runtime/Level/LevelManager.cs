@@ -1,22 +1,24 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace PuzzleTemplate.Runtime
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : Singleton<LevelManager>
     {
         [Header("Dependencies")]
         [SerializeField] protected GameObject _winConditionCheckerRef;
         [SerializeField] protected GameObject _puzzleGeneratorRef;
         [SerializeField] protected GameObject _puzzleDataProviderRef;
 
-        protected IWinConditionChecker _winConditionChecker;
+        public IWinConditionChecker WinConditionChecker;
         protected IPuzzleGenerator _puzzleGenerator;
         protected IPuzzleDataProvider _puzzleDataProvider;
         protected IPuzzle _puzzle;
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
-            _winConditionChecker = _winConditionCheckerRef.GetComponent<IWinConditionChecker>();
+            base.Awake();
+            WinConditionChecker = _winConditionCheckerRef.GetComponent<IWinConditionChecker>();
             _puzzleGenerator = _puzzleGeneratorRef.GetComponent<IPuzzleGenerator>();
             _puzzleDataProvider = _puzzleDataProviderRef.GetComponent<IPuzzleDataProvider>();
             RegisterEvents();
@@ -24,7 +26,11 @@ namespace PuzzleTemplate.Runtime
 
         protected virtual void Start() => StartLevel();
 
-        protected virtual void OnDestroy() => UnregisterEvents();
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            UnregisterEvents();
+        }
 
         protected virtual void RegisterEvents()
         {
@@ -47,13 +53,13 @@ namespace PuzzleTemplate.Runtime
             var puzzleData = _puzzleDataProvider.GetData();
             _puzzle = _puzzleGenerator.Generate(puzzleData);
             _puzzle.Initialise();
-            _winConditionChecker.Initialise(_puzzle);
+            WinConditionChecker.Initialise(_puzzle);
             EventBus.Raise(new LevelStartedEvent(_puzzle));
         }
 
         protected virtual void ResetLevel()
         {
-            _winConditionChecker.Reset();
+            WinConditionChecker.Reset();
             _puzzle.Reset();
         }
 

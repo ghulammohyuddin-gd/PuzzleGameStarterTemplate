@@ -8,28 +8,23 @@ namespace Client.Runtime.UI
     {
         [SerializeField] private TMP_Text _movesText;
         [SerializeField] private TMP_Text _levelNo;
-        [SerializeField] private GameObject _winConditionCheckerRef;
 
-        private IWinConditionChecker _winConditionChecker;
-
-        private void Awake()
-        {
-            _winConditionChecker = _winConditionCheckerRef.GetComponent<IWinConditionChecker>();
-            RegisterEvents();
-        }
+        private void Start() => RegisterEvents();
 
         private void OnDestroy() => UnregisterEvents();
 
         private void RegisterEvents()
         {
             EventBus.Subscribe<LevelStartedEvent>(HandleLevelStarted);
-            _winConditionChecker.OnAdvance += UpdateRemainingText;
+            var winConditionChecker = LevelManager.Instance.WinConditionChecker;
+            winConditionChecker.OnAdvance += UpdateRemainingText;
         }
 
         private void UnregisterEvents()
         {
             EventBus.Unsubscribe<LevelStartedEvent>(HandleLevelStarted);
-            _winConditionChecker.OnAdvance -= UpdateRemainingText;
+            var winConditionChecker = LevelManager.Instance.WinConditionChecker;
+            winConditionChecker.OnAdvance -= UpdateRemainingText;
         }
 
         private void HandleLevelStarted(LevelStartedEvent @event)
@@ -40,13 +35,13 @@ namespace Client.Runtime.UI
 
         private void UpdateRemainingText()
         {
-            if (_winConditionChecker is TilePuzzleMovesWinCondition movesWinCondition)
+            if (LevelManager.Instance.WinConditionChecker is TilePuzzleMovesWinCondition movesWinCondition)
             {
                 _movesText.SetText($"Moves: {movesWinCondition.MovesLeft}");
                 return;
             }
 
-            if (_winConditionChecker is TilePuzzleTimeWinCondition timeWinCondition)
+            if (LevelManager.Instance.WinConditionChecker is TilePuzzleTimeWinCondition timeWinCondition)
             {
                 _movesText.SetText($"Time: {(int)timeWinCondition.SecondsLeft}");
                 return;
