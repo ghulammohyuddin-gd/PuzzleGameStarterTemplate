@@ -24,8 +24,8 @@ namespace Client.Runtime.UI
             _puzzle.OnAdvance -= UpdateMoves;
         }
 
-        private void UpdateMoves() => _movesText.text = "Moves: " + _puzzle.MovesLeft;
+        private void UpdateMoves() => _movesText.SetText($"Moves: {_puzzle.MovesLeft}");
 
-        private void UpdateLevelText() => _levelNo.text = "Level: " + PrefsManager.LoadLevel() + 1;
+        private void UpdateLevelText() => _levelNo.SetText($"Level: {PrefsManager.LoadLevel() + 1}");
     }
 }

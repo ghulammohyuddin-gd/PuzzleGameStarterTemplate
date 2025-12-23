@@ -48,6 +48,7 @@ namespace Client.Runtime
         private void HandleLoadNext(LoadNextLevelEvent @event)
         {
             _puzzleData = new TilePuzzleData(_puzzleData.GridSize + 1);
+            PrefsManager.SaveLevel(PrefsManager.LoadLevel() + 1);
             ResetLevel();
             StartLevel();
         }

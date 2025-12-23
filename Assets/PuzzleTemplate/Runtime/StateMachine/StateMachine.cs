@@ -24,9 +24,6 @@ namespace PuzzleTemplate.Runtime
                     $"State {newState.GetType().Name} not registered"
                 );
 
-            if (CurrentState == newState)
-                return;
-
             CurrentState?.OnExit();
             CurrentState = newState;
             CurrentState.OnEnter();
