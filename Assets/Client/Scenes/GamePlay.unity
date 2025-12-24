@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minGridSize: 3
-  _maxGridSize: 10
+  _maxGridSize: 9
   _seconds: 25
 --- !u!114 &122455645
 MonoBehaviour:
@@ -629,8 +629,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _winConditionCheckerRef: {fileID: 1990202161}
-  _puzzleGeneratorRef: {fileID: 1110994020}
-  _puzzleDataProviderRef: {fileID: 1110994020}
+  _puzzleGeneratorRef: {fileID: 122455641}
+  _puzzleDataProviderRef: {fileID: 122455641}
 --- !u!4 &663584403
 Transform:
   m_ObjectHideFlags: 0
