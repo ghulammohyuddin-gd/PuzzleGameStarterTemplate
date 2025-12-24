@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using PuzzleTemplate.Runtime;
 using UnityEngine;
 
@@ -6,15 +7,14 @@ namespace Client.Runtime
 {
     public sealed class TilePuzzleDataProvider : MonoBehaviour, IPuzzleDataProvider
     {
-        [SerializeField] private int _minGridSize = 3;
-        [SerializeField] private int _maxGridSize = 10;
-        [SerializeField] private float _seconds = -1;
 
         public IPuzzleData GetData()
         {
             var level = PrefsManager.LoadLevel();
-            var gridSize = Math.Clamp(level + 3, _minGridSize, _maxGridSize);
-            return new TilePuzzleData(gridSize, _seconds);
+            var dataService = Locator.Get<IDataService>();
+            var levelDatas = dataService.GetAllData<TilePuzzleData>().ToArray();
+            var idx = Math.Clamp(level, 0, levelDatas.Length - 1);
+            return levelDatas[idx];
         }
 
         private void Awake() => RegisterEvents();

@@ -9,6 +9,7 @@ namespace Client.Runtime
         public override UniTask ExecuteAsync(CancellationToken cToken = default)
         {
             ContentRegistry.Register<GameSettingsData>("GameSettingsData");
+            ContentRegistry.Register<TilePuzzleData>("TilePuzzleData");
             return UniTask.CompletedTask;
         }
     }

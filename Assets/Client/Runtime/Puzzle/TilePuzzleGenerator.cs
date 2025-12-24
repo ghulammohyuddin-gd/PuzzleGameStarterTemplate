@@ -34,7 +34,7 @@ namespace Client.Runtime
                 spawned.Add(tile);
             }
 
-            return new TilePuzzle(spawned, tilePuzzleData.Seconds);
+            return new TilePuzzle(spawned, tilePuzzleData.TimeLimit);
         }
 
         private void SetLayout() => _layout = FindFirstObjectByType<GridLayoutGroup>();

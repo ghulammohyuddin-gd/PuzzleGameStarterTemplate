@@ -1,0 +1,82 @@
+[
+    {
+        "_id": "tile_level_1",
+        "_gridSize": 3,
+        "_targetTiles": 5,
+        "_moveLimit": 6,
+        "_timeLimit": 15,
+        "_maxUndoCount": 2
+    },
+    {
+        "_id": "tile_level_2",
+        "_gridSize": 4,
+        "_targetTiles": 10,
+        "_moveLimit": 11,
+        "_timeLimit": 20,
+        "_maxUndoCount": 3
+    },
+    {
+        "_id": "tile_level_3",
+        "_gridSize": 5,
+        "_targetTiles": 15,
+        "_moveLimit": 16,
+        "_timeLimit": 25,
+        "_maxUndoCount": 4
+    },
+    {
+        "_id": "tile_level_4",
+        "_gridSize": 6,
+        "_targetTiles": 20,
+        "_moveLimit": 21,
+        "_timeLimit": 30,
+        "_maxUndoCount": 5
+    },
+    {
+        "_id": "tile_level_5",
+        "_gridSize": 7,
+        "_targetTiles": 25,
+        "_moveLimit": 26,
+        "_timeLimit": 35,
+        "_maxUndoCount": 6
+    },
+    {
+        "_id": "tile_level_6",
+        "_gridSize": 8,
+        "_targetTiles": 30,
+        "_moveLimit": 31,
+        "_timeLimit": 40,
+        "_maxUndoCount": 7
+    },
+    {
+        "_id": "tile_level_7",
+        "_gridSize": 9,
+        "_targetTiles": 35,
+        "_moveLimit": 36,
+        "_timeLimit": 45,
+        "_maxUndoCount": 8
+    },
+    {
+        "_id": "tile_level_8",
+        "_gridSize": 10,
+        "_targetTiles": 50,
+        "_moveLimit": 51,
+        "_timeLimit": 50,
+        "_maxUndoCount": 9
+    },
+    {
+        "_id": "tile_level_9",
+        "_gridSize": 10,
+        "_targetTiles": 65,
+        "_moveLimit": 66,
+        "_timeLimit": 55,
+        "_maxUndoCount": 10
+    },
+    {
+        "_id": "tile_level_10",
+        "_gridSize": 10,
+        "_targetTiles": 90,
+        "_moveLimit": 91,
+        "_timeLimit": 60,
+        "_maxUndoCount": 11
+    }
+]
