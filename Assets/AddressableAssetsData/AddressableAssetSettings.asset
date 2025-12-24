@@ -89,6 +89,7 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - mg_content
+    - tile
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 3af3fa311e748fe418d957d07ccd1c54, type: 2}

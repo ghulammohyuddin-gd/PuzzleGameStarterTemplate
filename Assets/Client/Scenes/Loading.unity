@@ -727,6 +727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tags:
   - mg_content
+  - tile
 --- !u!1 &1485905808
 GameObject:
   m_ObjectHideFlags: 0

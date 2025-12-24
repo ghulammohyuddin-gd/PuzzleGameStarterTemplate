@@ -1,6 +1,6 @@
 namespace PuzzleTemplate.Runtime
 {
-    public interface IPuzzleData
+    public interface IPuzzleData : IData
     {
         // Empty yet.
     }
