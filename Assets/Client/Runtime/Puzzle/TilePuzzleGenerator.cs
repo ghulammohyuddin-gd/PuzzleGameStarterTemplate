@@ -9,7 +9,8 @@ namespace Client.Runtime
     public sealed class TilePuzzleGenerator : MonoBehaviour, IPuzzleGenerator
     {
         [SerializeField] private Tile _tilePrefab;
-        [SerializeField] private GridLayoutGroup _layout;
+
+        private GridLayoutGroup _layout;
 
         public IPuzzle Generate(IPuzzleData data)
         {
@@ -17,6 +18,8 @@ namespace Client.Runtime
             {
                 throw new InvalidOperationException("Puzzle data type mismatch.");
             }
+
+            SetLayout();
 
             int gridSize = tilePuzzleData.GridSize;
             _layout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
@@ -33,5 +36,7 @@ namespace Client.Runtime
 
             return new TilePuzzle(spawned, tilePuzzleData.Seconds);
         }
+
+        private void SetLayout() => _layout = FindFirstObjectByType<GridLayoutGroup>();
     }
 }
