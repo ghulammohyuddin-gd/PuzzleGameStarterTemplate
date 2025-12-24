@@ -1,4 +1,4 @@
 ﻿<Solution>
-  <Project Path="Client.Runtime.csproj" />
   <Project Path="PuzzleTemplate.Runtime.csproj" />
+  <Project Path="Client.Runtime.csproj" />
 </Solution>
