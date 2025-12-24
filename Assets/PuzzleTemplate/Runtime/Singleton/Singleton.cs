@@ -8,6 +8,8 @@ namespace PuzzleTemplate.Runtime
     /// <typeparam name="T">The type of the singleton.</typeparam>
     public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
+        [SerializeField] protected bool _dontDestroyOnLoad = true;
+
         private static T _instance;
         private static readonly object _lock = new object();
         private static bool _applicationIsQuitting = false;
@@ -36,9 +38,6 @@ namespace PuzzleTemplate.Runtime
                             GameObject singletonObject = new GameObject();
                             _instance = singletonObject.AddComponent<T>();
                             singletonObject.name = $"{typeof(T)} (Singleton)";
-
-                            // Optional: Make it persistent across scenes
-                            DontDestroyOnLoad(singletonObject);
                         }
                     }
 
@@ -52,7 +51,7 @@ namespace PuzzleTemplate.Runtime
             if (_instance == null)
             {
                 _instance = this as T;
-                DontDestroyOnLoad(gameObject);
+                SetDontDestroyOnLoad();
             }
             else if (_instance != this)
             {
@@ -72,6 +71,14 @@ namespace PuzzleTemplate.Runtime
             if (_instance == this)
             {
                 _instance = null;
+            }
+        }
+
+        protected virtual void SetDontDestroyOnLoad()
+        {
+            if (_dontDestroyOnLoad)
+            {
+                DontDestroyOnLoad(gameObject);
             }
         }
     }

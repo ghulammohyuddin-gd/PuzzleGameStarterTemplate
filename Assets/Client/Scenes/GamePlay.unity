@@ -673,6 +673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c9d96ab5d3e476a8a87de87435b9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dontDestroyOnLoad: 0
   _winConditionCheckerRef: {fileID: 134620856}
   _puzzleGeneratorRef: {fileID: 122455641}
   _puzzleDataProviderRef: {fileID: 122455641}
