@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace Client.Runtime
 {
@@ -18,6 +19,7 @@ namespace Client.Runtime
             return PlayerPrefs.GetInt(LEVEL_KEY, 0); // default to first level
         }
 
+        [MenuItem("Debug/Reset Progress")]
         public static void ResetProgress()
         {
             PlayerPrefs.DeleteKey(LEVEL_KEY);

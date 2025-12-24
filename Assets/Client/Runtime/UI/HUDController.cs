@@ -1,4 +1,5 @@
-﻿using PuzzleTemplate.Runtime;
+﻿using log4net.Core;
+using PuzzleTemplate.Runtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,8 +33,11 @@ namespace Client.Runtime.UI
         private void UnregisterEvents()
         {
             EventBus.Unsubscribe<LevelStartedEvent>(HandleLevelStarted);
-            var winConditionChecker = LevelManager.Instance.WinConditionChecker;
-            winConditionChecker.OnAdvance -= UpdateRemainingText;
+            var levelManager = LevelManager.Instance;
+            if (levelManager != null)
+            {
+                levelManager.WinConditionChecker.OnAdvance -= UpdateRemainingText;
+            }
             _undoBtn.onClick.RemoveListener(HandleUndo);
         }
 
