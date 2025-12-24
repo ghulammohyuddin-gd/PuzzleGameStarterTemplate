@@ -7,24 +7,24 @@ using UnityEngine.UI;
 namespace Client.Runtime
 {
     [RequireComponent(typeof(Image))]
-    public sealed class Tile : MonoBehaviour, IPointerClickHandler
+    public sealed class Tile : MonoBehaviour, IPointerClickHandler, ICommand
     {
-        public event Action OnClick;
+        public event Action<Tile> OnClick;
 
         private Image _img;
 
+        private TileType _cached;
         public TileType Type { get; private set; }
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if (Type == TileType.Tapped) return;
+        public void OnPointerClick(PointerEventData eventData) => Execute();
 
-            SetType(TileType.Tapped);
-            OnClick.SafeInvoke();
-        }
-
-        public void SetType(TileType type)
+        public void SetType(TileType type, bool cache = false)
         {
+            if (cache)
+            {
+                _cached = type;
+            }
+
             Type = type;
             _img.color = type switch
             {
@@ -39,6 +39,16 @@ namespace Client.Runtime
             _img = GetComponent<Image>();
             SetType(TileType.Tapped);
         }
+
+        public void Execute()
+        {
+            if (Type == TileType.Tapped) return;
+
+            SetType(TileType.Tapped);
+            OnClick.SafeInvoke(this);
+        }
+
+        public void Undo() => SetType(_cached);
     }
 
     public enum TileType

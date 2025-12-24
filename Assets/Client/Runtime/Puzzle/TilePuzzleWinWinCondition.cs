@@ -4,28 +4,26 @@ using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class TilePuzzleMovesWinCondition : MonoBehaviour, IWinConditionChecker
+    public sealed class TilePuzzleWinWinCondition : MonoBehaviour, IWinConditionChecker
     {
         public event Action OnWin;
         public event Action OnLose;
         public event Action OnAdvance;
 
+        public readonly CommandInvoker Invoker = new();
         private TilePuzzle _puzzle;
-
-        public int MovesLeft { get; private set; }
 
         public void Initialise(IPuzzle puzzle)
         {
             _puzzle = (TilePuzzle)puzzle;
+            Invoker.Clear();
             RegisterClicks();
-            MovesLeft = _puzzle.TotalGreenTiles + 1;
         }
 
         public void Reset()
         {
             UnregisterClicks();
-            MovesLeft = 0;
-            _puzzle = null;
+            Invoker.Clear();
         }
 
         private void RegisterClicks()
@@ -46,24 +44,18 @@ namespace Client.Runtime
 
         private void HandleClick(Tile tile)
         {
-            MovesLeft--;
-            OnAdvance.SafeInvoke();
+            Invoker.ExecuteCommand(tile);
 
             if (IsWinConditionMet())
             {
+                Invoker.Clear();
                 OnWin.SafeInvoke();
                 return;
             }
 
-            if (IsLoseConditionMet())
-            {
-                OnLose.SafeInvoke();
-                return;
-            }
+            OnAdvance.SafeInvoke();
         }
 
         private bool IsWinConditionMet() => _puzzle.CurrentGreenTiles <= 0;
-
-        private bool IsLoseConditionMet() => MovesLeft <= 0 && !IsWinConditionMet();
     }
 }

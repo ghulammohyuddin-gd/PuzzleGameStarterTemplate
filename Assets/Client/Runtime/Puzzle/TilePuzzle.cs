@@ -26,7 +26,7 @@ namespace Client.Runtime
         {
             foreach (var tile in Tiles)
             {
-                tile.SetType(GetRandomTileType());
+                tile.SetType(GetRandomTileType(), true);
             }
             TotalGreenTiles = Tiles.Count(t => t.Type == TileType.Green);
         }
