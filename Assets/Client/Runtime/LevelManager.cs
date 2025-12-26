@@ -30,7 +30,7 @@ namespace Client.Runtime
 
         protected virtual void HandleRestart(RestartLevelEvent @event) => RestartLevel();
 
-        protected virtual void StartLevel()
+        public virtual void StartLevel()
         {
             var puzzleDataProvider = Locator.Get<IPuzzleDataProvider>();
             var puzzleData = puzzleDataProvider.GetData();
@@ -41,32 +41,16 @@ namespace Client.Runtime
             EventBus.Raise(new LevelStartedEvent(CurrentPuzzle));
         }
 
-        protected virtual void ResetLevel()
+        public virtual void ResetLevel()
         {
             Locator.Get<IWinConditionChecker>().Reset();
             CurrentPuzzle.Reset();
         }
 
-        protected virtual void RestartLevel()
+        public virtual void RestartLevel()
         {
             ResetLevel();
             StartLevel();
         }
-
-        void ILevelHander.StartLevel()
-        {
-            StartLevel();
-        }
-
-        void ILevelHander.ResetLevel()
-        {
-            ResetLevel();
-        }
-
-        void ILevelHander.RestartLevel()
-        {
-            RestartLevel();
-        }
-
     }
 }
