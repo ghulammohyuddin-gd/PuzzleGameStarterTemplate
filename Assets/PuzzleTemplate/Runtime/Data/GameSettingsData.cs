@@ -7,9 +7,10 @@ namespace PuzzleTemplate.Runtime
     public class GameSettingsData : IData
     {
         [SerializeField] protected string _id;
-        [SerializeField] protected WinConstraint _winConstraint;
+        [SerializeField] protected string _winConstraint;
 
         public string Id => _id;
-        public WinConstraint WinConstraint => _winConstraint;
+
+        public WinConstraint WinConstraint => Enum.TryParse<WinConstraint>(_winConstraint, out var obj) ? obj : default;
     }
 }

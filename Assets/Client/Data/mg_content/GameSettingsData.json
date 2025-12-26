@@ -1,6 +1,6 @@
 [
     {
         "_id": "mg_game_settings_01",
-        "_winConstraint": "FreePlay"
+        "_winConstraint": "TimerBased"
     }
 ]

@@ -8,9 +8,8 @@ namespace Client.Runtime
     public class DependenciesLoadingStep : LoadingStepBase
     {
         [Header("Dependencies")]
-        [SerializeField] protected GameObject _winConditionCheckerRef;
-        [SerializeField] protected GameObject _puzzleGeneratorRef;
-        [SerializeField] protected GameObject _puzzleDataProviderRef;
+        [SerializeField] private GameObject _puzzleGeneratorRef;
+        [SerializeField] private GameObject _puzzleDataProviderRef;
 
         public override UniTask ExecuteAsync(CancellationToken cToken = default)
         {
@@ -28,7 +27,6 @@ namespace Client.Runtime
 
         private void BindPuzzleDependencies()
         {
-            Locator.Register(_winConditionCheckerRef.GetComponent<IWinConditionChecker>());
             Locator.Register(_puzzleGeneratorRef.GetComponent<IPuzzleGenerator>());
             Locator.Register(_puzzleDataProviderRef.GetComponent<IPuzzleDataProvider>());
         }
