@@ -18,7 +18,7 @@ namespace Client.Runtime.UI
         private void RegisterEvents()
         {
             EventBus.Subscribe<LevelStartedEvent>(HandleLevelStarted);
-            var winConditionChecker = LevelManager.Instance.WinConditionChecker;
+            var winConditionChecker = Locator.Get<IWinConditionChecker>();
             winConditionChecker.OnAdvance += UpdateRemainingText;
             _undoBtn.onClick.AddListener(HandleUndo);
         }
@@ -26,17 +26,14 @@ namespace Client.Runtime.UI
         private void UnregisterEvents()
         {
             EventBus.Unsubscribe<LevelStartedEvent>(HandleLevelStarted);
-            var levelManager = LevelManager.Instance;
-            if (levelManager != null)
-            {
-                levelManager.WinConditionChecker.OnAdvance -= UpdateRemainingText;
-            }
+            var winConditionChecker = Locator.Get<IWinConditionChecker>();
+            winConditionChecker.OnAdvance -= UpdateRemainingText;
             _undoBtn.onClick.RemoveListener(HandleUndo);
         }
 
         private void HandleUndo()
         {
-            if (LevelManager.Instance.WinConditionChecker is not TilePuzzleWinWinCondition winCondition) return;
+            if (Locator.Get<IWinConditionChecker>() is not TilePuzzleWinWinCondition winCondition) return;
             winCondition.UndoMove();
             _undoBtn.interactable = winCondition.UndosLeft > 0;
         }
@@ -50,7 +47,7 @@ namespace Client.Runtime.UI
 
         private void UpdateUndoUI()
         {
-            if (LevelManager.Instance.WinConditionChecker is TilePuzzleWinWinCondition winCondition)
+            if (Locator.Get<IWinConditionChecker>() is TilePuzzleWinWinCondition winCondition)
             {
                 _undoBtn.gameObject.SetActive(true);
                 _undoBtn.interactable = winCondition.UndosLeft > 0;
@@ -63,7 +60,7 @@ namespace Client.Runtime.UI
 
         private void UpdateRemainingText()
         {
-            var checker = LevelManager.Instance.WinConditionChecker;
+            var checker = Locator.Get<IWinConditionChecker>();
 
             _remainingTmp.text = checker switch
             {

@@ -1,5 +1,4 @@
-﻿using log4net.Core;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace PuzzleTemplate.Runtime.UI
 {
@@ -11,20 +10,17 @@ namespace PuzzleTemplate.Runtime.UI
         protected override void Start()
         {
             base.Start();
-            var winConditionChecker = LevelManager.Instance.WinConditionChecker;
+            var winConditionChecker = Locator.Get<IWinConditionChecker>();
             winConditionChecker.OnWin += OnLevelWin;
             winConditionChecker.OnLose += OnLevelLose;
         }
 
         protected virtual void OnDestroy()
         {
-            var levelManager = LevelManager.Instance;
-            if (levelManager != null)
-            {
-                var winConditionChecker = levelManager.WinConditionChecker;
-                winConditionChecker.OnWin -= OnLevelWin;
-                winConditionChecker.OnLose -= OnLevelLose;
-            }
+
+            var winConditionChecker = Locator.Get<IWinConditionChecker>();
+            winConditionChecker.OnWin -= OnLevelWin;
+            winConditionChecker.OnLose -= OnLevelLose;
         }
 
         protected virtual void OnLevelWin() => SwitchView(_winViewKey);

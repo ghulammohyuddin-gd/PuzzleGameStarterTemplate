@@ -1,36 +1,17 @@
-﻿using System;
+﻿
 using UnityEngine;
 
 namespace PuzzleTemplate.Runtime
 {
-    public class LevelManager : Singleton<LevelManager>
+    public class LevelManager : MonoBehaviour
     {
-        [Header("Dependencies")]
-        [SerializeField] protected GameObject _winConditionCheckerRef;
-        [SerializeField] protected GameObject _puzzleGeneratorRef;
-        [SerializeField] protected GameObject _puzzleDataProviderRef;
-
-        public IWinConditionChecker WinConditionChecker;
-        protected IPuzzleGenerator _puzzleGenerator;
-        protected IPuzzleDataProvider _puzzleDataProvider;
         protected IPuzzle _puzzle;
 
-        protected override void Awake()
-        {
-            base.Awake();
-            WinConditionChecker = _winConditionCheckerRef.GetComponent<IWinConditionChecker>();
-            _puzzleGenerator = _puzzleGeneratorRef.GetComponent<IPuzzleGenerator>();
-            _puzzleDataProvider = _puzzleDataProviderRef.GetComponent<IPuzzleDataProvider>();
-            RegisterEvents();
-        }
+        protected virtual void Awake() => RegisterEvents();
 
         protected virtual void Start() => StartLevel();
 
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-            UnregisterEvents();
-        }
+        protected virtual void OnDestroy() => UnregisterEvents();
 
         protected virtual void RegisterEvents()
         {
@@ -50,16 +31,18 @@ namespace PuzzleTemplate.Runtime
 
         protected virtual void StartLevel()
         {
-            var puzzleData = _puzzleDataProvider.GetData();
-            _puzzle = _puzzleGenerator.Generate(puzzleData);
+            var puzzleDataProvider = Locator.Get<IPuzzleDataProvider>();
+            var puzzleData = puzzleDataProvider.GetData();
+            var puzzleGenerator = Locator.Get<IPuzzleGenerator>();
+            _puzzle = puzzleGenerator.Generate(puzzleData);
             _puzzle.Initialise();
-            WinConditionChecker.Initialise(_puzzle);
+            Locator.Get<IWinConditionChecker>().Initialise(_puzzle);
             EventBus.Raise(new LevelStartedEvent(_puzzle));
         }
 
         protected virtual void ResetLevel()
         {
-            WinConditionChecker.Reset();
+            Locator.Get<IWinConditionChecker>().Reset();
             _puzzle.Reset();
         }
 
