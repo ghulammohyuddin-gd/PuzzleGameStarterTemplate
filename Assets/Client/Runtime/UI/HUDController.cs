@@ -1,5 +1,4 @@
-﻿using log4net.Core;
-using PuzzleTemplate.Runtime;
+﻿using PuzzleTemplate.Runtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,17 +7,11 @@ namespace Client.Runtime.UI
 {
     public class HUDController : MonoBehaviour
     {
-        [SerializeField] private TMP_Text _movesText;
+        [SerializeField] private TMP_Text _remainingTmp;
         [SerializeField] private TMP_Text _levelNo;
         [SerializeField] private Button _undoBtn;
 
-        private void Start()
-        {
-            RegisterEvents();
-            var status = LevelManager.Instance.WinConditionChecker is TilePuzzleWinWinCondition;
-            _undoBtn.gameObject.SetActive(status);
-            _movesText.gameObject.SetActive(!status);
-        }
+        private void Start() => RegisterEvents();
 
         private void OnDestroy() => UnregisterEvents();
 
@@ -44,28 +37,41 @@ namespace Client.Runtime.UI
         private void HandleUndo()
         {
             if (LevelManager.Instance.WinConditionChecker is not TilePuzzleWinWinCondition winCondition) return;
-            winCondition.Invoker.UndoOnce();
+            winCondition.UndoMove();
+            _undoBtn.interactable = winCondition.UndosLeft > 0;
         }
 
         private void HandleLevelStarted(LevelStartedEvent @event)
         {
+            UpdateUndoUI();
             UpdateLevelText();
             UpdateRemainingText();
         }
 
+        private void UpdateUndoUI()
+        {
+            if (LevelManager.Instance.WinConditionChecker is TilePuzzleWinWinCondition winCondition)
+            {
+                _undoBtn.gameObject.SetActive(true);
+                _undoBtn.interactable = winCondition.UndosLeft > 0;
+            }
+            else
+            {
+                _undoBtn.gameObject.SetActive(false);
+            }
+        }
+
         private void UpdateRemainingText()
         {
-            if (LevelManager.Instance.WinConditionChecker is TilePuzzleMovesWinCondition movesWinCondition)
-            {
-                _movesText.SetText($"Moves: {movesWinCondition.MovesLeft}");
-                return;
-            }
+            var checker = LevelManager.Instance.WinConditionChecker;
 
-            if (LevelManager.Instance.WinConditionChecker is TilePuzzleTimeWinCondition timeWinCondition)
+            _remainingTmp.text = checker switch
             {
-                _movesText.SetText($"Time: {(int)timeWinCondition.SecondsLeft}");
-                return;
-            }
+                TilePuzzleMovesWinCondition moves => $"Moves: {moves.MovesLeft}",
+                TilePuzzleTimeWinCondition time => $"Time: {(int)time.SecondsLeft}",
+                TilePuzzleWinWinCondition win => $"Undos: {win.UndosLeft}",
+                _ => string.Empty
+            };
         }
 
         private void UpdateLevelText() => _levelNo.SetText($"Level: {PrefsManager.LoadLevel() + 1}");

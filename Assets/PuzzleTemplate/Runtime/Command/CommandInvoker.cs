@@ -17,22 +17,28 @@ namespace PuzzleTemplate.Runtime
             _redo.Clear();
         }
 
-        public void UndoOnce()
+        public bool UndoOnce()
         {
             if (_undo.TryPop(out var command))
             {
                 command.Undo();
                 _redo.Push(command);
+                return true;
             }
+
+            return false;
         }
 
-        public void RedoOnce()
+        public bool RedoOnce()
         {
             if (_redo.TryPop(out var command))
             {
                 command.Execute();
                 _undo.Push(command);
+                return true;
             }
+
+            return false;
         }
 
         public void Clear()

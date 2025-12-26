@@ -1,46 +1,45 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using PuzzleTemplate.Runtime;
+using UnityEngine;
 
 namespace Client.Runtime
 {
-    public sealed class TilePuzzle : IPuzzle
+    public sealed class TilePuzzle : IPuzzle<TilePuzzleData>
     {
         public readonly IList<Tile> Tiles;
-        public readonly float Seconds;
 
-        public event Action OnAdvance;
+        public TilePuzzle(IList<Tile> tiles) => Tiles = tiles;
 
-        public TilePuzzle(IList<Tile> tiles, float seconds)
-        {
-            Tiles = tiles;
-            Seconds = seconds;
-        }
+        public TilePuzzleData Data { get; private set; }
 
-        public int TotalGreenTiles { get; private set; }
+        public void SetData(TilePuzzleData data) => Data = data;
 
-        public int CurrentGreenTiles => Tiles.Count(t => t.Type == TileType.Green);
+        public int CurrentTargetTiles => Tiles.Count(t => t.Type == TileType.Green);
 
         public void Initialise()
         {
-            foreach (var tile in Tiles)
+            var types = new List<TileType>();
+
+            for (int i = 0; i < Tiles.Count; i++)
             {
-                tile.SetType(GetRandomTileType(), true);
+                types.Add(i < Data.TargetTiles ? TileType.Green : TileType.Red);
             }
-            TotalGreenTiles = Tiles.Count(t => t.Type == TileType.Green);
+
+            var shuffledTypes = types.OrderBy(x => Random.value).ToList();
+
+            for (int i = 0; i < Tiles.Count; i++)
+            {
+                Tiles[i].SetType(shuffledTypes[i], true);
+            }
         }
 
         public void Reset()
         {
-            TotalGreenTiles = 0;
-
             foreach (var tile in Tiles)
             {
-                UnityEngine.Object.Destroy(tile.gameObject);
+                Object.Destroy(tile.gameObject);
             }
         }
-
-        private TileType GetRandomTileType() => (UnityEngine.Random.value > 0.5f) ? TileType.Green : TileType.Red;
     }
 }

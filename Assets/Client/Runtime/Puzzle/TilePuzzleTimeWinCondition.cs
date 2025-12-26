@@ -19,7 +19,7 @@ namespace Client.Runtime
         public void Initialise(IPuzzle puzzle)
         {
             _puzzle = (TilePuzzle)puzzle;
-            SecondsLeft = _puzzle.Seconds;
+            SecondsLeft = _puzzle.Data.TimeLimit;
             _isActive = true;
         }
 
@@ -57,7 +57,7 @@ namespace Client.Runtime
             }
         }
 
-        private bool IsWinConditionMet() => _puzzle.CurrentGreenTiles <= 0 && SecondsLeft > 0;
+        private bool IsWinConditionMet() => _puzzle.CurrentTargetTiles <= 0 && SecondsLeft > 0;
 
         private bool IsLoseConditionMet() => SecondsLeft <= 0;
     }

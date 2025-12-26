@@ -170,9 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 385f7a891613cbe4a98f950ca7198164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minGridSize: 3
-  _maxGridSize: 9
-  _seconds: 25
 --- !u!114 &122455645
 MonoBehaviour:
   m_ObjectHideFlags: 0

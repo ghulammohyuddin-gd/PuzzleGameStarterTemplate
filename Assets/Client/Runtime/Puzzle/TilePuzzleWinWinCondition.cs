@@ -10,20 +10,33 @@ namespace Client.Runtime
         public event Action OnLose;
         public event Action OnAdvance;
 
-        public readonly CommandInvoker Invoker = new();
+        private readonly CommandInvoker Invoker = new();
+        public int UndosLeft { get; private set; }
+
         private TilePuzzle _puzzle;
 
         public void Initialise(IPuzzle puzzle)
         {
             _puzzle = (TilePuzzle)puzzle;
-            Invoker.Clear();
+            UndosLeft = _puzzle.Data.MaxUndoCount;
             RegisterClicks();
+            Invoker.Clear();
         }
 
         public void Reset()
         {
             UnregisterClicks();
             Invoker.Clear();
+        }
+
+        public void UndoMove()
+        {
+            if (UndosLeft <= 0) return;
+            if (Invoker.UndoOnce())
+            {
+                UndosLeft--;
+                OnAdvance.SafeInvoke();
+            }
         }
 
         private void RegisterClicks()
@@ -56,6 +69,6 @@ namespace Client.Runtime
             OnAdvance.SafeInvoke();
         }
 
-        private bool IsWinConditionMet() => _puzzle.CurrentGreenTiles <= 0;
+        private bool IsWinConditionMet() => _puzzle.CurrentTargetTiles <= 0;
     }
 }

@@ -18,7 +18,7 @@ namespace Client.Runtime
         {
             _puzzle = (TilePuzzle)puzzle;
             RegisterClicks();
-            MovesLeft = _puzzle.TotalGreenTiles + 1;
+            MovesLeft = _puzzle.Data.MoveLimit;
         }
 
         public void Reset()
@@ -62,7 +62,7 @@ namespace Client.Runtime
             }
         }
 
-        private bool IsWinConditionMet() => _puzzle.CurrentGreenTiles <= 0;
+        private bool IsWinConditionMet() => _puzzle.CurrentTargetTiles <= 0;
 
         private bool IsLoseConditionMet() => MovesLeft <= 0 && !IsWinConditionMet();
     }

@@ -34,7 +34,10 @@ namespace Client.Runtime
                 spawned.Add(tile);
             }
 
-            return new TilePuzzle(spawned, tilePuzzleData.TimeLimit);
+            var puzzle = new TilePuzzle(spawned);
+            puzzle.SetData(tilePuzzleData);
+
+            return puzzle;
         }
 
         private void SetLayout() => _layout = FindFirstObjectByType<GridLayoutGroup>();

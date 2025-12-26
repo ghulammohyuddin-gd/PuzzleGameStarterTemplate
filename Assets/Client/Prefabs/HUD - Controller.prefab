@@ -35,8 +35,8 @@ RectTransform:
   - {fileID: 1793834209364468337}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.03671706}
-  m_AnchorMax: {x: 1, y: 0.9492441}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab15443db6434c9aabdb7fff96548ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movesText: {fileID: 3064900854873399627}
+  _remainingTmp: {fileID: 3064900854873399627}
   _levelNo: {fileID: 4999498471652000464}
   _undoBtn: {fileID: 6658710866553855465}
 --- !u!114 &5271689138357745996
@@ -103,7 +103,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -290, y: -93}
+  m_AnchoredPosition: {x: -478, y: -93}
   m_SizeDelta: {x: 100, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5214202865138154279
@@ -468,12 +468,12 @@ GameObject:
   - component: {fileID: 8549234268026114562}
   - component: {fileID: 3064900854873399627}
   m_Layer: 5
-  m_Name: MovesText
+  m_Name: RemainingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8948987696696689278
 RectTransform:
   m_ObjectHideFlags: 0

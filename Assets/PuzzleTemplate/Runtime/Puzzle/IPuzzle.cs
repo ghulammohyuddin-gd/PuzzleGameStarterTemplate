@@ -6,4 +6,12 @@ namespace PuzzleTemplate.Runtime
 
         void Reset();
     }
+
+    public interface IPuzzle<TData> : IPuzzle
+        where TData : IPuzzleData
+    {
+        TData Data { get; }
+
+        void SetData(TData data);
+    }
 }
