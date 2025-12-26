@@ -1,11 +1,12 @@
 ﻿
+using PuzzleTemplate.Runtime;
 using UnityEngine;
 
-namespace PuzzleTemplate.Runtime
+namespace Client.Runtime
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : MonoBehaviour, ILevelHander
     {
-        protected IPuzzle _puzzle;
+        public IPuzzle CurrentPuzzle { get; set; }
 
         protected virtual void Awake() => RegisterEvents();
 
@@ -34,16 +35,16 @@ namespace PuzzleTemplate.Runtime
             var puzzleDataProvider = Locator.Get<IPuzzleDataProvider>();
             var puzzleData = puzzleDataProvider.GetData();
             var puzzleGenerator = Locator.Get<IPuzzleGenerator>();
-            _puzzle = puzzleGenerator.Generate(puzzleData);
-            _puzzle.Initialise();
-            Locator.Get<IWinConditionChecker>().Initialise(_puzzle);
-            EventBus.Raise(new LevelStartedEvent(_puzzle));
+            CurrentPuzzle = puzzleGenerator.Generate(puzzleData);
+            CurrentPuzzle.Initialise();
+            Locator.Get<IWinConditionChecker>().Initialise(CurrentPuzzle);
+            EventBus.Raise(new LevelStartedEvent(CurrentPuzzle));
         }
 
         protected virtual void ResetLevel()
         {
             Locator.Get<IWinConditionChecker>().Reset();
-            _puzzle.Reset();
+            CurrentPuzzle.Reset();
         }
 
         protected virtual void RestartLevel()
@@ -51,5 +52,21 @@ namespace PuzzleTemplate.Runtime
             ResetLevel();
             StartLevel();
         }
+
+        void ILevelHander.StartLevel()
+        {
+            StartLevel();
+        }
+
+        void ILevelHander.ResetLevel()
+        {
+            ResetLevel();
+        }
+
+        void ILevelHander.RestartLevel()
+        {
+            RestartLevel();
+        }
+
     }
 }
