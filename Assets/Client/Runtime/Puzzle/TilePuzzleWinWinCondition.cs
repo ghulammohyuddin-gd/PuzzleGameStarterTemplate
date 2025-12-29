@@ -55,9 +55,12 @@ namespace Client.Runtime
             }
         }
 
-        private void HandleClick(Tile tile)
+        private void HandleClick(ISceneEntity tile)
         {
-            Invoker.ExecuteCommand(tile);
+            if (tile is ICommand command)
+            {
+                Invoker.ExecuteCommand(command);
+            }
 
             if (IsWinConditionMet())
             {

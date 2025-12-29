@@ -1,22 +1,16 @@
-﻿using System;
-using PuzzleTemplate.Runtime;
+﻿using PuzzleTemplate.Runtime;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Client.Runtime
 {
     [RequireComponent(typeof(Image))]
-    public sealed class Tile : MonoBehaviour, IPointerClickHandler, ICommand
+    public sealed class Tile : ClickController, ICommand
     {
-        public event Action<Tile> OnClick;
-
         private Image _img;
-
         private TileType _cached;
-        public TileType Type { get; private set; }
 
-        public void OnPointerClick(PointerEventData eventData) => Execute();
+        public TileType Type { get; private set; }
 
         public void SetType(TileType type, bool cache = false)
         {
@@ -40,15 +34,11 @@ namespace Client.Runtime
             SetType(TileType.Tapped);
         }
 
-        public void Execute()
-        {
-            if (Type == TileType.Tapped) return;
-
-            SetType(TileType.Tapped);
-            OnClick.SafeInvoke(this);
-        }
+        public void Execute() => SetType(TileType.Tapped);
 
         public void Undo() => SetType(_cached);
+
+        protected override void OnClicked() => SetType(TileType.Tapped);
     }
 
     public enum TileType

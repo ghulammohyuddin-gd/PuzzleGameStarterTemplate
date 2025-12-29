@@ -44,7 +44,7 @@ namespace Client.Runtime
             }
         }
 
-        private void HandleClick(Tile tile)
+        private void HandleClick(ISceneEntity tile)
         {
             MovesLeft--;
             OnAdvance.SafeInvoke();
