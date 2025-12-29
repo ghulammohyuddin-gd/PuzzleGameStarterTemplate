@@ -7,9 +7,9 @@ namespace Client.Runtime
 {
     public sealed class TilePuzzle : IPuzzle<TilePuzzleData>
     {
-        public readonly IList<Tile> Tiles;
+        public readonly IList<TileClickable> Tiles;
 
-        public TilePuzzle(IList<Tile> tiles) => Tiles = tiles;
+        public TilePuzzle(IList<TileClickable> tiles) => Tiles = tiles;
 
         public TilePuzzleData Data { get; private set; }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4835328133079137749}
   - component: {fileID: 895302487408356244}
   m_Layer: 0
-  m_Name: PuzzleTile
+  m_Name: Tile - Clickable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,7 +8,7 @@ namespace Client.Runtime
 {
     public sealed class TilePuzzleGenerator : MonoBehaviour, IPuzzleGenerator
     {
-        [SerializeField] private Tile _tilePrefab;
+        [SerializeField] private TileClickable _tilePrefab;
 
         private GridLayoutGroup _layout;
 
@@ -26,7 +26,7 @@ namespace Client.Runtime
             _layout.constraintCount = gridSize;
 
             var len = gridSize * gridSize;
-            var spawned = new List<Tile>();
+            var spawned = new List<TileClickable>();
 
             for (var x = 0; x < len; x++)
             {

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace Client.Runtime
 {
     [RequireComponent(typeof(Image))]
-    public sealed class Tile : ClickController, ICommand
+    public sealed class TileClickable : ClickController, ICommand
     {
         private Image _img;
         private TileType _cached;
